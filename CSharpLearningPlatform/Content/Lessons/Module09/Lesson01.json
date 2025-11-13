@@ -1,0 +1,40 @@
+{
+  "moduleId": 9,
+  "lessonNumber": 1,
+  "lessonId": "M09L01",
+  "title": "What is LINQ? (The Search Engine Analogy)",
+  "simplifierConcept": "Imagine you have 1000 photos on your phone. You want to find:\n• All photos from 2023\n• Only photos of your dog\n• Photos sorted by date\n\nYou could write a FOR LOOP to check each photo manually... OR you could use the built-in search feature! Much easier!\n\nThat's what LINQ is - a 'search engine' for collections in C#:\n• LINQ = Language Integrated Query\n• Works on any collection: arrays, Lists, Dictionaries\n• Write SQL-like queries in C# code\n• Much cleaner than manual loops!\n\nTwo syntaxes:\n1. METHOD SYNTAX: list.Where(x => x > 5).OrderBy(x => x)\n2. QUERY SYNTAX: from x in list where x > 5 orderby x select x\n\nMost developers use METHOD syntax (we'll focus on that!).\n\nThink: LINQ = 'Asking your collection smart questions instead of manually digging through it.'",
+  "coderExample": "using System;\nusing System.Collections.Generic;\nusing System.Linq;  // MUST include System.Linq!\n\nList<int> numbers = new List<int> { 1, 5, 2, 8, 3, 9, 4, 7, 6 };\n\n// WITHOUT LINQ - manual loop\nList<int> evenNumbers = new List<int>();\nforeach (int num in numbers)\n{\n    if (num % 2 == 0)\n    {\n        evenNumbers.Add(num);\n    }\n}\nConsole.WriteLine(\"Even (without LINQ): \" + string.Join(\", \", evenNumbers));\n\n// WITH LINQ - one line!\nvar evenLinq = numbers.Where(n => n % 2 == 0);\nConsole.WriteLine(\"Even (with LINQ): \" + string.Join(\", \", evenLinq));\n\n// More LINQ examples\nvar greaterThanFive = numbers.Where(n => n > 5);\nvar sorted = numbers.OrderBy(n => n);\nvar firstThree = numbers.Take(3);\n\nConsole.WriteLine(\"Greater than 5: \" + string.Join(\", \", greaterThanFive));\nConsole.WriteLine(\"Sorted: \" + string.Join(\", \", sorted));\nConsole.WriteLine(\"First 3: \" + string.Join(\", \", firstThree));\n\n// QUERY SYNTAX (alternative)\nvar query = from n in numbers\n            where n > 5\n            orderby n descending\n            select n;\n\nConsole.WriteLine(\"Query syntax: \" + string.Join(\", \", query));",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "using System.Linq;",
+      "explanation": "MUST include this namespace to use LINQ! Without it, methods like .Where(), .Select() won't be available."
+    },
+    {
+      "codeSnippet": "collection.Where(x => condition)",
+      "explanation": "Where() filters items. 'x => condition' is a LAMBDA expression (more next lesson!). Returns items where condition is true."
+    },
+    {
+      "codeSnippet": "Lambda: x => x > 5",
+      "explanation": "'x' is the parameter (each item). '=>' means 'goes to'. 'x > 5' is the expression. Read as: 'each item x goes to x > 5'."
+    },
+    {
+      "codeSnippet": "LINQ is lazy",
+      "explanation": "LINQ doesn't execute immediately! 'var result = list.Where(...)' just creates a QUERY. Execution happens when you iterate (foreach) or call .ToList()."
+    }
+  ],
+  "challenge": {
+    "instructions": "Practice basic LINQ queries!\n\n1. Create a List of integers: 10, 25, 5, 30, 15, 40, 20, 35\n\n2. Use LINQ to:\n   - Find all numbers greater than 20\n   - Find all numbers divisible by 5 (n % 5 == 0)\n   - Sort numbers in descending order\n   - Get the first 3 numbers (after sorting)\n\n3. Display each result with descriptive labels\n\nUSE .Where(), .OrderByDescending(), and .Take()!",
+    "starterCode": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\nList<int> numbers = new List<int> { 10, 25, 5, 30, 15, 40, 20, 35 };\n\n// Find numbers > 20\nvar greaterThan20 = numbers.Where(n => /* condition */);\n\n// Find numbers divisible by 5\nvar divisibleByFive = numbers.Where(n => /* condition */);\n\n// Sort descending\nvar sorted = numbers.OrderByDescending(n => n);\n\n// First 3 from sorted\nvar topThree = sorted.Take(3);\n\n// Display results\nConsole.WriteLine(\"Greater than 20: \" + string.Join(\", \", greaterThan20));",
+    "solutionCode": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\nList<int> numbers = new List<int> { 10, 25, 5, 30, 15, 40, 20, 35 };\n\nvar greaterThan20 = numbers.Where(n => n > 20);\nConsole.WriteLine(\"Greater than 20: \" + string.Join(\", \", greaterThan20));\n\nvar divisibleByFive = numbers.Where(n => n % 5 == 0);\nConsole.WriteLine(\"Divisible by 5: \" + string.Join(\", \", divisibleByFive));\n\nvar sorted = numbers.OrderByDescending(n => n);\nConsole.WriteLine(\"Sorted descending: \" + string.Join(\", \", sorted));\n\nvar topThree = sorted.Take(3);\nConsole.WriteLine(\"Top 3: \" + string.Join(\", \", topThree));",
+    "hint": "Where: 'list.Where(x => condition)'. OrderByDescending: 'list.OrderByDescending(x => x)'. Take: 'list.Take(n)'. Don't forget 'using System.Linq;'!",
+    "expectedOutputPatterns": ["Greater than 20", "Divisible by 5", "Top 3"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting 'using System.Linq': Without this, you get 'Where does not exist' errors! LINQ methods are EXTENSION methods from System.Linq namespace.",
+      "Expecting immediate execution: 'var result = list.Where(...)' doesn't run yet! It creates a query. Execution happens on iteration (.ToList(), foreach, etc.). This is called DEFERRED EXECUTION.",
+      "Lambda syntax confusion: 'x => x > 5' is shorthand for a function! Read it as: 'for each x, return whether x > 5'. The '=>' is the lambda operator.",
+      "Modifying original collection: LINQ doesn't modify the original! 'list.Where(...)' returns a NEW sequence. Original list is unchanged. Use .ToList() to get a new list."
+    ]
+  }
+}

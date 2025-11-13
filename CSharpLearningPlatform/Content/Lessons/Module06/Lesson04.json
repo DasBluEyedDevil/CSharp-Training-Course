@@ -1,0 +1,40 @@
+{
+  "moduleId": 6,
+  "lessonNumber": 4,
+  "lessonId": "M06L04",
+  "title": "Methods (What Your Objects Can Do)",
+  "simplifierConcept": "Imagine a TV remote. Each button makes the TV DO something: change channel, adjust volume, power on/off. You don't know HOW it works inside - you just press the button!\n\nMETHODS are like those buttons - they make objects DO things. Properties hold data (what the object IS), methods define behavior (what the object CAN DO).\n\nMethods can:\n• Take INPUT (parameters) - 'Add these two numbers'\n• Produce OUTPUT (return value) - 'Here's the result: 7'\n• Modify the object's state - 'Increase my score by 10'\n• Just perform actions (void) - 'Print this message'\n\nThink: A Calculator object has Add(), Subtract(), Multiply() methods. A Player object has TakeDamage(), Heal(), Attack() methods. Methods bring objects to LIFE!",
+  "coderExample": "class Calculator\n{\n    // Method with parameters and return value\n    public int Add(int a, int b)\n    {\n        return a + b;\n    }\n    \n    // Method with no return (void)\n    public void DisplayResult(int result)\n    {\n        Console.WriteLine(\"Result: \" + result);\n    }\n    \n    // Method with multiple parameters\n    public double Average(double x, double y, double z)\n    {\n        return (x + y + z) / 3;\n    }\n}\n\nclass Player\n{\n    public string Name;\n    public int Health = 100;\n    public int Score = 0;\n    \n    // Method that modifies object state\n    public void TakeDamage(int damage)\n    {\n        Health -= damage;\n        Console.WriteLine(Name + \" took \" + damage + \" damage! Health: \" + Health);\n    }\n    \n    // Method with return value\n    public bool IsAlive()\n    {\n        return Health > 0;\n    }\n}\n\n// Usage\nCalculator calc = new Calculator();\nint sum = calc.Add(5, 3);\ncalc.DisplayResult(sum);\n\nPlayer player = new Player();\nplayer.Name = \"Hero\";\nplayer.TakeDamage(30);\nif (player.IsAlive())\n    Console.WriteLine(\"Still fighting!\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "public int Add(int a, int b)",
+      "explanation": "Method signature: access modifier (public), return type (int), name (Add), parameters (int a, int b). This method takes two ints and returns an int."
+    },
+    {
+      "codeSnippet": "return a + b;",
+      "explanation": "The 'return' keyword sends a value back to the caller. The type MUST match the method's return type (int here). return exits the method immediately!"
+    },
+    {
+      "codeSnippet": "public void DisplayResult(int result)",
+      "explanation": "'void' means 'returns nothing'. Use void for methods that DO something but don't need to send a value back. No return statement needed (or use 'return;' to exit early)."
+    },
+    {
+      "codeSnippet": "Method overloading",
+      "explanation": "You can have multiple methods with the SAME NAME but DIFFERENT parameters: Add(int, int), Add(double, double), Add(int, int, int). C# picks the right one based on arguments!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a Game character class with action methods!\n\n1. Class 'Character' with fields: string Name, int Health = 100, int Mana = 50\n2. Method 'Attack' (returns int): returns random damage 10-20\n3. Method 'Heal' (void, takes int amount): adds amount to Health (max 100)\n4. Method 'CastSpell' (returns bool): if Mana >= 20, reduce Mana by 20 and return true, else return false\n5. Create a character and call all methods, display results",
+    "starterCode": "class Character\n{\n    public string Name;\n    public int Health = 100;\n    public int Mana = 50;\n    \n    // Add Attack method (returns int damage 10-20)\n    // Hint: Use new Random().Next(10, 21) for random 10-20\n    \n    // Add Heal method (void, takes int amount)\n    \n    // Add CastSpell method (returns bool)\n}\n\n// Create character and test methods\nCharacter hero = new Character();\nhero.Name = \"Warrior\";\n// Call Attack, Heal(20), CastSpell\n// Display results",
+    "solutionCode": "class Character\n{\n    public string Name;\n    public int Health = 100;\n    public int Mana = 50;\n    \n    public int Attack()\n    {\n        int damage = new Random().Next(10, 21);\n        Console.WriteLine(Name + \" attacks for \" + damage + \" damage!\");\n        return damage;\n    }\n    \n    public void Heal(int amount)\n    {\n        Health += amount;\n        if (Health > 100) Health = 100;\n        Console.WriteLine(Name + \" healed for \" + amount + \". Health: \" + Health);\n    }\n    \n    public bool CastSpell()\n    {\n        if (Mana >= 20)\n        {\n            Mana -= 20;\n            Console.WriteLine(Name + \" casts spell! Mana: \" + Mana);\n            return true;\n        }\n        Console.WriteLine(\"Not enough mana!\");\n        return false;\n    }\n}\n\nCharacter hero = new Character();\nhero.Name = \"Warrior\";\nint dmg = hero.Attack();\nhero.Heal(20);\nbool cast = hero.CastSpell();\nConsole.WriteLine(\"Spell cast success: \" + cast);",
+    "hint": "Method structure: public ReturnType MethodName(parameters) { code; return value; }. Use void for no return. Methods can access and modify the object's fields!",
+    "expectedOutputPatterns": ["attacks", "healed", "spell"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting 'return': If method returns a value (not void), you MUST return something! 'public int Add(int a, int b) { a + b; }' is WRONG - needs 'return a + b;'",
+      "Calling methods without parentheses: player.Attack is WRONG! Must be player.Attack() - parentheses are REQUIRED even with no parameters!",
+      "Wrong return type: If method returns int, you can't return a string! The return value type MUST match the method signature.",
+      "Not storing return values: int result = calc.Add(5, 3); stores the result. calc.Add(5, 3); without storing throws away the return value!"
+    ]
+  }
+}

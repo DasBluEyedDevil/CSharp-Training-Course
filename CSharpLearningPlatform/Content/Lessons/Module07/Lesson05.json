@@ -1,0 +1,40 @@
+{
+  "moduleId": 7,
+  "lessonNumber": 5,
+  "lessonId": "M07L05",
+  "title": "When to Use Each OOP Feature",
+  "simplifierConcept": "You've learned many OOP tools! But WHEN do you use each one? Think of it like a toolbox:\n\n🔧 **INHERITANCE**: Use when there's an 'IS-A' relationship. Dog IS-A Animal, Car IS-A Vehicle. Share common features.\n\n🎨 **ABSTRACT CLASSES**: Use when you want to provide SOME implementation but force derived classes to complete it. Template pattern.\n\n📋 **INTERFACES**: Use when you want to define a CONTRACT without implementation. Multiple classes can implement same interface even if completely unrelated.\n\n🔄 **POLYMORPHISM**: Use when you want different classes to respond to the same method call differently. Shape.Draw() draws differently for Circle vs Rectangle.\n\nRule of thumb:\n• Inheritance: Share CODE (implementation)\n• Interfaces: Share CONTRACT (what must be done)\n• Abstract: Share BOTH (some code + force completion)",
+  "coderExample": "// Example: Game character system\n\n// INTERFACE - contract for anything that can attack\ninterface IAttacker\n{\n    void Attack();\n    int GetDamage();\n}\n\n// ABSTRACT CLASS - template for all characters\nabstract class Character\n{\n    public string Name;\n    public int Health = 100;\n    \n    // Concrete method (shared by all)\n    public void TakeDamage(int damage)\n    {\n        Health -= damage;\n        Console.WriteLine(Name + \" took \" + damage + \" damage. Health: \" + Health);\n    }\n    \n    // Abstract method (each character moves differently)\n    public abstract void Move();\n}\n\n// DERIVED CLASS implementing abstract and interface\nclass Warrior : Character, IAttacker\n{\n    public int WeaponDamage = 20;\n    \n    public override void Move()\n    {\n        Console.WriteLine(Name + \" marches forward\");\n    }\n    \n    public void Attack()\n    {\n        Console.WriteLine(Name + \" swings sword!\");\n    }\n    \n    public int GetDamage()\n    {\n        return WeaponDamage;\n    }\n}\n\nclass Mage : Character, IAttacker\n{\n    public int SpellPower = 30;\n    \n    public override void Move()\n    {\n        Console.WriteLine(Name + \" teleports\");\n    }\n    \n    public void Attack()\n    {\n        Console.WriteLine(Name + \" casts fireball!\");\n    }\n    \n    public int GetDamage()\n    {\n        return SpellPower;\n    }\n}\n\n// Polymorphism in action\nCharacter[] party = { new Warrior { Name = \"Thor\" }, new Mage { Name = \"Gandalf\" } };\nforeach (Character c in party)\n{\n    c.Move();  // Each moves differently!\n}\n\nIAttacker[] attackers = { new Warrior(), new Mage() };\nforeach (IAttacker a in attackers)\n{\n    a.Attack();  // Each attacks differently!\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "Decision Tree: Inheritance",
+      "explanation": "Use inheritance when: 1) Classes have IS-A relationship, 2) Want to share implementation, 3) Have clear hierarchy. Avoid deep inheritance (3+ levels gets complex)."
+    },
+    {
+      "codeSnippet": "Decision Tree: Abstract Class",
+      "explanation": "Use abstract when: 1) Some methods don't make sense in base class, 2) Want to provide SOME shared code, 3) Force derived classes to implement certain methods."
+    },
+    {
+      "codeSnippet": "Decision Tree: Interface",
+      "explanation": "Use interface when: 1) Define behavior contract, 2) No shared implementation needed, 3) Want multiple 'capabilities' (IDrawable, IResizable, ISaveable)."
+    },
+    {
+      "codeSnippet": "Composition vs Inheritance",
+      "explanation": "Sometimes COMPOSITION (has-a) is better than INHERITANCE (is-a)! Car HAS-A Engine (composition) is better than Car IS-A Engine (wrong!)."
+    }
+  ],
+  "challenge": {
+    "instructions": "Design a zoo system using all OOP concepts!\n\n1. INTERFACE 'IFeedable': void Feed()\n2. ABSTRACT CLASS 'Animal': string Name, int Age, abstract void MakeSound()\n3. DERIVED 'Lion' : Animal, IFeedable: override MakeSound() to 'Roar!', implement Feed()\n4. DERIVED 'Penguin' : Animal, IFeedable: override MakeSound() to 'Squawk!', implement Feed()\n5. Create array of Animals, call MakeSound() polymorphically\n6. Create array of IFeedable, call Feed() on all\n\nDemonstrate: inheritance, abstraction, interfaces, polymorphism!",
+    "starterCode": "interface IFeedable\n{\n    void Feed();\n}\n\nabstract class Animal\n{\n    public string Name;\n    public int Age;\n    \n    public abstract void MakeSound();\n}\n\n// Implement Lion and Penguin\n\n// Create arrays and demonstrate polymorphism",
+    "solutionCode": "interface IFeedable\n{\n    void Feed();\n}\n\nabstract class Animal\n{\n    public string Name;\n    public int Age;\n    \n    public abstract void MakeSound();\n    \n    public void DisplayInfo()\n    {\n        Console.WriteLine(Name + \", age \" + Age);\n    }\n}\n\nclass Lion : Animal, IFeedable\n{\n    public override void MakeSound()\n    {\n        Console.WriteLine(\"Roar!\");\n    }\n    \n    public void Feed()\n    {\n        Console.WriteLine(\"Feeding \" + Name + \" meat\");\n    }\n}\n\nclass Penguin : Animal, IFeedable\n{\n    public override void MakeSound()\n    {\n        Console.WriteLine(\"Squawk!\");\n    }\n    \n    public void Feed()\n    {\n        Console.WriteLine(\"Feeding \" + Name + \" fish\");\n    }\n}\n\nAnimal[] animals = { \n    new Lion { Name = \"Simba\", Age = 5 },\n    new Penguin { Name = \"Pingu\", Age = 2 }\n};\n\nforeach (Animal a in animals)\n{\n    a.DisplayInfo();\n    a.MakeSound();\n}\n\nIFeedable[] feedables = { new Lion(), new Penguin() };\nforeach (IFeedable f in feedables)\n{\n    f.Feed();\n}",
+    "hint": "Combine concepts: abstract class for shared template, interface for behavior contract, override for polymorphism. Use base type arrays for polymorphic operations.",
+    "expectedOutputPatterns": ["Roar", "Squawk", "Feeding"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Overusing inheritance: Don't create deep hierarchies (Animal → Mammal → Carnivore → Feline → Lion). Keep it simple! 2-3 levels max.",
+      "Interface vs Abstract confusion: If NO shared implementation, use interface. If SOME shared code, use abstract class. Both? Use abstract class with interfaces!",
+      "Forgetting polymorphism benefit: The power is storing different types in same array (Animal[]) and calling methods. Each object responds differently!",
+      "Inheritance for code reuse only: Don't inherit just to reuse code! Use composition (has-a) or helper classes instead. Inherit when there's true IS-A relationship."
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "moduleId": 8,
+  "lessonNumber": 4,
+  "lessonId": "M08L04",
+  "title": "Using System Libraries (Built-In Tools)",
+  "simplifierConcept": "Imagine building a house. You COULD make your own hammer, saw, and nails from scratch... or you could buy them from a hardware store! Much faster!\n\nThat's what SYSTEM LIBRARIES are - pre-built tools that come with .NET:\n• System.Collections.Generic → List, Dictionary, Queue\n• System.IO → Reading/writing files\n• System.Linq → Querying data (next module!)\n• System.Text → String manipulation, StringBuilder\n• System.DateTime → Dates and times\n\nThese are BATTLE-TESTED, OPTIMIZED tools used by millions of developers. Don't reinvent the wheel!\n\nThink: System libraries = 'The free toolbox that comes with C#.' Learning what's available saves HUNDREDS of hours of coding!",
+  "coderExample": "using System;\nusing System.Collections.Generic;\nusing System.IO;\nusing System.Text;\n\n// COLLECTIONS (System.Collections.Generic)\nList<string> names = new List<string>();\nnames.Add(\"Alice\");\nnames.Add(\"Bob\");\n\nDictionary<string, int> ages = new Dictionary<string, int>();\nages[\"Alice\"] = 30;\nages[\"Bob\"] = 25;\n\n// FILE I/O (System.IO)\nstring path = \"test.txt\";\nFile.WriteAllText(path, \"Hello from C#!\");\nstring content = File.ReadAllText(path);\nConsole.WriteLine(content);\n\nif (File.Exists(path))\n{\n    Console.WriteLine(\"File exists!\");\n}\n\n// STRING MANIPULATION (System.Text)\nStringBuilder sb = new StringBuilder();\nsb.Append(\"Hello\");\nsb.Append(\" \");\nsb.Append(\"World\");\nstring result = sb.ToString();\nConsole.WriteLine(result);\n\n// DATE/TIME (System)\nDateTime now = DateTime.Now;\nConsole.WriteLine(\"Current time: \" + now);\n\nDateTime birthday = new DateTime(1990, 5, 15);\nTimeSpan age = now - birthday;\nConsole.WriteLine(\"Days old: \" + age.TotalDays);\n\n// MATH (System)\ndouble squareRoot = Math.Sqrt(16);\ndouble power = Math.Pow(2, 8);  // 2^8\nint max = Math.Max(10, 20);\nConsole.WriteLine(\"Max: \" + max);",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "System.IO namespace",
+      "explanation": "File operations: File.ReadAllText(), File.WriteAllText(), File.Exists(), Directory.CreateDirectory(). Essential for working with files!"
+    },
+    {
+      "codeSnippet": "StringBuilder",
+      "explanation": "From System.Text. Use when concatenating strings in loops! String concat creates new objects (slow). StringBuilder modifies in-place (fast)."
+    },
+    {
+      "codeSnippet": "DateTime",
+      "explanation": "From System. DateTime.Now (current), DateTime.Today (date only). Arithmetic: subtract dates to get TimeSpan. Format with .ToString(\"yyyy-MM-dd\")."
+    },
+    {
+      "codeSnippet": "Math class",
+      "explanation": "Static methods: Math.Sqrt(), Math.Pow(), Math.Round(), Math.Abs(), Math.Min(), Math.Max(). From System namespace."
+    }
+  ],
+  "challenge": {
+    "instructions": "Build a simple journal/diary application using System libraries!\n\n1. Create a 'journal.txt' file\n2. Use StringBuilder to build an entry:\n   - Current date/time (DateTime.Now)\n   - User's mood (ask user)\n   - User's journal entry (ask user)\n3. Append the entry to journal.txt\n4. Read and display all entries from the file\n5. Display how many days until New Year (use DateTime and TimeSpan)",
+    "starterCode": "using System;\nusing System.IO;\nusing System.Text;\n\nstring filePath = \"journal.txt\";\n\n// Build journal entry with StringBuilder\nStringBuilder entry = new StringBuilder();\n\n// Add current date/time\n\n// Ask for mood and journal text\nConsole.WriteLine(\"How are you feeling?\");\nstring mood = Console.ReadLine();\n\nConsole.WriteLine(\"What's on your mind?\");\nstring thoughts = Console.ReadLine();\n\n// Build entry\n\n// Append to file\n\n// Read all entries\n\n// Calculate days until New Year",
+    "solutionCode": "using System;\nusing System.IO;\nusing System.Text;\n\nstring filePath = \"journal.txt\";\n\nStringBuilder entry = new StringBuilder();\nentry.AppendLine(\"=== Journal Entry ===\");\nentry.AppendLine(\"Date: \" + DateTime.Now.ToString(\"yyyy-MM-dd HH:mm\"));\n\nConsole.WriteLine(\"How are you feeling?\");\nstring mood = Console.ReadLine();\nentry.AppendLine(\"Mood: \" + mood);\n\nConsole.WriteLine(\"What's on your mind?\");\nstring thoughts = Console.ReadLine();\nentry.AppendLine(\"Entry: \" + thoughts);\nentry.AppendLine(\"\");\n\nFile.AppendAllText(filePath, entry.ToString());\nConsole.WriteLine(\"Journal entry saved!\");\n\nif (File.Exists(filePath))\n{\n    Console.WriteLine(\"\\nAll entries:\");\n    string allEntries = File.ReadAllText(filePath);\n    Console.WriteLine(allEntries);\n}\n\nDateTime newYear = new DateTime(DateTime.Now.Year + 1, 1, 1);\nTimeSpan timeUntil = newYear - DateTime.Now;\nConsole.WriteLine(\"Days until New Year: \" + (int)timeUntil.TotalDays);",
+    "hint": "StringBuilder: 'new StringBuilder()', then '.Append()' or '.AppendLine()'. Files: 'File.AppendAllText(path, text)'. DateTime: 'DateTime.Now', subtract dates for TimeSpan.",
+    "expectedOutputPatterns": ["Journal", "saved", "Days until"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "File path issues: On Windows, use @\"C:\\folder\\file.txt\" (verbatim string with @) or \"C:\\\\folder\\\\file.txt\" (escape backslashes). Or use Path.Combine() for cross-platform!",
+      "String concatenation in loops: DON'T use '+' in loops for strings! 'str += x' creates new string each time (slow!). Use StringBuilder for loops.",
+      "DateTime vs DateTimeOffset: DateTime doesn't store timezone! For apps across timezones, use DateTimeOffset. For local-only apps, DateTime is fine.",
+      "Not checking File.Exists(): Calling File.ReadAllText() on non-existent file throws exception! Always check 'if (File.Exists(path))' first, or use try/catch."
+    ]
+  }
+}

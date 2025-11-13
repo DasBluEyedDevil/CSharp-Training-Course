@@ -1,0 +1,40 @@
+{
+  "moduleId": 10,
+  "lessonNumber": 2,
+  "lessonId": "M10L02",
+  "title": "The async & await Keywords (The Modern Way)",
+  "simplifierConcept": "Imagine you're a manager delegating tasks:\n\n'Hey team, START working on this report (don't block me!)'\n'I'll go do other things'\n'When the report is READY, I'll come back and review it'\n\nThat's async/await!\n\nASYNC keyword:\n• Marks a method as asynchronous\n• Enables 'await' keyword inside\n• Method can be 'paused' and 'resumed'\n• Returns Task or Task<T>\n\nAWAIT keyword:\n• 'Pause here until this completes'\n• Doesn't block the thread! (Thread is released for other work)\n• When done, execution continues from where it paused\n• Can only use inside 'async' methods\n\nThink of await like a bookmark: 'I'll pause here, do other things, and come back when this is ready.'\n\nRULE: If a method is async, you should await it! (Unless you intentionally want fire-and-forget)",
+  "coderExample": "using System;\nusing System.Net.Http;\nusing System.Threading.Tasks;\n\n// ASYNC method - returns Task\nasync Task DoWorkAsync()\n{\n    Console.WriteLine(\"Work started\");\n    await Task.Delay(1000);  // Pause for 1 second\n    Console.WriteLine(\"Work completed\");\n}\n\n// ASYNC method with return value - returns Task<string>\nasync Task<string> GetDataAsync()\n{\n    Console.WriteLine(\"Fetching data...\");\n    await Task.Delay(2000);\n    return \"Data retrieved!\";  // Returns string, but method returns Task<string>\n}\n\n// ASYNC method calling other async methods\nasync Task ProcessDataAsync()\n{\n    Console.WriteLine(\"Starting process...\");\n    \n    // Await other async methods\n    await DoWorkAsync();\n    \n    string data = await GetDataAsync();  // Get returned value\n    Console.WriteLine(\"Got: \" + data);\n    \n    Console.WriteLine(\"Process complete!\");\n}\n\n// Real-world example: HTTP request\nasync Task<string> DownloadWebPageAsync(string url)\n{\n    using (HttpClient client = new HttpClient())\n    {\n        Console.WriteLine(\"Downloading \" + url + \"...\");\n        string content = await client.GetStringAsync(url);  // Async HTTP call\n        Console.WriteLine(\"Download complete!\");\n        return content;\n    }\n}\n\n// Using the async methods\nawait ProcessDataAsync();\n\n// Multiple sequential awaits\nConsole.WriteLine(\"Step 1\");\nawait Task.Delay(500);\nConsole.WriteLine(\"Step 2\");\nawait Task.Delay(500);\nConsole.WriteLine(\"Step 3\");\n\n// Calling async method without await (fire-and-forget)\nTask backgroundTask = DoWorkAsync();  // Starts, doesn't wait\nConsole.WriteLine(\"This runs immediately!\");\nawait backgroundTask;  // Now wait for it",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "async Task MethodName()",
+      "explanation": "'async' modifier enables await. 'Task' is return type (like void for async). Method body can contain 'await' expressions."
+    },
+    {
+      "codeSnippet": "async Task<T> MethodName()",
+      "explanation": "Async method that returns a value. Return type is Task<T> where T is the actual value type. Inside, you 'return T', not 'return Task<T>'!"
+    },
+    {
+      "codeSnippet": "await expression",
+      "explanation": "Waits for async operation without blocking thread. Expression must be 'awaitable' (Task, Task<T>, or custom awaitable). Execution pauses, then resumes when complete."
+    },
+    {
+      "codeSnippet": "Async all the way",
+      "explanation": "If you call async method, you should await it. If your method awaits, it should be async. This propagates up the call stack - 'async all the way'!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Build an async data processing pipeline!\n\n1. Create 'async Task<int> LoadDataAsync()':\n   - Print 'Loading data...'\n   - await Task.Delay(1000)\n   - Print 'Data loaded!'\n   - Return 42\n\n2. Create 'async Task<int> ProcessDataAsync(int input)':\n   - Print 'Processing data...'\n   - await Task.Delay(1500)\n   - Print 'Processing complete!'\n   - Return input * 2\n\n3. Create 'async Task<string> SaveResultAsync(int result)':\n   - Print 'Saving result...'\n   - await Task.Delay(800)\n   - Print 'Result saved!'\n   - Return 'Saved: ' + result\n\n4. Create 'async Task RunPipelineAsync()':\n   - Call all three methods in sequence (await each)\n   - Print final message from SaveResultAsync\n\n5. Call RunPipelineAsync() and await it",
+    "starterCode": "using System;\nusing System.Threading.Tasks;\n\nasync Task<int> LoadDataAsync()\n{\n    // Implement\n}\n\nasync Task<int> ProcessDataAsync(int input)\n{\n    // Implement\n}\n\nasync Task<string> SaveResultAsync(int result)\n{\n    // Implement\n}\n\nasync Task RunPipelineAsync()\n{\n    // Load\n    int data = await LoadDataAsync();\n    \n    // Process\n    int processed = await ProcessDataAsync(data);\n    \n    // Save\n    string message = await SaveResultAsync(processed);\n    \n    Console.WriteLine(\"Pipeline result: \" + message);\n}\n\n// Run the pipeline\nawait RunPipelineAsync();",
+    "solutionCode": "using System;\nusing System.Threading.Tasks;\n\nasync Task<int> LoadDataAsync()\n{\n    Console.WriteLine(\"Loading data...\");\n    await Task.Delay(1000);\n    Console.WriteLine(\"Data loaded!\");\n    return 42;\n}\n\nasync Task<int> ProcessDataAsync(int input)\n{\n    Console.WriteLine(\"Processing data...\");\n    await Task.Delay(1500);\n    Console.WriteLine(\"Processing complete!\");\n    return input * 2;\n}\n\nasync Task<string> SaveResultAsync(int result)\n{\n    Console.WriteLine(\"Saving result...\");\n    await Task.Delay(800);\n    Console.WriteLine(\"Result saved!\");\n    return \"Saved: \" + result;\n}\n\nasync Task RunPipelineAsync()\n{\n    int data = await LoadDataAsync();\n    int processed = await ProcessDataAsync(data);\n    string message = await SaveResultAsync(processed);\n    Console.WriteLine(\"Pipeline result: \" + message);\n}\n\nawait RunPipelineAsync();\nConsole.WriteLine(\"All done!\");",
+    "hint": "Async method: 'async Task<T> MethodName()'. Return value: 'return T' (not Task<T>!). Call: 'T result = await MethodAsync()'. Chain: await each step in sequence.",
+    "expectedOutputPatterns": ["Loading", "Processing", "Saving", "Pipeline result"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Returning Task<T> instead of T: In 'async Task<int> GetNumber()', return 'return 42;' NOT 'return Task.FromResult(42);'! The async keyword handles Task wrapping.",
+      "Async void instead of async Task: Only use 'async void' for event handlers! Regular methods should be 'async Task'. 'async void' can't be awaited and exceptions are hard to catch.",
+      "Not awaiting async methods: 'DoWorkAsync();' without await starts the method but doesn't wait! The calling method continues immediately. Always await unless you want fire-and-forget.",
+      "Deadlocks with .Result or .Wait(): In UI/ASP.NET apps, using '.Result' or '.Wait()' on Task can cause DEADLOCK! Always use 'await'. Blocking on async code is dangerous."
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "moduleId": 8,
+  "lessonNumber": 5,
+  "lessonId": "M08L05",
+  "title": "NuGet (The App Store for Code)",
+  "simplifierConcept": "Imagine you want to add GPS navigation to your phone. You don't build it from scratch - you download an app from the App Store!\n\nThat's what NUGET is - the 'app store' for C# code libraries (called PACKAGES):\n• Need to work with JSON? Install Newtonsoft.Json\n• Need to send emails? Install MailKit\n• Need to parse CSV files? Install CsvHelper\n• Need to connect to databases? Install Entity Framework Core\n\nThese packages are built by other developers and SHARED for free (mostly). They're:\n• TESTED by thousands of users\n• MAINTAINED with bug fixes\n• DOCUMENTED with examples\n• VERSIONED (you can upgrade/downgrade)\n\nThink: NuGet = 'Don't write everything yourself! Stand on the shoulders of giants.' Professional developers use dozens of NuGet packages!",
+  "coderExample": "// INSTALLING packages (via terminal or Visual Studio)\n// dotnet add package Newtonsoft.Json\n// dotnet add package Humanizer\n\n// Once installed, use them like system libraries!\nusing System;\nusing Newtonsoft.Json;  // Popular JSON library\nusing Humanizer;  // Makes things human-readable\n\n// JSON SERIALIZATION with Newtonsoft.Json\nclass Person\n{\n    public string Name { get; set; }\n    public int Age { get; set; }\n    public string Email { get; set; }\n}\n\nPerson person = new Person \n{ \n    Name = \"Alice\", \n    Age = 30, \n    Email = \"alice@example.com\" \n};\n\n// Convert object to JSON string\nstring json = JsonConvert.SerializeObject(person, Formatting.Indented);\nConsole.WriteLine(\"JSON:\\n\" + json);\n\n// Convert JSON string back to object\nstring jsonData = \"{\\\"Name\\\":\\\"Bob\\\",\\\"Age\\\":25}\";\nPerson restored = JsonConvert.DeserializeObject<Person>(jsonData);\nConsole.WriteLine(\"Name: \" + restored.Name);\n\n// HUMANIZER library - makes numbers/dates readable\nDateTime past = DateTime.Now.AddDays(-5);\nConsole.WriteLine(past.Humanize());  // \"5 days ago\"\n\nConsole.WriteLine(\"NoOfDonuts\".Humanize());  // \"No of donuts\"\nConsole.WriteLine(\"1000\".ToWords());  // \"one thousand\"",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "dotnet add package PackageName",
+      "explanation": "Command-line way to install NuGet packages. Run in project folder. Adds package to .csproj file automatically."
+    },
+    {
+      "codeSnippet": "JsonConvert.SerializeObject()",
+      "explanation": "From Newtonsoft.Json. Converts C# objects to JSON strings. Use Formatting.Indented for readable output."
+    },
+    {
+      "codeSnippet": "JsonConvert.DeserializeObject<T>()",
+      "explanation": "Converts JSON string back to C# object. Specify type with <Person>. Returns null if JSON doesn't match structure!"
+    },
+    {
+      "codeSnippet": "Package versioning",
+      "explanation": "Packages have versions: 13.0.3, 2.1.0. Install specific version: 'dotnet add package Name --version 2.1.0'. Update: 'dotnet add package Name'."
+    }
+  ],
+  "challenge": {
+    "instructions": "Work with JSON data using Newtonsoft.Json!\n\n1. Create a 'Book' class:\n   - string Title\n   - string Author\n   - int Year\n   - decimal Price\n\n2. Create a List of 3 books\n\n3. Use JsonConvert.SerializeObject() to convert list to JSON\n   - Use Formatting.Indented for readability\n   - Display the JSON\n\n4. Save JSON to a file (books.json)\n\n5. Read the file back and deserialize to List<Book>\n\n6. Display all book titles from the deserialized list\n\nNOTE: For this challenge, assume Newtonsoft.Json is installed!",
+    "starterCode": "using System;\nusing System.Collections.Generic;\nusing System.IO;\nusing Newtonsoft.Json;\n\nclass Book\n{\n    // Define properties\n}\n\n// Create list of books\nList<Book> books = new List<Book>();\n\n// Add 3 books\n\n// Serialize to JSON\nstring json = JsonConvert.SerializeObject(books, Formatting.Indented);\nConsole.WriteLine(\"JSON:\\n\" + json);\n\n// Save to file\n\n// Read from file and deserialize\n\n// Display book titles",
+    "solutionCode": "using System;\nusing System.Collections.Generic;\nusing System.IO;\nusing Newtonsoft.Json;\n\nclass Book\n{\n    public string Title { get; set; }\n    public string Author { get; set; }\n    public int Year { get; set; }\n    public decimal Price { get; set; }\n}\n\nList<Book> books = new List<Book>();\nbooks.Add(new Book { Title = \"1984\", Author = \"Orwell\", Year = 1949, Price = 15.99m });\nbooks.Add(new Book { Title = \"To Kill a Mockingbird\", Author = \"Lee\", Year = 1960, Price = 12.99m });\nbooks.Add(new Book { Title = \"The Great Gatsby\", Author = \"Fitzgerald\", Year = 1925, Price = 10.99m });\n\nstring json = JsonConvert.SerializeObject(books, Formatting.Indented);\nConsole.WriteLine(\"JSON:\\n\" + json);\n\nFile.WriteAllText(\"books.json\", json);\nConsole.WriteLine(\"\\nSaved to books.json\");\n\nstring fileContent = File.ReadAllText(\"books.json\");\nList<Book> loadedBooks = JsonConvert.DeserializeObject<List<Book>>(fileContent);\n\nConsole.WriteLine(\"\\nLoaded books:\");\nforeach (Book book in loadedBooks)\n{\n    Console.WriteLine(\"- \" + book.Title + \" by \" + book.Author);\n}",
+    "hint": "Serialize: 'JsonConvert.SerializeObject(obj, Formatting.Indented)'. Deserialize: 'JsonConvert.DeserializeObject<Type>(json)'. Save/load JSON with File.WriteAllText and File.ReadAllText.",
+    "expectedOutputPatterns": ["JSON", "Saved", "Loaded books"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Package not installed: If you use Newtonsoft.Json without installing it, you get 'namespace not found' error! Must run 'dotnet add package Newtonsoft.Json' first.",
+      "Property names must match JSON: JsonConvert uses property names! If JSON has \\\"title\\\" but your class has \\\"Title\\\", use [JsonProperty(\\\"title\\\")] attribute or it won't map correctly.",
+      "Null reference after deserialize: If JSON structure doesn't match class, DeserializeObject returns null or incomplete object! Always validate JSON structure matches your class.",
+      "Versioning conflicts: Different packages might need different versions of same dependency! NuGet usually resolves this, but sometimes you get conflicts. Check package compatibility."
+    ]
+  }
+}

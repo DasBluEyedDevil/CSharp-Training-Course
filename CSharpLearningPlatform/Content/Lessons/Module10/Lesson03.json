@@ -1,0 +1,40 @@
+{
+  "moduleId": 10,
+  "lessonNumber": 3,
+  "lessonId": "M10L03",
+  "title": "Task<T> (The Promise of a Future Result)",
+  "simplifierConcept": "Imagine you order a package online:\n• You get a TRACKING NUMBER immediately\n• The package isn't here YET\n• The tracking number is a PROMISE: 'Your package WILL arrive'\n• You can check status, wait for it, or do other things\n• When it arrives, you can open it and get the contents\n\nThat's Task<T>!\n\nTask<T> represents:\n• An ONGOING operation (might not be done yet)\n• A PROMISE of a future result of type T\n• You can:\n  - Check if it's complete: task.IsCompleted\n  - Wait for it: await task\n  - Get the result: await task (returns T)\n  - Run multiple: Task.WhenAll(), Task.WhenAny()\n\nTask = async operation that returns nothing (void)\nTask<T> = async operation that returns T\n\nThink: Task<T> = 'I don't have the value NOW, but I WILL have it soon. Here's a promise!'",
+  "coderExample": "using System;\nusing System.Threading.Tasks;\nusing System.Collections.Generic;\n\n// Method returning Task<int> (promise of future int)\nasync Task<int> CalculateAsync(int x, int y)\n{\n    await Task.Delay(1000);  // Simulate work\n    return x + y;\n}\n\n// Using Task<T>\nTask<int> resultTask = CalculateAsync(5, 3);\nConsole.WriteLine(\"Calculation started...\");\n\nint result = await resultTask;  // Wait and get the int\nConsole.WriteLine(\"Result: \" + result);\n\n// TASK METHODS\n\n// Task.WhenAll - wait for ALL tasks\nTask<int> t1 = CalculateAsync(1, 2);\nTask<int> t2 = CalculateAsync(3, 4);\nTask<int> t3 = CalculateAsync(5, 6);\n\nint[] results = await Task.WhenAll(t1, t2, t3);\nConsole.WriteLine(\"All results: \" + string.Join(\", \", results));\n\n// Task.WhenAny - wait for FIRST to complete\nTask<int> fast = Task.Delay(500).ContinueWith(_ => 1);\nTask<int> slow = Task.Delay(2000).ContinueWith(_ => 2);\n\nTask<int> firstDone = await Task.WhenAny(fast, slow);\nint firstResult = await firstDone;\nConsole.WriteLine(\"First completed: \" + firstResult);\n\n// Task.Run - run CPU-bound work on background thread\nTask<int> cpuTask = Task.Run(() => \n{\n    int sum = 0;\n    for (int i = 0; i < 1000000; i++)\n    {\n        sum += i;\n    }\n    return sum;\n});\n\nint sum = await cpuTask;\nConsole.WriteLine(\"Sum: \" + sum);\n\n// Task status properties\nTask<string> task = GetDataAsync();\n\nConsole.WriteLine(\"IsCompleted: \" + task.IsCompleted);\nConsole.WriteLine(\"Status: \" + task.Status);\n\nstring data = await task;\nConsole.WriteLine(\"IsCompleted: \" + task.IsCompleted);  // Now true!",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "Task<T> vs Task",
+      "explanation": "Task<T> returns a value of type T. Task returns nothing (like void). Both represent async operations. Use await to get T from Task<T>."
+    },
+    {
+      "codeSnippet": "await Task.WhenAll(t1, t2, t3)",
+      "explanation": "Waits for ALL tasks to complete. Returns array of results if tasks are Task<T>. More efficient than awaiting each task sequentially!"
+    },
+    {
+      "codeSnippet": "await Task.WhenAny(t1, t2)",
+      "explanation": "Waits for FIRST task to complete. Returns the completed task (not the result!). Await the returned task to get result. Useful for timeouts."
+    },
+    {
+      "codeSnippet": "Task.Run(() => code)",
+      "explanation": "Runs code on background thread (thread pool). Use for CPU-intensive work. Returns Task or Task<T>. Don't use for I/O (use async I/O instead)."
+    }
+  ],
+  "challenge": {
+    "instructions": "Build a download manager with Task<T>!\n\n1. Create 'async Task<int> DownloadFileAsync(string filename, int sizeKB)':\n   - Print 'Downloading [filename] ([sizeKB]KB)...'\n   - await Task.Delay(sizeKB * 10) to simulate download (bigger = slower)\n   - Print '[filename] complete!'\n   - Return sizeKB\n\n2. In main code:\n   - Start 4 downloads simultaneously (different sizes: 50KB, 150KB, 100KB, 200KB)\n   - Store in List<Task<int>>\n   - Use Task.WhenAll to wait for ALL downloads\n   - Sum the results to get total KB downloaded\n   - Calculate and display total MB (KB / 1024.0)\n\n3. BONUS: Use Task.WhenAny to detect which file finishes FIRST",
+    "starterCode": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.Threading.Tasks;\n\nasync Task<int> DownloadFileAsync(string filename, int sizeKB)\n{\n    // Implement download simulation\n}\n\nConsole.WriteLine(\"Starting downloads...\");\n\n// Create list of download tasks\nList<Task<int>> downloads = new List<Task<int>>();\n\ndownloads.Add(DownloadFileAsync(\"file1.zip\", 50));\ndownloads.Add(DownloadFileAsync(\"file2.zip\", 150));\ndownloads.Add(DownloadFileAsync(\"file3.zip\", 100));\ndownloads.Add(DownloadFileAsync(\"file4.zip\", 200));\n\n// Wait for all\nint[] sizes = await Task.WhenAll(downloads);\n\n// Calculate total\nint totalKB = sizes.Sum();\ndouble totalMB = totalKB / 1024.0;\n\nConsole.WriteLine(\"Total downloaded: \" + totalKB + \"KB (\" + totalMB + \"MB)\");",
+    "solutionCode": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.Threading.Tasks;\n\nasync Task<int> DownloadFileAsync(string filename, int sizeKB)\n{\n    Console.WriteLine(\"Downloading \" + filename + \" (\" + sizeKB + \"KB)...\");\n    await Task.Delay(sizeKB * 10);\n    Console.WriteLine(filename + \" complete!\");\n    return sizeKB;\n}\n\nConsole.WriteLine(\"Starting downloads...\");\n\nList<Task<int>> downloads = new List<Task<int>>();\n\ndownloads.Add(DownloadFileAsync(\"file1.zip\", 50));\ndownloads.Add(DownloadFileAsync(\"file2.zip\", 150));\ndownloads.Add(DownloadFileAsync(\"file3.zip\", 100));\ndownloads.Add(DownloadFileAsync(\"file4.zip\", 200));\n\nint[] sizes = await Task.WhenAll(downloads);\n\nint totalKB = sizes.Sum();\ndouble totalMB = totalKB / 1024.0;\n\nConsole.WriteLine(\"\\nAll downloads complete!\");\nConsole.WriteLine(\"Total downloaded: \" + totalKB + \"KB (\" + totalMB.ToString(\"F2\") + \"MB)\");",
+    "hint": "Return Task<int>: 'async Task<int> Method()'. Store tasks: 'List<Task<int>> list'. Wait for all: 'int[] results = await Task.WhenAll(list)'. Sum array: 'results.Sum()'.",
+    "expectedOutputPatterns": ["Downloading", "complete", "Total downloaded"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Awaiting in loop: 'foreach (var t in tasks) await t' is SEQUENTIAL! Use 'await Task.WhenAll(tasks)' for parallel. Awaiting one-by-one defeats the purpose of async.",
+      "Not storing task before await: 'await Method1(); await Method2();' is sequential. Start both first: 'var t1 = Method1(); var t2 = Method2(); await Task.WhenAll(t1, t2);' for parallel!",
+      "Using .Result: 'task.Result' BLOCKS the thread! Use 'await task' instead. '.Result' can cause deadlocks in UI/ASP.NET apps.",
+      "Task.WhenAny result: WhenAny returns the TASK, not the result! Must await again: 'Task<int> firstTask = await Task.WhenAny(t1, t2); int result = await firstTask;'."
+    ]
+  }
+}

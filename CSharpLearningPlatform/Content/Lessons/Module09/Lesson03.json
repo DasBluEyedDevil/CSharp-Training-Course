@@ -1,0 +1,40 @@
+{
+  "moduleId": 9,
+  "lessonNumber": 3,
+  "lessonId": "M09L03",
+  "title": "Filtering with .Where() (The Filter Funnel)",
+  "simplifierConcept": "Imagine gold miners using a sieve (filter) to separate gold from dirt. The filter lets ONLY gold through!\n\nThat's .Where() - it's a FILTER for collections:\n• Input: A collection of items\n• Process: Test each item with a condition\n• Output: Only items that pass the test\n\nThe condition is a LAMBDA EXPRESSION:\n• 'x => x > 5' means 'for each x, check if x > 5'\n• 'x' is the current item\n• '=>' means 'goes to' or 'such that'\n• Right side is the boolean condition\n\nMultiple conditions?\n• AND: .Where(x => x > 5 && x < 10)\n• OR: .Where(x => x == 1 || x == 100)\n• Method calls: .Where(x => x.StartsWith(\"A\"))\n\nThink: .Where() = 'Keep only the items that match my criteria, discard the rest.'",
+  "coderExample": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\nList<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };\n\n// Simple filter\nvar evens = numbers.Where(n => n % 2 == 0);\nConsole.WriteLine(\"Evens: \" + string.Join(\", \", evens));\n\n// Multiple conditions with AND\nvar range = numbers.Where(n => n > 3 && n < 8);\nConsole.WriteLine(\"Between 3 and 8: \" + string.Join(\", \", range));\n\n// OR conditions\nvar extremes = numbers.Where(n => n <= 2 || n >= 9);\nConsole.WriteLine(\"Extremes: \" + string.Join(\", \", extremes));\n\n// Working with objects\nclass Person\n{\n    public string Name;\n    public int Age;\n    public string City;\n}\n\nList<Person> people = new List<Person>\n{\n    new Person { Name = \"Alice\", Age = 30, City = \"NYC\" },\n    new Person { Name = \"Bob\", Age = 25, City = \"LA\" },\n    new Person { Name = \"Charlie\", Age = 35, City = \"NYC\" },\n    new Person { Name = \"Diana\", Age = 28, City = \"Chicago\" }\n};\n\n// Filter by property\nvar inNYC = people.Where(p => p.City == \"NYC\");\nforeach (var person in inNYC)\n{\n    Console.WriteLine(person.Name + \" lives in NYC\");\n}\n\n// Complex filter: adults in NYC\nvar adultsInNYC = people.Where(p => p.Age >= 30 && p.City == \"NYC\");\nforeach (var person in adultsInNYC)\n{\n    Console.WriteLine(person.Name + \" is 30+ in NYC\");\n}\n\n// Method calls in filter\nvar startsWithC = people.Where(p => p.Name.StartsWith(\"C\"));\nforeach (var person in startsWithC)\n{\n    Console.WriteLine(\"Starts with C: \" + person.Name);\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "collection.Where(x => condition)",
+      "explanation": "Where() tests each item. 'x' is each item (you choose the name!). Returns IEnumerable<T> with only items where condition is true."
+    },
+    {
+      "codeSnippet": "Lambda: x => expression",
+      "explanation": "Lambda is anonymous function. 'x' is parameter. '=>' is lambda operator. Expression returns bool (true/false). Read: 'x such that expression'."
+    },
+    {
+      "codeSnippet": "Multiple conditions",
+      "explanation": "Combine with && (AND), || (OR), ! (NOT). Example: 'x => x > 5 && x < 10' means 'between 5 and 10'."
+    },
+    {
+      "codeSnippet": "Object properties in lambdas",
+      "explanation": "Access properties inside lambda: 'p => p.Age > 30'. Can call methods too: 'p => p.Name.Contains(\"a\")'."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a product filtering system!\n\n1. Create a 'Product' class:\n   - string Name\n   - decimal Price\n   - string Category\n   - int Stock\n\n2. Create a List with at least 6 products:\n   - Mix of Electronics, Clothing, Books\n   - Varying prices ($10 - $500)\n   - Different stock levels (0 - 100)\n\n3. Use .Where() to find:\n   - Products under $50\n   - Electronics with stock > 0\n   - Products that are either Books OR price > $200\n   - Out of stock items (stock == 0)\n\n4. Display results for each filter with descriptive labels",
+    "starterCode": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\nclass Product\n{\n    public string Name;\n    public decimal Price;\n    public string Category;\n    public int Stock;\n}\n\nList<Product> products = new List<Product>\n{\n    new Product { Name = \"Laptop\", Price = 999, Category = \"Electronics\", Stock = 5 },\n    new Product { Name = \"Shirt\", Price = 25, Category = \"Clothing\", Stock = 50 },\n    // Add 4 more products\n};\n\n// Filter 1: Under $50\nvar affordable = products.Where(p => /* condition */);\n\n// Filter 2: Electronics in stock\nvar availableElectronics = products.Where(p => /* condition */);\n\n// Filter 3: Books OR expensive\nvar booksOrExpensive = products.Where(p => /* condition */);\n\n// Filter 4: Out of stock\nvar outOfStock = products.Where(p => /* condition */);",
+    "solutionCode": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\nclass Product\n{\n    public string Name;\n    public decimal Price;\n    public string Category;\n    public int Stock;\n}\n\nList<Product> products = new List<Product>\n{\n    new Product { Name = \"Laptop\", Price = 999, Category = \"Electronics\", Stock = 5 },\n    new Product { Name = \"Shirt\", Price = 25, Category = \"Clothing\", Stock = 50 },\n    new Product { Name = \"Novel\", Price = 15, Category = \"Books\", Stock = 0 },\n    new Product { Name = \"Headphones\", Price = 79, Category = \"Electronics\", Stock = 20 },\n    new Product { Name = \"Jeans\", Price = 45, Category = \"Clothing\", Stock = 30 },\n    new Product { Name = \"Tablet\", Price = 299, Category = \"Electronics\", Stock = 0 }\n};\n\nvar affordable = products.Where(p => p.Price < 50);\nConsole.WriteLine(\"Products under $50:\");\nforeach (var p in affordable)\n{\n    Console.WriteLine(\"- \" + p.Name + \": $\" + p.Price);\n}\n\nvar availableElectronics = products.Where(p => p.Category == \"Electronics\" && p.Stock > 0);\nConsole.WriteLine(\"\\nElectronics in stock:\");\nforeach (var p in availableElectronics)\n{\n    Console.WriteLine(\"- \" + p.Name + \" (\" + p.Stock + \" units)\");\n}\n\nvar booksOrExpensive = products.Where(p => p.Category == \"Books\" || p.Price > 200);\nConsole.WriteLine(\"\\nBooks OR price > $200:\");\nforeach (var p in booksOrExpensive)\n{\n    Console.WriteLine(\"- \" + p.Name);\n}\n\nvar outOfStock = products.Where(p => p.Stock == 0);\nConsole.WriteLine(\"\\nOut of stock:\");\nforeach (var p in outOfStock)\n{\n    Console.WriteLine(\"- \" + p.Name);\n}",
+    "hint": "Where syntax: '.Where(item => condition)'. AND: '&&'. OR: '||'. Compare strings: 'p.Category == \"Books\"'. Property access: 'p.Price', 'p.Stock'.",
+    "expectedOutputPatterns": ["under $50", "Electronics in stock", "Out of stock"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Using = instead of ==: Comparison is '==' (double equals)! Single '=' is assignment, won't work in lambda. 'x => x.Age = 30' is ERROR!",
+      "Forgetting parentheses with complex conditions: 'x => x > 5 && x < 10 || x == 100' can be ambiguous! Use parentheses: 'x => (x > 5 && x < 10) || x == 100'.",
+      "Case sensitivity in string comparison: 'Category == \"electronics\"' won't match \"Electronics\"! Use .Equals(\"electronics\", StringComparison.OrdinalIgnoreCase) for case-insensitive.",
+      "Null reference in lambda: If object property could be null, check first! 'x => x.Name.StartsWith(\"A\")' crashes if Name is null. Use: 'x => x.Name != null && x.Name.StartsWith(\"A\")'."
+    ]
+  }
+}
