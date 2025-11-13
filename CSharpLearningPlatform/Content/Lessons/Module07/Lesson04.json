@@ -1,0 +1,40 @@
+{
+  "moduleId": 7,
+  "lessonNumber": 4,
+  "lessonId": "M07L04",
+  "title": "Interfaces (The Contract)",
+  "simplifierConcept": "Imagine a job posting: 'Looking for employee who can: Drive, Operate forklift, Read inventory systems.' This is a CONTRACT - if you want the job, you MUST have these skills!\n\nAn INTERFACE is a contract for classes. It says: 'If you implement me, you MUST provide these methods.' Unlike abstract classes:\n• NO implementation (just method signatures)\n• A class can implement MULTIPLE interfaces (but only inherit from ONE class!)\n• All members are public and abstract by default\n\nNaming: Interfaces start with 'I' by convention: IDrawable, IPlayable, IComparable.\n\nThink: IDrawable = 'anything that can be drawn'. Button, Image, Shape all implement IDrawable. They're completely different, but share the ability to be drawn!",
+  "coderExample": "// INTERFACE definition\ninterface IDrawable\n{\n    void Draw();  // No implementation!\n    void Erase();\n}\n\ninterface IResizable\n{\n    void Resize(int width, int height);\n}\n\n// Class implementing ONE interface\nclass Button : IDrawable\n{\n    public void Draw()\n    {\n        Console.WriteLine(\"Drawing button\");\n    }\n    \n    public void Erase()\n    {\n        Console.WriteLine(\"Erasing button\");\n    }\n}\n\n// Class implementing MULTIPLE interfaces\nclass Image : IDrawable, IResizable\n{\n    public void Draw()\n    {\n        Console.WriteLine(\"Drawing image\");\n    }\n    \n    public void Erase()\n    {\n        Console.WriteLine(\"Erasing image\");\n    }\n    \n    public void Resize(int width, int height)\n    {\n        Console.WriteLine(\"Resizing to \" + width + \"x\" + height);\n    }\n}\n\n// Polymorphism with interfaces\nIDrawable[] drawable = { new Button(), new Image() };\nforeach (IDrawable item in drawable)\n{\n    item.Draw();  // Each draws differently!\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "interface IInterfaceName",
+      "explanation": "Interfaces use 'interface' keyword. By convention, names start with 'I'. Define WHAT, not HOW."
+    },
+    {
+      "codeSnippet": "void Method();",
+      "explanation": "Interface methods have NO body, NO access modifiers (implicitly public). Just signatures ending with semicolon."
+    },
+    {
+      "codeSnippet": "class C : IDrawable, IResizable",
+      "explanation": "Class can implement MULTIPLE interfaces! Separate with commas. Must implement ALL methods from ALL interfaces."
+    },
+    {
+      "codeSnippet": "Interface vs Abstract Class",
+      "explanation": "Interface = pure contract (no implementation). Abstract = template with some implementation. Can implement many interfaces, inherit from one class."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a media player system with interfaces!\n\n1. INTERFACE 'IPlayable':\n   - void Play()\n   - void Pause()\n   - void Stop()\n\n2. INTERFACE 'IRecordable':\n   - void Record()\n   - void SaveRecording()\n\n3. CLASS 'VideoPlayer' implements IPlayable\n4. CLASS 'AudioRecorder' implements IPlayable AND IRecordable\n5. Create objects, call methods polymorphically",
+    "starterCode": "interface IPlayable\n{\n    // Define methods\n}\n\ninterface IRecordable\n{\n    // Define methods\n}\n\nclass VideoPlayer : IPlayable\n{\n    // Implement IPlayable\n}\n\nclass AudioRecorder : IPlayable, IRecordable\n{\n    // Implement both interfaces\n}",
+    "solutionCode": "interface IPlayable\n{\n    void Play();\n    void Pause();\n    void Stop();\n}\n\ninterface IRecordable\n{\n    void Record();\n    void SaveRecording();\n}\n\nclass VideoPlayer : IPlayable\n{\n    public void Play()\n    {\n        Console.WriteLine(\"Playing video\");\n    }\n    \n    public void Pause()\n    {\n        Console.WriteLine(\"Video paused\");\n    }\n    \n    public void Stop()\n    {\n        Console.WriteLine(\"Video stopped\");\n    }\n}\n\nclass AudioRecorder : IPlayable, IRecordable\n{\n    public void Play()\n    {\n        Console.WriteLine(\"Playing audio\");\n    }\n    \n    public void Pause()\n    {\n        Console.WriteLine(\"Audio paused\");\n    }\n    \n    public void Stop()\n    {\n        Console.WriteLine(\"Audio stopped\");\n    }\n    \n    public void Record()\n    {\n        Console.WriteLine(\"Recording audio\");\n    }\n    \n    public void SaveRecording()\n    {\n        Console.WriteLine(\"Saving recording\");\n    }\n}\n\nIPlayable player = new VideoPlayer();\nplayer.Play();\n\nAudioRecorder recorder = new AudioRecorder();\nrecorder.Play();\nrecorder.Record();",
+    "hint": "Interface: 'interface IName { void Method(); }'. Implement: 'class C : IName { public void Method() { } }'. Must implement ALL interface methods!",
+    "expectedOutputPatterns": ["Playing", "Recording"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Adding implementation in interface: 'void Method() { code }' in interface is WRONG! Interfaces have NO implementation (except default interface methods in C# 8+, advanced topic).",
+      "Forgetting 'public' in implementation: When implementing interface methods in class, you MUST make them 'public'! Interface members are implicitly public.",
+      "Not implementing all methods: If interface has 3 methods, class MUST implement all 3! Missing even one = compiler error.",
+      "Using 'new' instead of 'implements': C# uses ':' for BOTH inheritance and interfaces. 'class C : IDrawable' implements the interface (colon, not 'implements' keyword)."
+    ]
+  }
+}

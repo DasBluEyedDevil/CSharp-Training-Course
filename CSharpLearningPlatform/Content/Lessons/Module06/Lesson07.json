@@ -1,0 +1,44 @@
+{
+  "moduleId": 6,
+  "lessonNumber": 7,
+  "lessonId": "M06L07",
+  "title": "Static vs Instance Members",
+  "simplifierConcept": "Imagine a school:\n\n• **INSTANCE (each student)**: Each student has their OWN name, grade, age. John's grade is different from Mary's grade.\n\n• **STATIC (shared by all)**: The school bell rings for EVERYONE. The school's name is the SAME for all students. These are SHARED, not personal.\n\nIn C#:\n• **Instance members**: Each object has its own copy. player1.score is different from player2.score.\n• **Static members**: Shared by ALL instances of the class. ONE copy for the whole class.\n\nWhen to use static?\n• Counters: How many Player objects exist? Player.Count (shared)\n• Utility methods: Math.Sqrt(), Console.WriteLine() - don't need a specific object!\n• Constants: Math.PI - same for everyone\n\nAccess static members through the CLASS NAME (Player.Count), not an object (player1.Count won't work)!",
+  "coderExample": "class Player\n{\n    // STATIC - shared by all players\n    public static int TotalPlayers = 0;\n    public static int MaxScore = 0;\n    \n    // INSTANCE - each player has their own\n    public string Name;\n    public int Score;\n    \n    public Player(string name)\n    {\n        Name = name;\n        Score = 0;\n        TotalPlayers++;  // Increment shared counter\n    }\n    \n    // INSTANCE method - works with specific player\n    public void AddPoints(int points)\n    {\n        Score += points;\n        \n        // Update static MaxScore if this player beat it\n        if (Score > MaxScore)\n            MaxScore = Score;\n    }\n    \n    // STATIC method - doesn't need a specific player\n    public static void DisplayStats()\n    {\n        Console.WriteLine(\"Total Players: \" + TotalPlayers);\n        Console.WriteLine(\"Highest Score: \" + MaxScore);\n    }\n}\n\n// Usage\nPlayer p1 = new Player(\"Alice\");\nPlayer p2 = new Player(\"Bob\");\n\n// Access static through class name\nConsole.WriteLine(\"Players: \" + Player.TotalPlayers);  // 2\n\np1.AddPoints(100);\np2.AddPoints(150);\n\n// Static method called through class name\nPlayer.DisplayStats();  // Total: 2, Max: 150\n\n// Each instance has own Score\nConsole.WriteLine(p1.Score);  // 100\nConsole.WriteLine(p2.Score);  // 150",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "public static int Count",
+      "explanation": "STATIC field - ONE copy shared by all instances. Access via ClassName.FieldName, not objectName.FieldName!"
+    },
+    {
+      "codeSnippet": "public string Name",
+      "explanation": "INSTANCE field (no 'static') - EACH object has its own copy. Access via objectName.FieldName."
+    },
+    {
+      "codeSnippet": "public static void Method()",
+      "explanation": "STATIC method - called through class name: ClassName.Method(). Can only access static members! Can't use 'this' or instance fields."
+    },
+    {
+      "codeSnippet": "Player.TotalPlayers vs p1.Score",
+      "explanation": "Static members use CLASS NAME (Player.TotalPlayers). Instance members use OBJECT (p1.Score). This is how you know which is which!"
+    },
+    {
+      "codeSnippet": "Math.PI, Console.WriteLine",
+      "explanation": "These are static! Math.PI (static field), Console.WriteLine (static method). You don't create Math or Console objects - you use the class directly!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a Vehicle counter system!\n\n1. Class 'Vehicle' with:\n   - STATIC field: int TotalVehicles = 0\n   - STATIC field: int MaxSpeed = 0\n   - INSTANCE fields: string Model, int Speed\n2. Constructor that increments TotalVehicles\n3. INSTANCE method Accelerate(int amount): increases Speed, updates static MaxSpeed if beaten\n4. STATIC method ShowStats(): displays TotalVehicles and MaxSpeed\n5. Create 3 vehicles, accelerate them, call ShowStats\n\nDemonstrate the difference between static (shared) and instance (individual)!",
+    "starterCode": "class Vehicle\n{\n    // Static members (shared)\n    \n    // Instance members (per object)\n    \n    // Constructor\n    \n    // Instance method Accelerate\n    \n    // Static method ShowStats\n}\n\n// Create vehicles and test\nVehicle car1 = new Vehicle();\nVehicle car2 = new Vehicle();\nVehicle car3 = new Vehicle();\n// Set models, accelerate, show stats",
+    "solutionCode": "class Vehicle\n{\n    public static int TotalVehicles = 0;\n    public static int MaxSpeed = 0;\n    \n    public string Model;\n    public int Speed;\n    \n    public Vehicle(string model)\n    {\n        Model = model;\n        Speed = 0;\n        TotalVehicles++;\n    }\n    \n    public void Accelerate(int amount)\n    {\n        Speed += amount;\n        Console.WriteLine(Model + \" accelerated to \" + Speed + \" mph\");\n        \n        if (Speed > MaxSpeed)\n            MaxSpeed = Speed;\n    }\n    \n    public static void ShowStats()\n    {\n        Console.WriteLine(\"=== Vehicle Stats ===\");\n        Console.WriteLine(\"Total Vehicles: \" + TotalVehicles);\n        Console.WriteLine(\"Max Speed Reached: \" + MaxSpeed + \" mph\");\n    }\n}\n\nVehicle car1 = new Vehicle(\"Tesla\");\nVehicle car2 = new Vehicle(\"BMW\");\nVehicle car3 = new Vehicle(\"Audi\");\n\ncar1.Accelerate(80);\ncar2.Accelerate(120);\ncar3.Accelerate(95);\n\nVehicle.ShowStats();",
+    "hint": "Static: use 'static' keyword, access via ClassName. Instance: no 'static', access via objectName. Static methods can't use 'this' or instance members!",
+    "expectedOutputPatterns": ["Total", "Max Speed"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Accessing static through instance: 'p1.TotalPlayers' might work but is WRONG! Always use ClassName.StaticMember for clarity: Player.TotalPlayers.",
+      "Using instance members in static methods: Static methods can't access instance fields! 'public static void Method() { Console.WriteLine(Name); }' is ERROR if Name is instance field.",
+      "Forgetting 'static' keyword: If you want a shared member, you MUST use 'static'. 'public int TotalPlayers' without 'static' means EACH object has its own TotalPlayers (not shared)!",
+      "When to use static: Use static for shared data (counters, constants) or utility methods (Math.Sqrt). Use instance for object-specific data (each player's score)."
+    ]
+  }
+}

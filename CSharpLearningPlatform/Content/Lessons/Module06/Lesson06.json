@@ -1,0 +1,44 @@
+{
+  "moduleId": 6,
+  "lessonNumber": 6,
+  "lessonId": "M06L06",
+  "title": "Access Modifiers (public, private, protected)",
+  "simplifierConcept": "Think of your house with different rooms:\n\n• **PUBLIC** = Living room: Anyone can enter, guests welcome\n• **PRIVATE** = Your bedroom: Only YOU can enter\n• **PROTECTED** = Family room: Only family members (and you) allowed\n\nAccess modifiers control WHO can access your class members (fields, properties, methods).\n\nWhy restrict access? SECURITY and ORGANIZATION!\n• Keep internal implementation private (users don't need to know HOW it works)\n• Expose only what's necessary through public methods\n• Prevent accidental modification of important data\n\nThis is **ENCAPSULATION** - one of OOP's core principles. Hide complexity, expose simplicity!",
+  "coderExample": "class BankAccount\n{\n    // PRIVATE: Only this class can access\n    private decimal balance;\n    private string accountNumber;\n    \n    // PUBLIC: Anyone can access\n    public string AccountHolder;\n    \n    // PUBLIC constructor\n    public BankAccount(string holder, decimal initialBalance)\n    {\n        AccountHolder = holder;\n        balance = initialBalance;  // Can access private field within class\n        accountNumber = GenerateAccountNumber();  // Calling private method\n    }\n    \n    // PUBLIC method - users can call this\n    public void Deposit(decimal amount)\n    {\n        if (amount > 0)\n            balance += amount;\n    }\n    \n    // PUBLIC method exposing private data safely\n    public decimal GetBalance()\n    {\n        return balance;  // OK to access private field within class\n    }\n    \n    // PRIVATE method - only internal use\n    private string GenerateAccountNumber()\n    {\n        return \"ACC\" + new Random().Next(1000, 9999);\n    }\n}\n\n// Usage\nBankAccount account = new BankAccount(\"Alice\", 1000);\naccount.Deposit(500);  // OK - public method\nConsole.WriteLine(account.GetBalance());  // OK - public method\n// account.balance = 999999;  // ERROR! balance is private\n// account.GenerateAccountNumber();  // ERROR! private method",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "private",
+      "explanation": "Only accessible within the same class. Fields should almost ALWAYS be private! Access them through public properties or methods."
+    },
+    {
+      "codeSnippet": "public",
+      "explanation": "Accessible from anywhere. Use for methods and properties that form your class's PUBLIC INTERFACE - what users interact with."
+    },
+    {
+      "codeSnippet": "protected",
+      "explanation": "Accessible within the class AND derived classes (inheritance - next module!). Useful for base classes that child classes need to access."
+    },
+    {
+      "codeSnippet": "Default (no modifier)",
+      "explanation": "In C#, if you don't specify, it defaults to PRIVATE for class members. Always specify explicitly for clarity!"
+    },
+    {
+      "codeSnippet": "Encapsulation best practice",
+      "explanation": "PRIVATE fields + PUBLIC properties/methods = encapsulation! Control how data is accessed and modified. Never expose fields directly!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a secure User class using access modifiers!\n\n1. PRIVATE fields: string password, int loginAttempts\n2. PUBLIC properties: string Username { get; set; }\n3. PUBLIC constructor: User(string username, string password)\n4. PUBLIC method Login(string pwd): checks if pwd matches password\n   - If match: reset loginAttempts to 0, return true\n   - If wrong: increment loginAttempts, return false\n5. PRIVATE method IsLockedOut(): returns true if loginAttempts >= 3\n6. Test with correct and incorrect passwords",
+    "starterCode": "class User\n{\n    // Private fields\n    \n    // Public property\n    \n    // Public constructor\n    \n    // Public Login method\n    \n    // Private IsLockedOut method\n}\n\n// Create user and test login\nUser user = new User(\"alice\", \"secret123\");\n// Try wrong password twice, then correct password\n// Try accessing private fields (should error)",
+    "solutionCode": "class User\n{\n    private string password;\n    private int loginAttempts = 0;\n    \n    public string Username { get; set; }\n    \n    public User(string username, string password)\n    {\n        this.Username = username;\n        this.password = password;\n    }\n    \n    public bool Login(string pwd)\n    {\n        if (IsLockedOut())\n        {\n            Console.WriteLine(\"Account locked! Too many attempts.\");\n            return false;\n        }\n        \n        if (pwd == password)\n        {\n            loginAttempts = 0;\n            Console.WriteLine(\"Login successful!\");\n            return true;\n        }\n        else\n        {\n            loginAttempts++;\n            Console.WriteLine(\"Wrong password! Attempts: \" + loginAttempts);\n            return false;\n        }\n    }\n    \n    private bool IsLockedOut()\n    {\n        return loginAttempts >= 3;\n    }\n}\n\nUser user = new User(\"alice\", \"secret123\");\nuser.Login(\"wrong\");\nuser.Login(\"wrong2\");\nuser.Login(\"secret123\");",
+    "hint": "Make sensitive data (password, loginAttempts) private. Provide public methods to interact with them safely. Private methods are internal helpers.",
+    "expectedOutputPatterns": ["Login", "password"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Making everything public: Don't expose internal data! Use private for fields, public for methods/properties only. 'public string password' is BAD - anyone can change it!",
+      "Accessing private from outside: You can't do 'account.balance = 1000' if balance is private! That's the point - use public methods instead.",
+      "Forgetting to specify: If you don't write 'public' or 'private', C# defaults to PRIVATE. Always specify explicitly for clarity!",
+      "Using protected too early: You'll learn about protected with inheritance. For now, use private (internal) and public (external interface) only."
+    ]
+  }
+}

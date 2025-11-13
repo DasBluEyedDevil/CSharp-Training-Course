@@ -1,0 +1,40 @@
+{
+  "moduleId": 7,
+  "lessonNumber": 2,
+  "lessonId": "M07L02",
+  "title": "Polymorphism (virtual & override)",
+  "simplifierConcept": "Imagine different types of phones all have a 'Ring' button, but each rings DIFFERENTLY! iPhone plays a melody, Android buzzes, old Nokia has the classic ringtone. Same button name, different behaviors!\n\nThat's POLYMORPHISM (meaning 'many forms')! A method in the base class can be OVERRIDDEN in derived classes to provide different implementations.\n\nIn the base class, mark methods as 'virtual' (can be overridden). In derived classes, use 'override' to provide new implementation.\n\nExample: Animal.MakeSound() is virtual. Dog overrides it to 'Woof!', Cat overrides it to 'Meow!'. Same method name, different sounds - that's polymorphism in action!",
+  "coderExample": "class Animal\n{\n    public string Name;\n    \n    // VIRTUAL method - can be overridden\n    public virtual void MakeSound()\n    {\n        Console.WriteLine(\"Some generic animal sound\");\n    }\n    \n    public virtual void Move()\n    {\n        Console.WriteLine(Name + \" is moving\");\n    }\n}\n\nclass Dog : Animal\n{\n    // OVERRIDE the base method\n    public override void MakeSound()\n    {\n        Console.WriteLine(\"Woof! Woof!\");\n    }\n    \n    public override void Move()\n    {\n        Console.WriteLine(Name + \" is running on four legs\");\n    }\n}\n\nclass Bird : Animal\n{\n    public override void MakeSound()\n    {\n        Console.WriteLine(\"Tweet tweet!\");\n    }\n    \n    public override void Move()\n    {\n        Console.WriteLine(Name + \" is flying\");\n    }\n}\n\n// Polymorphism in action\nAnimal animal1 = new Dog();\nAnimal animal2 = new Bird();\n\nanimal1.MakeSound();  // Calls Dog's version: Woof!\nanimal2.MakeSound();  // Calls Bird's version: Tweet!\n\n// Even though both are declared as Animal, \n// they call their ACTUAL type's method!",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "public virtual void Method()",
+      "explanation": "'virtual' in base class means 'derived classes CAN override this'. Without virtual, derived classes can't override (they can hide with 'new', but that's different)."
+    },
+    {
+      "codeSnippet": "public override void Method()",
+      "explanation": "'override' in derived class replaces the base class implementation. Signature (name, parameters, return type) MUST match exactly!"
+    },
+    {
+      "codeSnippet": "Animal dog = new Dog();",
+      "explanation": "You can store a derived type in a base type variable! This is polymorphism - the variable is Animal, but the object is Dog. Calls Dog's methods!"
+    },
+    {
+      "codeSnippet": "base.Method()",
+      "explanation": "In override method, use 'base.Method()' to call the BASE class version. Useful when you want to EXTEND, not REPLACE."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a shape hierarchy with polymorphic Area calculation!\n\n1. BASE CLASS 'Shape':\n   - virtual method CalculateArea() returns double, returns 0\n   - virtual method Display() prints shape info\n\n2. DERIVED 'Circle' : Shape\n   - Property: double Radius\n   - Override CalculateArea(): return Math.PI * Radius * Radius\n   - Override Display(): print 'Circle with radius [r]'\n\n3. DERIVED 'Rectangle' : Shape\n   - Properties: double Width, double Height\n   - Override CalculateArea(): return Width * Height\n   - Override Display(): print 'Rectangle [w]x[h]'\n\n4. Create array of Shape, store Circle and Rectangle, call methods polymorphically",
+    "starterCode": "class Shape\n{\n    public virtual double CalculateArea()\n    {\n        return 0;\n    }\n    \n    public virtual void Display()\n    {\n        Console.WriteLine(\"Generic shape\");\n    }\n}\n\nclass Circle : Shape\n{\n    public double Radius;\n    // Override methods\n}\n\nclass Rectangle : Shape\n{\n    public double Width;\n    public double Height;\n    // Override methods\n}\n\n// Create shapes polymorphically",
+    "solutionCode": "class Shape\n{\n    public virtual double CalculateArea()\n    {\n        return 0;\n    }\n    \n    public virtual void Display()\n    {\n        Console.WriteLine(\"Generic shape\");\n    }\n}\n\nclass Circle : Shape\n{\n    public double Radius;\n    \n    public override double CalculateArea()\n    {\n        return Math.PI * Radius * Radius;\n    }\n    \n    public override void Display()\n    {\n        Console.WriteLine(\"Circle with radius \" + Radius);\n    }\n}\n\nclass Rectangle : Shape\n{\n    public double Width;\n    public double Height;\n    \n    public override double CalculateArea()\n    {\n        return Width * Height;\n    }\n    \n    public override void Display()\n    {\n        Console.WriteLine(\"Rectangle \" + Width + \"x\" + Height);\n    }\n}\n\nShape[] shapes = new Shape[2];\nshapes[0] = new Circle() { Radius = 5 };\nshapes[1] = new Rectangle() { Width = 4, Height = 6 };\n\nforeach (Shape shape in shapes)\n{\n    shape.Display();\n    Console.WriteLine(\"Area: \" + shape.CalculateArea());\n}",
+    "hint": "Base class: mark methods 'virtual'. Derived: mark 'override' with same signature. Store derived objects in base type variable for polymorphism.",
+    "expectedOutputPatterns": ["Circle", "Rectangle", "Area"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting 'virtual' in base: If base method isn't 'virtual', you can't 'override' it! You get a compiler error: 'cannot override inherited member because it is not marked virtual'.",
+      "Signature mismatch: Override MUST match exactly! 'public override int Method()' can't override 'public virtual void Method()'. Return type, name, parameters must be identical.",
+      "Using 'new' instead of 'override': 'public new void Method()' HIDES the base method, doesn't override! This breaks polymorphism. Always use 'override' for polymorphic behavior.",
+      "Not storing in base type: If you do 'Dog dog = new Dog()', polymorphism works but isn't as useful. Store in base type: 'Animal animal = new Dog()' to leverage polymorphism fully."
+    ]
+  }
+}

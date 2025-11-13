@@ -1,0 +1,44 @@
+{
+  "moduleId": 6,
+  "lessonNumber": 3,
+  "lessonId": "M06L03",
+  "title": "Properties (Controlled Access to Data)",
+  "simplifierConcept": "Imagine a bank vault. You can't just walk in and grab money - you need to go through a teller who validates your request, checks your balance, and controls access!\n\nPROPERTIES are like that teller. Instead of exposing fields directly (public string Name;), you use properties with get and set to control HOW data is accessed and modified.\n\nWhy? VALIDATION and SECURITY!\n• Check if age is valid (0-120) before storing\n• Make data read-only (get only, no set)\n• Calculate values on the fly (FullName = FirstName + LastName)\n\nProperties look like fields when you use them, but they're actually methods in disguise! This is called ENCAPSULATION - hiding implementation details and controlling access.",
+  "coderExample": "class Person\n{\n    private int _age;  // Private field (backing field)\n\n    // Property with validation\n    public int Age\n    {\n        get { return _age; }\n        set\n        {\n            if (value >= 0 && value <= 120)\n                _age = value;\n            else\n                Console.WriteLine(\"Invalid age!\");\n        }\n    }\n\n    // Auto-implemented property (no backing field needed)\n    public string Name { get; set; }\n\n    // Read-only property (get only)\n    public string Status\n    {\n        get\n        {\n            return Age >= 18 ? \"Adult\" : \"Minor\";\n        }\n    }\n\n    // Shortened syntax (expression-bodied)\n    public string Category => Age >= 65 ? \"Senior\" : \"Regular\";\n}\n\n// Usage\nPerson person = new Person();\nperson.Name = \"Alice\";  // Looks like a field!\nperson.Age = 25;        // But validation happens\nperson.Age = 200;       // Invalid! Rejected\nConsole.WriteLine(person.Status);  // Calculated on the fly",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "get { return _age; }",
+      "explanation": "The 'get' accessor returns the value. Called when you READ the property (Console.WriteLine(person.Age))."
+    },
+    {
+      "codeSnippet": "set { _age = value; }",
+      "explanation": "The 'set' accessor assigns the value. 'value' is a special keyword containing what the user is trying to assign. Add validation here!"
+    },
+    {
+      "codeSnippet": "public string Name { get; set; }",
+      "explanation": "AUTO-IMPLEMENTED property. C# creates a hidden backing field for you. Use when you don't need validation."
+    },
+    {
+      "codeSnippet": "public string Status { get; }",
+      "explanation": "READ-ONLY property (no set). Can't be changed from outside. Great for calculated values or data that shouldn't be modified."
+    },
+    {
+      "codeSnippet": "=> expression",
+      "explanation": "Expression-bodied property (C# 6+). Shorthand for get-only properties. 'public int Double => value * 2;' is the same as 'get { return value * 2; }'"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a BankAccount class with controlled properties!\n\n1. Private field: decimal _balance (starts at 0)\n2. Property 'Balance' with:\n   - get: returns _balance\n   - set: only allows positive values, otherwise print error\n3. Auto-property: string AccountHolder { get; set; }\n4. Read-only property: bool IsOverdrawn (returns true if balance < 0)\n5. Create an account, try to set negative balance, display status",
+    "starterCode": "class BankAccount\n{\n    private decimal _balance = 0;\n    \n    // Add Balance property with validation\n    \n    // Add AccountHolder auto-property\n    \n    // Add IsOverdrawn read-only property\n}\n\n// Create account and test\nBankAccount account = new BankAccount();\naccount.AccountHolder = \"Alice\";\n// Try setting balance to 100, then try -50\n// Display balance and IsOverdrawn status",
+    "solutionCode": "class BankAccount\n{\n    private decimal _balance = 0;\n    \n    public decimal Balance\n    {\n        get { return _balance; }\n        set\n        {\n            if (value >= 0)\n                _balance = value;\n            else\n                Console.WriteLine(\"Balance cannot be negative!\");\n        }\n    }\n    \n    public string AccountHolder { get; set; }\n    \n    public bool IsOverdrawn => _balance < 0;\n}\n\nBankAccount account = new BankAccount();\naccount.AccountHolder = \"Alice\";\naccount.Balance = 100;\nConsole.WriteLine(\"Balance: $\" + account.Balance);\n\naccount.Balance = -50;  // Rejected!\nConsole.WriteLine(\"Balance: $\" + account.Balance);\nConsole.WriteLine(\"Overdrawn: \" + account.IsOverdrawn);",
+    "hint": "Property structure: public Type PropertyName { get { return field; } set { if (valid) field = value; } }. Use => for read-only calculated properties.",
+    "expectedOutputPatterns": ["Balance", "Alice"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting private backing field: If you use get/set with logic, you need a private field like _age to store the actual value!",
+      "Naming confusion: Convention is _camelCase for private fields, PascalCase for properties. _age (field) and Age (property).",
+      "Auto-property when you need validation: { get; set; } doesn't let you add validation! Use full get/set syntax when you need to check values.",
+      "Using 'this.value' in set: The parameter is just 'value', not 'this.value'. It's a special keyword in the set accessor."
+    ]
+  }
+}
