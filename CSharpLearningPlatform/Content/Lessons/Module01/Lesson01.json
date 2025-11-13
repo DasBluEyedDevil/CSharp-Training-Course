@@ -1,0 +1,42 @@
+{
+  "moduleId": 1,
+  "lessonNumber": 1,
+  "lessonId": "M01L01",
+  "title": "What is Programming?",
+  "simplifierConcept": "Imagine you're teaching a robot to make a sandwich. You can't just say \"make me lunch\" – the robot needs EXACT steps: pick up bread, put on peanut butter, put on jelly, combine slices. That's programming! You're giving a computer step-by-step instructions in a language it understands.\n\nC# (pronounced \"See-Sharp\") is one of those languages. It's like English, but much more precise and rule-based. When you write C# code, you're telling the computer exactly what to do, one instruction at a time.",
+  "coderExample": "// This is your first C# program!\nConsole.WriteLine(\"Hello, World!\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "//",
+      "explanation": "Two slashes create a 'comment' – notes for humans that the computer ignores. Use these to explain your code!"
+    },
+    {
+      "codeSnippet": "Console.WriteLine",
+      "explanation": "This is like saying \"Computer, speak!\" It tells the computer to display text on the screen."
+    },
+    {
+      "codeSnippet": "(\"Hello, World!\")",
+      "explanation": "The text inside quotes is the MESSAGE you want to display. It must be in quotes so C# knows it's text, not code."
+    },
+    {
+      "codeSnippet": ";",
+      "explanation": "The semicolon is like a period at the end of a sentence. It tells C#: \"This instruction is complete!\""
+    }
+  ],
+  "challenge": {
+    "instructions": "Your challenge: Change the message to display YOUR name instead of 'Hello, World!'. For example, if your name is Alex, make it say 'Hello, Alex!'",
+    "starterCode": "// Change the message below to say your name!\nConsole.WriteLine(\"Hello, World!\");",
+    "solutionCode": "// Change the message below to say your name!\nConsole.WriteLine(\"Hello, Alex!\");",
+    "hint": "Keep the Console.WriteLine part the same – just change the text between the quotes!",
+    "expectedOutputPatterns": ["Hello"],
+    "validationRules": [
+      "Output must contain 'Hello'",
+      "Must use Console.WriteLine"
+    ],
+    "commonStickingPoints": [
+      "Forgetting the semicolon (;) at the end – C# will complain with an error!",
+      "Removing the quotes (\") around the text – the quotes are required!",
+      "Misspelling Console or WriteLine – capitalization matters in C#!"
+    ]
+  }
+}

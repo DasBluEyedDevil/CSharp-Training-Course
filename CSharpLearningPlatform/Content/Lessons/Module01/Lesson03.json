@@ -1,0 +1,31 @@
+{
+  "moduleId": 1,
+  "lessonNumber": 3,
+  "lessonId": "M01L03",
+  "title": "Displaying Multiple Lines",
+  "simplifierConcept": "You've learned that Console.WriteLine displays text. But what if you want to display LOTS of information? You have two options:\n\n1. Use multiple Console.WriteLine statements (you've been doing this!)\n2. Use special characters like \\n (newline) to create line breaks inside one statement\n\nThink of \\n as pressing the 'Enter' key on your keyboard. It tells the computer: \"Start a new line here!\"",
+  "coderExample": "// Method 1: Multiple WriteLine statements\nConsole.WriteLine(\"First line\");\nConsole.WriteLine(\"Second line\");\n\n// Method 2: Using \\n for newlines\nConsole.WriteLine(\"First line\\nSecond line\\nThird line\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "\\n",
+      "explanation": "The backslash-n creates a newline (line break). It's called an 'escape sequence' – special characters that do something instead of displaying."
+    },
+    {
+      "codeSnippet": "Multiple WriteLine vs. \\n",
+      "explanation": "Both methods work! Multiple WriteLine is clearer for beginners. Using \\n is more compact but harder to read at first."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a mini-biography using Console.WriteLine! Display:\n• A title line: 'About Me'\n• Your name\n• Your age\n• Your favorite hobby\n\nTry using \\n to create blank lines between sections for better readability!",
+    "starterCode": "// Your mini-biography\nConsole.WriteLine(\"About Me\");\n// Add more lines here!",
+    "solutionCode": "// Your mini-biography\nConsole.WriteLine(\"About Me\\n\");\nConsole.WriteLine(\"Name: Alex\");\nConsole.WriteLine(\"Age: 25\");\nConsole.WriteLine(\"Favorite Hobby: Coding!\");",
+    "hint": "Remember: \\n creates a blank line. Try Console.WriteLine(\"About Me\\n\"); to add space after the title!",
+    "expectedOutputPatterns": ["About Me"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Writing /n instead of \\n – it must be a BACKSLASH (\\), not a forward slash (/)!",
+      "Forgetting quotes around text with \\n – the entire string needs quotes: \"Line1\\nLine2\"",
+      "Not seeing the newline work – make sure you're using Console.WriteLine, not Console.Write"
+    ]
+  }
+}

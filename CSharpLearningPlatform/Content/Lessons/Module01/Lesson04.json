@@ -1,0 +1,35 @@
+{
+  "moduleId": 1,
+  "lessonNumber": 4,
+  "lessonId": "M01L04",
+  "title": "Comments: Notes for Humans",
+  "simplifierConcept": "Imagine you're leaving notes in a cookbook: \"This recipe is spicy!\" or \"Mom's favorite!\". These notes help YOU, but they don't change the recipe itself.\n\nComments in C# work the same way! They're notes for humans (including your future self) that the computer completely ignores. There are two types:\n\n1. Single-line comments: // Everything after these slashes is ignored\n2. Multi-line comments: /* Everything between these is ignored */\n\nGood programmers use comments to explain WHY they wrote code, not just WHAT the code does. Future you will thank present you!",
+  "coderExample": "// This is a single-line comment\nConsole.WriteLine(\"This runs!\"); // Comments can go at the end of a line too!\n\n/* This is a multi-line comment.\n   You can write as much as you want.\n   The computer will ignore ALL of this! */\n\nConsole.WriteLine(\"This also runs!\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "// Single-line comment",
+      "explanation": "Everything after // on that line is ignored. Quick notes go here!"
+    },
+    {
+      "codeSnippet": "/* Multi-line comment */",
+      "explanation": "Everything between /* and */ is ignored, even across multiple lines. Good for long explanations."
+    },
+    {
+      "codeSnippet": "Why use comments?",
+      "explanation": "Comments explain your thinking: \"This loop finds the highest score\" is better than just reading the code!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Write a program that displays a simple ASCII art (like a smiley face), but ADD COMMENTS explaining each line!\n\nFor example:\n// Top of the face\nConsole.WriteLine(\"  ^   ^  \");\n// The mouth\nConsole.WriteLine(\"   ---   \");",
+    "starterCode": "// Create your ASCII art here!\n// Remember to add comments explaining each part!\n\nConsole.WriteLine(\"Add your art here\");",
+    "solutionCode": "// Top of the face - the eyes\nConsole.WriteLine(\"  ^   ^  \");\n\n// The nose (simple dot)\nConsole.WriteLine(\"    .    \");\n\n// The mouth (happy smile)\nConsole.WriteLine(\"   ---   \");",
+    "hint": "Use Console.WriteLine for each line of your art, and add // comments above each line to explain it!",
+    "expectedOutputPatterns": [],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting that comments are for HUMANS, not the computer – they don't do anything to your code!",
+      "Using /* to start a comment but forgetting */ to close it – everything after becomes a comment!",
+      "Writing comments that just repeat the code: // Display text is not helpful. // Display welcome message to user is better!"
+    ]
+  }
+}

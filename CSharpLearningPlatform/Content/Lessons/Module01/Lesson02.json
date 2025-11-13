@@ -1,0 +1,31 @@
+{
+  "moduleId": 1,
+  "lessonNumber": 2,
+  "lessonId": "M01L02",
+  "title": "What is .NET and the CLR?",
+  "simplifierConcept": "Think of C# as a recipe written in English, but your computer only speaks binary (0s and 1s). How does the computer understand your C# code?\n\nThat's where .NET comes in! .NET is like a translation service:\n\n1. You write C# code (human-readable)\n2. The .NET compiler translates it into an intermediate language\n3. The CLR (Common Language Runtime) – the \"engine\" – runs that code on your computer\n\nThe CLR is like the engine in a car. You don't see it working, but without it, your code won't run. It handles memory, security, and making sure your program doesn't crash the whole computer!",
+  "coderExample": "// When you run this code, the CLR is working behind the scenes!\nConsole.WriteLine(\"The CLR is running my code!\");\nConsole.WriteLine(\"It manages memory and keeps things safe.\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "Console.WriteLine(\"...\");",
+      "explanation": "Each line with Console.WriteLine is a separate instruction. The CLR executes them one at a time, top to bottom."
+    },
+    {
+      "codeSnippet": "Multiple lines",
+      "explanation": "You can have as many instructions as you want! The computer will execute them in order, like reading a recipe step by step."
+    }
+  ],
+  "challenge": {
+    "instructions": "Write a program that displays THREE lines of text:\n1. Your name\n2. Your favorite programming language (hint: it should be C#!)\n3. One thing you want to build with code",
+    "starterCode": "// Display your name\nConsole.WriteLine(\"Your name here\");\n\n// Display your favorite language\n\n// Display what you want to build",
+    "solutionCode": "// Display your name\nConsole.WriteLine(\"Alex\");\n\n// Display your favorite language\nConsole.WriteLine(\"My favorite language is C#\");\n\n// Display what you want to build\nConsole.WriteLine(\"I want to build a video game!\");",
+    "hint": "You'll need THREE Console.WriteLine statements – one for each line! Copy the pattern from the first line.",
+    "expectedOutputPatterns": [],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting to add Console.WriteLine for each line – you need three separate statements!",
+      "Forgetting the semicolon at the end of EACH line",
+      "Not putting quotes around the text – every piece of text needs quotes!"
+    ]
+  }
+}

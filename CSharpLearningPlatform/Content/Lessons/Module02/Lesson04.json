@@ -1,0 +1,35 @@
+{
+  "moduleId": 2,
+  "lessonNumber": 4,
+  "lessonId": "M02L04",
+  "title": "Basic Math Operations",
+  "simplifierConcept": "C# is like a super-powered calculator! You can do math with variables using familiar operators:\n\n• + (addition): 5 + 3 = 8\n• - (subtraction): 10 - 4 = 6\n• * (multiplication): 6 * 7 = 42 (we use * because × isn't on keyboards!)\n• / (division): 20 / 4 = 5\n• % (modulus - remainder): 10 % 3 = 1 (10 divided by 3 is 3 remainder 1)\n\nThe modulus (%) might seem weird, but it's super useful! Want to know if a number is even? If number % 2 equals 0, it's even!\n\nC# follows the same order of operations you learned in school: PEMDAS (Parentheses, Exponents, Multiplication/Division, Addition/Subtraction).",
+  "coderExample": "// Basic math operations\nint a = 10;\nint b = 3;\n\nint sum = a + b;        // 13\nint difference = a - b; // 7\nint product = a * b;    // 30\nint quotient = a / b;   // 3 (integer division!)\nint remainder = a % b;  // 1 (10 ÷ 3 = 3 remainder 1)\n\nConsole.WriteLine(\"Sum: \" + sum);\nConsole.WriteLine(\"Remainder: \" + remainder);\n\n// Order of operations matters!\nint result1 = 5 + 3 * 2;     // 11 (multiplication first)\nint result2 = (5 + 3) * 2;   // 16 (parentheses first)\nConsole.WriteLine(result1 + \" vs \" + result2);",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "int quotient = a / b;",
+      "explanation": "WATCH OUT! When dividing two integers, C# gives you an INTEGER result. 10/3 = 3 (not 3.333...). The decimal part is thrown away!"
+    },
+    {
+      "codeSnippet": "int remainder = a % b;",
+      "explanation": "The % operator gives you the REMAINDER after division. 10 % 3 = 1 because 10 ÷ 3 = 3 with 1 left over."
+    },
+    {
+      "codeSnippet": "Parentheses",
+      "explanation": "Use ( ) to control order! 5 + 3 * 2 = 11, but (5 + 3) * 2 = 16. Parentheses are calculated first!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a program that calculates the area and perimeter of a rectangle!\n\n1. Create 'int' variables for length (8) and width (5)\n2. Calculate area (length × width)\n3. Calculate perimeter (2 × length + 2 × width)\n4. Display both results with labels\n\nBonus: Try using parentheses to make your perimeter calculation clearer!",
+    "starterCode": "// Rectangle dimensions\nint length = 8;\nint width = 5;\n\n// Calculate area\n\n// Calculate perimeter\n\n// Display results",
+    "solutionCode": "// Rectangle dimensions\nint length = 8;\nint width = 5;\n\n// Calculate area (length times width)\nint area = length * width;\n\n// Calculate perimeter (2 times length plus 2 times width)\nint perimeter = 2 * length + 2 * width;\n// Or with parentheses: int perimeter = 2 * (length + width);\n\n// Display results\nConsole.WriteLine(\"Area: \" + area);\nConsole.WriteLine(\"Perimeter: \" + perimeter);",
+    "hint": "Area = length × width. Perimeter = 2×length + 2×width (or 2×(length+width) with parentheses!). Use the * operator for multiplication!",
+    "expectedOutputPatterns": ["Area", "Perimeter"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Using 'x' or '×' for multiplication: In C#, you MUST use the asterisk (*). 5 * 3, not 5 x 3!",
+      "Integer division surprise: 7 / 2 gives you 3, not 3.5! The decimal part disappears with int division.",
+      "Forgetting order of operations: 2 * length + 2 * width works, but 2 * (length + width) is clearer!"
+    ]
+  }
+}
