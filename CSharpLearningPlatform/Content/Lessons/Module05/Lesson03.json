@@ -1,0 +1,44 @@
+{
+  "moduleId": 5,
+  "lessonNumber": 3,
+  "lessonId": "M05L03",
+  "title": "Dictionary<TKey, TValue> (The Lookup Table)",
+  "simplifierConcept": "Imagine a real dictionary: You look up a WORD (the key) and get its DEFINITION (the value). You don't flip through page by page - you jump straight to the word!\n\nA Dictionary<TKey, TValue> works the same way! It stores KEY-VALUE PAIRS:\n• The KEY is unique (like a word - only appears once)\n• The VALUE is what you get when you look up that key\n• Lookup is INSTANT - no matter how big the dictionary!\n\nExamples:\n• Phone book: Name (key) → Phone number (value)\n• Game: PlayerName (key) → Score (value)\n• Store: ProductID (key) → Price (value)\n\nWhy not use a List? Lists require you to search through items one by one. Dictionaries use the key for INSTANT lookup - like using an index in a book!\n\nPerfect for when you need to find things by a unique identifier!",
+  "coderExample": "using System.Collections.Generic;\n\n// Creating a dictionary\nDictionary<string, int> playerScores = new Dictionary<string, int>();\n\n// Adding key-value pairs\nplayerScores.Add(\"Alice\", 1500);\nplayerScores.Add(\"Bob\", 1200);\nplayerScores.Add(\"Charlie\", 1800);\n\n// Or initialize with values\nDictionary<string, string> capitals = new Dictionary<string, string>\n{\n    { \"USA\", \"Washington DC\" },\n    { \"France\", \"Paris\" },\n    { \"Japan\", \"Tokyo\" }\n};\n\n// Accessing values by key\nConsole.WriteLine(\"Alice's score: \" + playerScores[\"Alice\"]);\nConsole.WriteLine(\"France's capital: \" + capitals[\"France\"]);\n\n// Checking if key exists\nif (playerScores.ContainsKey(\"Bob\"))\n{\n    Console.WriteLine(\"Bob's score: \" + playerScores[\"Bob\"]);\n}\n\n// Updating a value\nplayerScores[\"Alice\"] = 1600;  // Alice scored more!\n\n// Looping through dictionary\nforeach (var pair in playerScores)\n{\n    Console.WriteLine(pair.Key + \" has \" + pair.Value + \" points\");\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "Dictionary<TKey, TValue>",
+      "explanation": "Two types in angle brackets: TKey (key type) and TValue (value type). Dictionary<string, int> means string keys, int values."
+    },
+    {
+      "codeSnippet": ".Add(key, value)",
+      "explanation": "Adds a key-value pair. The key MUST be unique! Trying to add the same key twice causes an error."
+    },
+    {
+      "codeSnippet": "dict[key]",
+      "explanation": "Get or set a value by its key. dict['Alice'] gets Alice's value. dict['Alice'] = 100 sets it. If key doesn't exist, CRASH!"
+    },
+    {
+      "codeSnippet": ".ContainsKey(key)",
+      "explanation": "Check if a key exists BEFORE accessing it! Always check first to avoid crashes: if (dict.ContainsKey('x')) { use dict['x'] }"
+    },
+    {
+      "codeSnippet": "foreach (var pair in dict)",
+      "explanation": "Loop through key-value pairs. Each 'pair' has .Key and .Value properties. Order is NOT guaranteed!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a simple English-Spanish translator!\n\n1. Create Dictionary<string, string> called 'translator'\n2. Add translations: 'hello' → 'hola', 'goodbye' → 'adiós', 'friend' → 'amigo'\n3. Look up and display the translation for 'hello'\n4. Check if 'goodbye' exists, then display its translation\n5. Add a new translation: 'water' → 'agua'\n6. Use foreach to display all translations in format: 'English: Spanish'",
+    "starterCode": "using System.Collections.Generic;\n\n// Create translator dictionary\n\n// Add translations\n\n// Look up 'hello'\n\n// Check and display 'goodbye'\n\n// Add 'water'\n\n// Display all translations",
+    "solutionCode": "using System.Collections.Generic;\n\n// Create translator dictionary\nDictionary<string, string> translator = new Dictionary<string, string>();\n\n// Add translations\ntranslator.Add(\"hello\", \"hola\");\ntranslator.Add(\"goodbye\", \"adiós\");\ntranslator.Add(\"friend\", \"amigo\");\n\n// Look up 'hello'\nConsole.WriteLine(\"hello: \" + translator[\"hello\"]);\n\n// Check and display 'goodbye'\nif (translator.ContainsKey(\"goodbye\"))\n{\n    Console.WriteLine(\"goodbye: \" + translator[\"goodbye\"]);\n}\n\n// Add 'water'\ntranslator.Add(\"water\", \"agua\");\n\n// Display all translations\nforeach (var pair in translator)\n{\n    Console.WriteLine(pair.Key + \": \" + pair.Value);\n}",
+    "hint": "Create: Dictionary<string, string> dict = new Dictionary<string, string>(); Add: dict.Add(key, value); Access: dict[key]; Check: ContainsKey(key)",
+    "expectedOutputPatterns": ["hello", "hola"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Duplicate keys: Adding the same key twice throws an error! Use ContainsKey to check first, or use dict[key] = value which updates if exists.",
+      "Accessing non-existent key: dict['xyz'] when 'xyz' doesn't exist = CRASH! Always use ContainsKey first!",
+      "Wrong foreach syntax: foreach (string x in dict) is wrong! Use foreach (var pair in dict) then access pair.Key and pair.Value.",
+      "Forgetting two types: Dictionary<string> is WRONG! Need TWO types: Dictionary<TKey, TValue> like Dictionary<string, int>."
+    ]
+  }
+}

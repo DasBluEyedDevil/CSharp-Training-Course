@@ -1,0 +1,40 @@
+{
+  "moduleId": 4,
+  "lessonNumber": 5,
+  "lessonId": "M04L05",
+  "title": "Nested Loops (Loops Within Loops)",
+  "simplifierConcept": "Imagine you're organizing a tournament where every team plays every other team:\n\n• Outer loop: Go through each team (Team A, Team B, Team C...)\n• Inner loop: For THIS team, play against every OTHER team\n\nTeam A plays Team B, Team C, Team D...\nTeam B plays Team A, Team C, Team D...\nAnd so on!\n\nThat's a NESTED LOOP - a loop INSIDE another loop!\n\nThink of it like checking every seat in a theater:\n• Outer loop: Go through each ROW (Row 1, Row 2, Row 3...)\n• Inner loop: For THIS row, check each SEAT (Seat A, B, C...)\n\nRow 1, Seat A → Row 1, Seat B → ... → Row 2, Seat A → Row 2, Seat B...\n\nNested loops are powerful for grids, patterns, tables, or any time you need to do something for EVERY COMBINATION of two things!",
+  "coderExample": "// Simple nested loop - multiplication table\nfor (int row = 1; row <= 3; row++)\n{\n    for (int col = 1; col <= 3; col++)\n    {\n        Console.WriteLine(row + \" x \" + col + \" = \" + (row * col));\n    }\n    Console.WriteLine(\"---\");  // Separator between rows\n}\n\n// Pattern printing - right triangle\nfor (int i = 1; i <= 5; i++)\n{\n    for (int j = 1; j <= i; j++)\n    {\n        Console.Write(\"* \");\n    }\n    Console.WriteLine();  // New line after each row\n}\n// Output:\n// *\n// * *\n// * * *\n// * * *\n// * * * * *\n\n// Grid coordinates\nfor (int x = 0; x < 3; x++)\n{\n    for (int y = 0; y < 3; y++)\n    {\n        Console.WriteLine(\"Position: (\" + x + \", \" + y + \")\");\n    }\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "Outer loop",
+      "explanation": "The outer loop runs ONCE per full cycle. If it runs 5 times, you get 5 'groups' or 'rows' of inner loop executions."
+    },
+    {
+      "codeSnippet": "Inner loop",
+      "explanation": "The inner loop runs COMPLETELY for EACH iteration of the outer loop! If outer runs 3 times and inner runs 4 times, inner executes 3×4 = 12 times total!"
+    },
+    {
+      "codeSnippet": "Execution order",
+      "explanation": "Outer starts → Inner runs ALL its iterations → Outer increments → Inner runs ALL its iterations again → Repeat"
+    },
+    {
+      "codeSnippet": "Variable names",
+      "explanation": "Use different variable names! Common pattern: i for outer, j for inner. Or use meaningful names: row/col, x/y, etc."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a times table! Generate a 5×5 multiplication grid.\n\n1. Outer loop: row from 1 to 5\n2. Inner loop: col from 1 to 5\n3. For each combination, display: '[row] x [col] = [result]'\n\nBonus: Add a blank line between each 'row' of the table for readability!",
+    "starterCode": "// Times table generator\n// Outer loop for rows\n\n    // Inner loop for columns\n    \n    // Display the multiplication",
+    "solutionCode": "// Times table generator\n// Outer loop for rows\nfor (int row = 1; row <= 5; row++)\n{\n    // Inner loop for columns\n    for (int col = 1; col <= 5; col++)\n    {\n        // Display the multiplication\n        Console.WriteLine(row + \" x \" + col + \" = \" + (row * col));\n    }\n    \n    // Blank line between rows\n    Console.WriteLine();\n}",
+    "hint": "Structure: for (row) { for (col) { inner code } }. The inner loop runs completely for EACH value of the outer loop!",
+    "expectedOutputPatterns": ["x"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Using same variable name: for (int i...) { for (int i...) } is WRONG! Inner loop needs a different name: j, col, y, etc.",
+      "Misunderstanding iteration count: If outer runs 3 times and inner runs 4 times, inner executes 12 times total, not 7!",
+      "Console.WriteLine vs Write: Use Write to print on same line, WriteLine to start a new line. Useful for patterns!",
+      "Performance warning: Nested loops can get SLOW fast! 3 nested loops with 100 iterations each = 1,000,000 operations!"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "moduleId": 6,
+  "lessonNumber": 1,
+  "lessonId": "M06L01",
+  "title": "Why Object-Oriented Programming?",
+  "simplifierConcept": "Imagine building 100 houses. Would you redesign each house from scratch? NO! You'd create a BLUEPRINT and build all houses from that blueprint!\n\nThat's Object-Oriented Programming (OOP)! Instead of writing scattered variables and functions, you create BLUEPRINTS (called CLASSES) that define how things work. Then you build actual OBJECTS from those blueprints.\n\nWithout OOP:\nstring player1Name = 'Alice';\nint player1Score = 100;\nint player1Health = 80;\nstring player2Name = 'Bob';\nint player2Score = 150;\nint player2Health = 60;\n...(100 players = 300 variables!)\n\nWith OOP:\nCreate a Player blueprint once.\nPlayer alice = new Player('Alice', 100, 80);\nPlayer bob = new Player('Bob', 150, 60);\n\nOOP makes code ORGANIZED, REUSABLE, and SCALABLE. It's how professional software is built!",
+  "coderExample": "// WITHOUT OOP - messy!\nstring playerName = \"Alice\";\nint playerScore = 100;\nint playerHealth = 80;\n\nvoid DisplayPlayer()\n{\n    Console.WriteLine(playerName + \": \" + playerScore + \" points, \" + playerHealth + \" HP\");\n}\n\n// WITH OOP - clean and organized!\nclass Player\n{\n    public string Name;\n    public int Score;\n    public int Health;\n    \n    public void Display()\n    {\n        Console.WriteLine(Name + \": \" + Score + \" points, \" + Health + \" HP\");\n    }\n}\n\n// Creating objects from the class\nPlayer alice = new Player();\nalice.Name = \"Alice\";\nalice.Score = 100;\nalice.Health = 80;\nalice.Display();\n\nPlayer bob = new Player();\nbob.Name = \"Bob\";\nbob.Score = 150;\nbob.Health = 60;\nbob.Display();",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "class ClassName",
+      "explanation": "Defines a blueprint. By convention, class names use PascalCase (first letter capitalized). This is the template!"
+    },
+    {
+      "codeSnippet": "public string Name;",
+      "explanation": "A FIELD - data stored in the class. 'public' means accessible from outside. Each object gets its OWN copy of this data!"
+    },
+    {
+      "codeSnippet": "new Player()",
+      "explanation": "Creates an OBJECT (instance) from the class blueprint. 'new' allocates memory and builds the object. This is called INSTANTIATION."
+    },
+    {
+      "codeSnippet": "object.Field",
+      "explanation": "Dot notation accesses an object's data or methods. alice.Name gets Alice's name, bob.Name gets Bob's - they're separate!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create your first class!\n\n1. Create a class called 'Car' with public fields:\n   - string Brand\n   - string Model\n   - int Year\n2. Create two Car objects:\n   - One for a Toyota Camry from 2020\n   - One for a Honda Civic from 2019\n3. Display both cars in format: '[Brand] [Model] ([Year])'\n\nThis is your first step into OOP!",
+    "starterCode": "// Create your Car class here\n\n// Create two Car objects and display them",
+    "solutionCode": "// Create your Car class here\nclass Car\n{\n    public string Brand;\n    public string Model;\n    public int Year;\n}\n\n// Create two Car objects and display them\nCar car1 = new Car();\ncar1.Brand = \"Toyota\";\ncar1.Model = \"Camry\";\ncar1.Year = 2020;\n\nCar car2 = new Car();\ncar2.Brand = \"Honda\";\ncar2.Model = \"Civic\";\ncar2.Year = 2019;\n\nConsole.WriteLine(car1.Brand + \" \" + car1.Model + \" (\" + car1.Year + \")\");\nConsole.WriteLine(car2.Brand + \" \" + car2.Model + \" (\" + car2.Year + \")\");",
+    "hint": "Define class: class Car { public string Brand; ... }. Create object: Car c = new Car(); Set fields: c.Brand = 'Toyota';",
+    "expectedOutputPatterns": ["Toyota", "Honda"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting 'new' keyword: Car c = Car(); is WRONG! Must be: Car c = new Car(); to create an object.",
+      "Class vs Object confusion: The class is the BLUEPRINT. Objects are INSTANCES built from the blueprint. You can have many objects from one class!",
+      "Forgetting 'public': If you don't write 'public', fields are private by default and can't be accessed outside the class!",
+      "Capitalization: Class names should be PascalCase (Player, Car, not player, car). This is convention, not a requirement, but follow it!"
+    ]
+  }
+}

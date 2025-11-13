@@ -1,0 +1,40 @@
+{
+  "moduleId": 3,
+  "lessonNumber": 5,
+  "lessonId": "M03L05",
+  "title": "The Ternary Operator (Shortcut Decision)",
+  "simplifierConcept": "Sometimes you need a simple if-else decision that just assigns a value. Writing a full if-else block feels like overkill:\n\n```\nstring message;\nif (score >= 50) {\n    message = \"Pass\";\n} else {\n    message = \"Fail\";\n}\n```\n\nC# has a SHORTCUT called the TERNARY OPERATOR (ternary means 'three parts'):\n\n```\nstring message = (score >= 50) ? \"Pass\" : \"Fail\";\n```\n\nOne line! It works like this:\n\n(condition) ? valueIfTrue : valueIfFalse\n\nThink of the ? as 'if this is true' and the : as 'otherwise'. It's like asking a yes/no question:\n\n'Is the score 50 or higher? If YES, assign \"Pass\". If NO, assign \"Fail\".'\n\nThe ternary operator is PERFECT for simple assignments but can get messy if overused. If your logic is complex, stick with regular if-else for readability!",
+  "coderExample": "// Regular if-else (verbose)\nint age = 20;\nstring status;\n\nif (age >= 18)\n{\n    status = \"Adult\";\n}\nelse\n{\n    status = \"Minor\";\n}\nConsole.WriteLine(status);\n\n// Ternary operator (concise!)\nint age2 = 20;\nstring status2 = (age2 >= 18) ? \"Adult\" : \"Minor\";\nConsole.WriteLine(status2);\n\n// Inline usage\nint score = 85;\nConsole.WriteLine(\"Result: \" + (score >= 60 ? \"Pass\" : \"Fail\"));\n\n// Multiple ternaries (careful - can get confusing!)\nint grade = 85;\nstring letter = (grade >= 90) ? \"A\" : \n                (grade >= 80) ? \"B\" : \n                (grade >= 70) ? \"C\" : \"F\";\nConsole.WriteLine(\"Grade: \" + letter);",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "(condition) ? valueIfTrue : valueIfFalse",
+      "explanation": "The three parts: condition to check, value if true (after ?), value if false (after :). The whole expression RETURNS a value!"
+    },
+    {
+      "codeSnippet": "Parentheses around condition",
+      "explanation": "The parentheses around the condition are optional but make it clearer: (age >= 18) ? ... is more readable than age >= 18 ? ..."
+    },
+    {
+      "codeSnippet": "Returns a value",
+      "explanation": "The ternary operator PRODUCES a value, so you can assign it: string x = condition ? 'yes' : 'no'; or use it inline: Console.WriteLine(x > 5 ? 'big' : 'small');"
+    },
+    {
+      "codeSnippet": "Nested ternaries",
+      "explanation": "You CAN nest ternaries but it gets hard to read fast! grade >= 90 ? 'A' : grade >= 80 ? 'B' : 'C'. Use regular if-else when it's complex!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a game status checker using the ternary operator!\n\n1. Create these variables:\n   - int health = 75\n   - int energy = 30\n2. Use ternary operators to create:\n   - string healthStatus = (health > 50) ? 'Healthy' : 'Injured'\n   - string energyStatus = (energy > 50) ? 'Energized' : 'Tired'\n3. Display both statuses\n\nBonus: Try changing the values to see different results!",
+    "starterCode": "// Variables\nint health = 75;\nint energy = 30;\n\n// Use ternary operators to create status strings\n\n// Display the statuses",
+    "solutionCode": "// Variables\nint health = 75;\nint energy = 30;\n\n// Use ternary operators to create status strings\nstring healthStatus = (health > 50) ? \"Healthy\" : \"Injured\";\nstring energyStatus = (energy > 50) ? \"Energized\" : \"Tired\";\n\n// Display the statuses\nConsole.WriteLine(\"Health: \" + healthStatus);\nConsole.WriteLine(\"Energy: \" + energyStatus);",
+    "hint": "Format: variable = (condition) ? \"value if true\" : \"value if false\"; Remember the ? and : symbols!",
+    "expectedOutputPatterns": ["Health", "Energy"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting the colon: The : is REQUIRED! condition ? trueValue is incomplete. Must have : falseValue at the end.",
+      "Using curly braces: Don't write (age >= 18) ? { 'Adult' } - the values don't use braces, just the value itself!",
+      "Mixing types: (age >= 18) ? 'Adult' : 0 is WRONG! Both values must be the same type (both strings, both ints, etc.).",
+      "Overusing ternaries: Nested ternaries get VERY hard to read. If you have 3+ levels, use if-else instead for clarity!"
+    ]
+  }
+}

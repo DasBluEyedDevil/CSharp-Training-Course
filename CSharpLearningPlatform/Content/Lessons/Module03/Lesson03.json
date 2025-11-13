@@ -1,0 +1,44 @@
+{
+  "moduleId": 3,
+  "lessonNumber": 3,
+  "lessonId": "M03L03",
+  "title": "Comparison & Logical Operators",
+  "simplifierConcept": "You've been using comparisons like >= and ==, but there's a whole toolkit available! These are called COMPARISON OPERATORS, and they let you ask questions about values:\n\n• == (equals): Is this EXACTLY the same?\n• != (not equals): Is this DIFFERENT?\n• > (greater than): Is this BIGGER?\n• < (less than): Is this SMALLER?\n• >= (greater or equal): Is this bigger OR the same?\n• <= (less or equal): Is this smaller OR the same?\n\nBut what if you need to check MULTIPLE conditions? Like: 'If it's Saturday AND I have money, I'll go to the movies.'\n\nThat's where LOGICAL OPERATORS come in:\n• && (AND): BOTH conditions must be true\n• || (OR): AT LEAST ONE condition must be true\n• ! (NOT): Flips true to false, false to true\n\nThink of && like a bouncer checking TWO IDs: 'You need to be 21 AND have a ticket.' You need BOTH!",
+  "coderExample": "// Comparison operators\nint score = 85;\n\nif (score == 100) { Console.WriteLine(\"Perfect!\"); }\nif (score != 100) { Console.WriteLine(\"Not perfect, but good!\"); }\nif (score > 80) { Console.WriteLine(\"Above 80!\"); }\nif (score >= 85) { Console.WriteLine(\"85 or higher!\"); }\n\n// Logical operators - AND (&&)\nint age = 25;\nbool hasLicense = true;\n\nif (age >= 16 && hasLicense)\n{\n    Console.WriteLine(\"You can drive!\");\n}\n\n// Logical operators - OR (||)\nbool isWeekend = true;\nbool isHoliday = false;\n\nif (isWeekend || isHoliday)\n{\n    Console.WriteLine(\"No work today!\");\n}\n\n// NOT operator (!)\nbool isRaining = false;\n\nif (!isRaining)\n{\n    Console.WriteLine(\"Let's go outside!\");\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "==",
+      "explanation": "Double equals checks EQUALITY. Don't confuse with = (assignment)! age == 18 checks if age is 18. age = 18 SETS age to 18!"
+    },
+    {
+      "codeSnippet": "!=",
+      "explanation": "Not equals checks INEQUALITY. score != 100 is true if score is anything OTHER than 100."
+    },
+    {
+      "codeSnippet": "&&",
+      "explanation": "AND requires BOTH sides to be true. age >= 21 && hasID is only true if BOTH conditions are true. If either is false, the whole thing is false!"
+    },
+    {
+      "codeSnippet": "||",
+      "explanation": "OR requires AT LEAST ONE side to be true. isWeekend || isHoliday is true if EITHER (or both!) is true. Only false if BOTH are false."
+    },
+    {
+      "codeSnippet": "!",
+      "explanation": "NOT flips the value. !isRaining means 'if it is NOT raining'. If isRaining is false, !isRaining is true!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a movie theater admission system!\n\nVariables:\n- int age (set to any number)\n- bool hasParent (set to true or false)\n- bool hasTicket (set to true or false)\n\nRules using if statements:\n1. If age >= 18 AND hasTicket: 'Welcome! Enjoy the movie.'\n2. Else if age < 18 AND hasParent AND hasTicket: 'Welcome with your parent!'\n3. Else if !hasTicket: 'Please purchase a ticket first.'\n4. Else: 'Sorry, you need a parent to attend.'\n\nTest with different combinations!",
+    "starterCode": "// Set up variables\nint age = 16;\nbool hasParent = true;\nbool hasTicket = true;\n\n// Write your if-else chain with logical operators",
+    "solutionCode": "// Set up variables\nint age = 16;\nbool hasParent = true;\nbool hasTicket = true;\n\n// Write your if-else chain with logical operators\nif (age >= 18 && hasTicket)\n{\n    Console.WriteLine(\"Welcome! Enjoy the movie.\");\n}\nelse if (age < 18 && hasParent && hasTicket)\n{\n    Console.WriteLine(\"Welcome with your parent!\");\n}\nelse if (!hasTicket)\n{\n    Console.WriteLine(\"Please purchase a ticket first.\");\n}\nelse\n{\n    Console.WriteLine(\"Sorry, you need a parent to attend.\");\n}",
+    "hint": "Use && to combine conditions: (age >= 18 && hasTicket). Use ! to check 'not': !hasTicket means 'does NOT have ticket'.",
+    "expectedOutputPatterns": [],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Using & or | instead of && or ||: In C#, use DOUBLE symbols for logical operators! & and | are bitwise operators (advanced topic).",
+      "Confusing = with ==: if (age = 18) ASSIGNS 18! Use if (age == 18) to COMPARE!",
+      "Wrong operator precedence: age > 18 && hasTicket || isVIP is confusing! Use parentheses: (age > 18 && hasTicket) || isVIP",
+      "Forgetting ! means 'not': !hasTicket is true when hasTicket is FALSE. It reads as 'if does NOT have ticket'."
+    ]
+  }
+}

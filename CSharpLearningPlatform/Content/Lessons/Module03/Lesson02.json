@@ -1,0 +1,40 @@
+{
+  "moduleId": 3,
+  "lessonNumber": 2,
+  "lessonId": "M03L02",
+  "title": "else and else if (Multiple Paths)",
+  "simplifierConcept": "You've learned about 'if' - taking ONE path if a condition is true. But what if you want to do something DIFFERENT when the condition is false?\n\nThat's where 'else' comes in! Think of it like this:\n\n'If it's sunny, wear sunglasses. ELSE (otherwise), wear a hat.'\n\nYou're guaranteed to do ONE of these two things - either the first or the second, never both!\n\nBut what if you have MORE than two options? That's where 'else if' helps:\n\n'If it's sunny, wear sunglasses. ELSE IF it's raining, take an umbrella. ELSE (for anything else), wear a hat.'\n\nC# checks each condition in order, top to bottom, and executes the FIRST one that's true. Once it finds a match, it STOPS checking the rest!",
+  "coderExample": "int temperature = 75;\n\n// if-else: Two paths\nif (temperature > 80)\n{\n    Console.WriteLine(\"It's hot! Stay hydrated.\");\n}\nelse\n{\n    Console.WriteLine(\"Nice weather!\");\n}\n\n// if-else if-else: Multiple paths\nint score = 85;\n\nif (score >= 90)\n{\n    Console.WriteLine(\"Grade: A\");\n}\nelse if (score >= 80)\n{\n    Console.WriteLine(\"Grade: B\");\n}\nelse if (score >= 70)\n{\n    Console.WriteLine(\"Grade: C\");\n}\nelse\n{\n    Console.WriteLine(\"Grade: F\");\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "else { }",
+      "explanation": "The 'else' block runs ONLY if the 'if' condition was false. Think of it as the 'otherwise' path. It's optional!"
+    },
+    {
+      "codeSnippet": "else if (condition) { }",
+      "explanation": "'else if' adds MORE conditions to check. It only runs if all previous conditions were false AND this condition is true."
+    },
+    {
+      "codeSnippet": "Order matters!",
+      "explanation": "C# checks from top to bottom. Once a condition is true, it runs that block and SKIPS the rest. score=85 hits the 'B' grade and never checks 'C'!"
+    },
+    {
+      "codeSnippet": "Final else",
+      "explanation": "The final 'else' is the 'catch-all' - it runs if NONE of the conditions above were true. It's like the 'default' option."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a simple game difficulty selector!\n\n1. Create an int variable 'level' and set it to any number\n2. Use if-else if-else to display messages:\n   - If level == 1: 'Easy mode selected'\n   - Else if level == 2: 'Normal mode selected'\n   - Else if level == 3: 'Hard mode selected'\n   - Else: 'Invalid level! Defaulting to Normal.'\n\nTry changing the level value to test all paths!",
+    "starterCode": "// Create level variable\nint level = 2;\n\n// Write your if-else if-else chain here",
+    "solutionCode": "// Create level variable\nint level = 2;\n\n// Write your if-else if-else chain here\nif (level == 1)\n{\n    Console.WriteLine(\"Easy mode selected\");\n}\nelse if (level == 2)\n{\n    Console.WriteLine(\"Normal mode selected\");\n}\nelse if (level == 3)\n{\n    Console.WriteLine(\"Hard mode selected\");\n}\nelse\n{\n    Console.WriteLine(\"Invalid level! Defaulting to Normal.\");\n}",
+    "hint": "Use == to compare (not =). Chain them: if (...) { } else if (...) { } else if (...) { } else { }",
+    "expectedOutputPatterns": ["mode"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Using = instead of == for comparison: level = 1 ASSIGNS 1, level == 1 COMPARES!",
+      "Forgetting that only ONE block runs: If score is 95, only the 'A' grade displays. The others are skipped!",
+      "Putting else if AFTER else: The final else must be LAST! else if after else causes an error.",
+      "Wrong order of conditions: If you check score >= 70 BEFORE score >= 90, a score of 95 will hit 'C' first and stop!"
+    ]
+  }
+}

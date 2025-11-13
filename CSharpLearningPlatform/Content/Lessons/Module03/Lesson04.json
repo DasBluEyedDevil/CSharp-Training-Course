@@ -1,0 +1,44 @@
+{
+  "moduleId": 3,
+  "lessonNumber": 4,
+  "lessonId": "M03L04",
+  "title": "The switch Statement (The Traffic Director)",
+  "simplifierConcept": "Imagine a traffic director at a busy intersection directing cars: 'If you're going to New York, take route 1. If you're going to Boston, take route 2. If you're going to DC, take route 3...'\n\nThat's what a SWITCH statement does! When you have ONE variable that could be many different values, and you want different code for each value, switch is cleaner than a long chain of if-else if.\n\nThink of switch like a restaurant menu:\n• You look at ONE thing (what you want to order)\n• You find it on the menu (case 1, case 2, case 3...)\n• You get that specific dish (the code for that case runs)\n• If what you want isn't on the menu (no matching case), you get the 'default' option\n\nSwitch is perfect when you're checking ONE variable against SPECIFIC values. If you need complex conditions (like age > 18 && hasTicket), stick with if-else!",
+  "coderExample": "// Switch statement example\nint dayNumber = 3;\n\nswitch (dayNumber)\n{\n    case 1:\n        Console.WriteLine(\"Monday - Back to work!\");\n        break;\n    case 2:\n        Console.WriteLine(\"Tuesday - Still going...\");\n        break;\n    case 3:\n        Console.WriteLine(\"Wednesday - Midweek!\");\n        break;\n    case 4:\n        Console.WriteLine(\"Thursday - Almost there!\");\n        break;\n    case 5:\n        Console.WriteLine(\"Friday - Weekend incoming!\");\n        break;\n    case 6:\n    case 7:\n        Console.WriteLine(\"Weekend! Relax!\");\n        break;\n    default:\n        Console.WriteLine(\"Invalid day number!\");\n        break;\n}\n\n// String switch (C# can switch on strings too!)\nstring command = \"jump\";\n\nswitch (command)\n{\n    case \"jump\":\n        Console.WriteLine(\"Player jumps!\");\n        break;\n    case \"run\":\n        Console.WriteLine(\"Player runs!\");\n        break;\n    case \"attack\":\n        Console.WriteLine(\"Player attacks!\");\n        break;\n    default:\n        Console.WriteLine(\"Unknown command!\");\n        break;\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "switch (variable)",
+      "explanation": "The variable in parentheses is what you're checking. C# will compare this against each 'case'."
+    },
+    {
+      "codeSnippet": "case value:",
+      "explanation": "Each 'case' is a possible value. If variable equals this value, the code after the colon runs. The value must be a constant (like 1, 'text', etc.)!"
+    },
+    {
+      "codeSnippet": "break;",
+      "explanation": "CRITICAL! 'break' exits the switch. Without it, code 'falls through' to the next case (usually not what you want). Don't forget break!"
+    },
+    {
+      "codeSnippet": "Multiple cases",
+      "explanation": "case 6: case 7: with NO break between means 'if 6 OR 7, do this'. Both values execute the same code block."
+    },
+    {
+      "codeSnippet": "default:",
+      "explanation": "The 'default' case runs if NONE of the other cases matched. Like the 'else' at the end of if-else chains. It's optional but recommended!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a simple calculator using switch!\n\n1. Create a string variable 'operation' (set to '+', '-', '*', or '/')\n2. Create int variables num1 = 10 and num2 = 5\n3. Use a switch statement on 'operation':\n   - case \"+\": Display num1 + num2\n   - case \"-\": Display num1 - num2\n   - case \"*\": Display num1 * num2\n   - case \"/\": Display num1 / num2\n   - default: Display 'Unknown operation'\n\nRemember to use break after each case!",
+    "starterCode": "// Variables\nstring operation = \"+\";\nint num1 = 10;\nint num2 = 5;\n\n// Write your switch statement here",
+    "solutionCode": "// Variables\nstring operation = \"+\";\nint num1 = 10;\nint num2 = 5;\n\n// Write your switch statement here\nswitch (operation)\n{\n    case \"+\":\n        Console.WriteLine(num1 + num2);\n        break;\n    case \"-\":\n        Console.WriteLine(num1 - num2);\n        break;\n    case \"*\":\n        Console.WriteLine(num1 * num2);\n        break;\n    case \"/\":\n        Console.WriteLine(num1 / num2);\n        break;\n    default:\n        Console.WriteLine(\"Unknown operation\");\n        break;\n}",
+    "hint": "Structure: switch (operation) { case \"+\": code here; break; case \"-\": code here; break; ... }. Don't forget break!",
+    "expectedOutputPatterns": [],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting break: Without break, code 'falls through' to the next case! Always end each case with break (unless you want fall-through).",
+      "Using variables in case: case myVariable: is WRONG! case values must be constants: case 1: or case \"text\":  ",
+      "Forgetting quotes on strings: case jump: is wrong! String cases need quotes: case \"jump\":",
+      "Using conditions in case: You can't do case (x > 5): ! Switch only checks EQUALITY. Use if-else for conditions."
+    ]
+  }
+}
