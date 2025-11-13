@@ -1,0 +1,40 @@
+{
+  "moduleId": 4,
+  "lessonNumber": 1,
+  "lessonId": "M04L01",
+  "title": "While Loops (Repeat While True)",
+  "simplifierConcept": "Imagine doing chores:\n\n🧺 WHILE there are dirty dishes → Wash a dish\n🏃 WHILE you have energy → Run another lap\n📚 WHILE there are pages left → Read a page\n\nYou don't know HOW MANY times, but you know WHEN TO STOP!\n\nwhile (condition)\n{\n    // Keep repeating this code\n    // UNTIL condition becomes false\n}\n\nLike a guard at a gate:\n- Checks condition\n- If TRUE → Run code, check again\n- If FALSE → Stop, move on\n\nint count = 0;\nwhile (count < 5)\n{\n    Console.WriteLine(count);\n    count++;  // MUST change condition or loop forever!\n}\n\nThink: While loop = Keep doing something WHILE a condition is true!",
+  "coderExample": "// BASIC WHILE LOOP\nint count = 0;\n\nwhile (count < 5)\n{\n    Console.WriteLine($\"Count: {count}\");\n    count++;  // Increment to avoid infinite loop!\n}\n// Output: 0, 1, 2, 3, 4\n\n// COUNTDOWN\nint seconds = 5;\n\nwhile (seconds > 0)\n{\n    Console.WriteLine($\"{seconds}...\");\n    seconds--;\n}\nConsole.WriteLine(\"Blast off!\");\n\n// USER INPUT LOOP\nstring password = \"\";\n\nwhile (password != \"secret\")\n{\n    Console.WriteLine(\"Enter password:\");\n    password = Console.ReadLine();\n}\nConsole.WriteLine(\"Access granted!\");\n\n// SUM NUMBERS UNTIL ZERO\nint sum = 0;\nint number = -1;\n\nwhile (number != 0)\n{\n    Console.WriteLine(\"Enter number (0 to quit):\");\n    number = int.Parse(Console.ReadLine());\n    sum += number;\n}\nConsole.WriteLine($\"Total sum: {sum}\");\n\n// INFINITE LOOP (DANGEROUS!)\n// while (true)  // Runs forever!\n// {\n//     Console.WriteLine(\"This never stops!\");\n// }\n// Use break to exit infinite loops (covered later)\n\n// PRACTICAL: Balance checker\ndouble balance = 100.0;\n\nwhile (balance > 0)\n{\n    Console.WriteLine($\"Balance: ${balance}\");\n    Console.WriteLine(\"Enter purchase amount:\");\n    double purchase = double.Parse(Console.ReadLine());\n    \n    if (purchase <= balance)\n    {\n        balance -= purchase;\n        Console.WriteLine($\"Purchase approved! Remaining: ${balance}\");\n    }\n    else\n    {\n        Console.WriteLine(\"Insufficient funds!\");\n        break;  // Exit loop\n    }\n}\nConsole.WriteLine(\"Out of money!\");\n\n// PRACTICAL: Number guessing with attempts\nint secret = 42;\nint guess = 0;\nint attempts = 0;\n\nwhile (guess != secret)\n{\n    Console.WriteLine(\"Guess the number:\");\n    guess = int.Parse(Console.ReadLine());\n    attempts++;\n    \n    if (guess < secret)\n    {\n        Console.WriteLine(\"Too low!\");\n    }\n    else if (guess > secret)\n    {\n        Console.WriteLine(\"Too high!\");\n    }\n}\n\nConsole.WriteLine($\"Correct! It took {attempts} attempts.\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "while (condition)",
+      "explanation": "Checks condition BEFORE each iteration. If true, runs code. If false, exits loop. Condition must eventually become false or loop runs forever!"
+    },
+    {
+      "codeSnippet": "Loop variable",
+      "explanation": "Variable that controls loop. MUST be modified inside loop! while (x < 5) needs x++ or x = x + 1 inside. Otherwise infinite loop!"
+    },
+    {
+      "codeSnippet": "Infinite loop",
+      "explanation": "while (true) or condition that never becomes false runs forever! Crashes/hangs program. Always ensure condition can become false OR use break to exit."
+    },
+    {
+      "codeSnippet": "While vs If",
+      "explanation": "IF runs once if condition is true. WHILE runs REPEATEDLY while condition is true. if (x < 5) runs once. while (x < 5) keeps running until x >= 5!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a savings goal tracker!\n\n1. Ask user for savings goal amount\n2. Start with $0 saved\n3. While saved < goal:\n   - Ask how much they want to save this month\n   - Add to total saved\n   - Calculate remaining amount\n   - Display progress (saved, remaining, % complete)\n   - Count months\n4. When goal reached:\n   - Display congratulations\n   - Show total months taken\n\nExample:\nGoal: $1000\n\nMonth 1 - Save: $300\nSaved: $300 / $1000 (30%)\nRemaining: $700\n\nMonth 2 - Save: $500\nSaved: $800 / $1000 (80%)\nRemaining: $200\n\nMonth 3 - Save: $200\nGoal reached in 3 months!",
+    "starterCode": "// Savings Goal Tracker\n\nConsole.WriteLine(\"Enter savings goal:\");\ndouble goal = double.Parse(Console.ReadLine());\n\ndouble saved = 0;\nint months = 0;\n\n// While loop until goal reached\n\n// Congratulations message",
+    "solutionCode": "// Savings Goal Tracker\n\nConsole.WriteLine(\"Enter savings goal:\");\ndouble goal = double.Parse(Console.ReadLine());\n\ndouble saved = 0;\nint months = 0;\n\nwhile (saved < goal)\n{\n    months++;\n    Console.WriteLine($\"\\n--- Month {months} ---\");\n    Console.WriteLine(\"How much can you save this month?\");\n    double amount = double.Parse(Console.ReadLine());\n    \n    saved += amount;\n    double remaining = goal - saved;\n    double percent = (saved / goal) * 100;\n    \n    Console.WriteLine($\"Saved: ${saved} / ${goal} ({percent:F1}%)\");\n    \n    if (remaining > 0)\n    {\n        Console.WriteLine($\"Remaining: ${remaining}\");\n    }\n}\n\nConsole.WriteLine($\"\\n🎉 Goal reached in {months} months!\");\nConsole.WriteLine($\"Final amount: ${saved}\");",
+    "hint": "while (saved < goal) repeats until goal reached. saved += amount adds to total. remaining = goal - saved. percent = (saved / goal) * 100. months++ counts iterations. {value:F1} formats to 1 decimal.",
+    "expectedOutputPatterns": ["Month", "Saved", "Goal", "Remaining"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Infinite loop: Forgetting to modify loop variable! while (x < 5) without x++ inside loops forever. Program hangs. Always change the variable that condition checks!",
+      "Condition never true: while (x > 10) when x starts at 0 and increases never runs! Check initial condition. May need do-while (covered later) to run at least once.",
+      "Off-by-one: while (x < 5) runs for x=0,1,2,3,4 (5 times). while (x <= 5) runs for x=0,1,2,3,4,5 (6 times). Easy to get wrong count!",
+      "Using = instead of ==: while (x = 5) assigns 5 to x, doesn't compare! Infinite loop if 5 is truthy. Use == for comparison: while (x == 5)."
+    ]
+  }
+}

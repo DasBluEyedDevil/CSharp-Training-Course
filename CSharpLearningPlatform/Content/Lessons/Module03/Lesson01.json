@@ -1,0 +1,40 @@
+{
+  "moduleId": 3,
+  "lessonNumber": 1,
+  "lessonId": "M03L01",
+  "title": "If Statements (Making Decisions)",
+  "simplifierConcept": "Programs need to make DECISIONS:\n\n🌦️ IF it's raining → Take umbrella\n🎂 IF age >= 18 → Can vote\n🎮 IF score > 100 → You win!\n\nLife is full of IF situations!\n\nIn code:\n\nif (condition)\n{\n    // Do this when condition is TRUE\n}\n\nLike a fork in the road:\n- Condition true? Take this path!\n- Condition false? Skip this path!\n\nif (temperature > 30)\n{\n    Console.WriteLine(\"It's hot!\");\n}\n\nThink: IF statements let your program choose different actions based on conditions!",
+  "coderExample": "// BASIC IF STATEMENT\nint age = 20;\n\nif (age >= 18)\n{\n    Console.WriteLine(\"You can vote!\");\n}\n// This runs because 20 >= 18 is TRUE\n\n// IF WITH FALSE CONDITION\nint score = 50;\n\nif (score > 100)\n{\n    Console.WriteLine(\"You win!\");  // Doesn't run (50 not > 100)\n}\nConsole.WriteLine(\"Game over\");  // Always runs\n\n// MULTIPLE STATEMENTS IN IF\nint temperature = 35;\n\nif (temperature > 30)\n{\n    Console.WriteLine(\"It's hot!\");\n    Console.WriteLine(\"Drink water!\");\n    Console.WriteLine(\"Stay in shade!\");\n}\n// All three run because 35 > 30\n\n// PRACTICAL EXAMPLES\n\n// Password checker\nstring password = \"secret123\";\n\nif (password == \"secret123\")\n{\n    Console.WriteLine(\"Access granted!\");\n}\n\n// Discount eligibility\nint purchaseAmount = 150;\n\nif (purchaseAmount >= 100)\n{\n    Console.WriteLine(\"You qualify for free shipping!\");\n}\n\n// Speed limit\nint speed = 75;\nint limit = 65;\n\nif (speed > limit)\n{\n    Console.WriteLine(\"Speeding! Slow down!\");\n    int over = speed - limit;\n    Console.WriteLine($\"You're {over} mph over the limit\");\n}\n\n// Even/odd checker\nint number = 8;\n\nif (number % 2 == 0)\n{\n    Console.WriteLine($\"{number} is even\");\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "if (condition)",
+      "explanation": "IF keyword followed by condition in parentheses. Condition must be true/false (boolean). If true, code in { } runs. If false, code skipped."
+    },
+    {
+      "codeSnippet": "{ }",
+      "explanation": "Curly braces contain code to run when condition is true. Can have 1 line or 100 lines. ALL code in braces runs together. ALWAYS use braces even for 1 line!"
+    },
+    {
+      "codeSnippet": "Comparison ==",
+      "explanation": "Double equals (==) checks if values are EQUAL. Single = assigns, double == compares! if (x == 5) checks equality. if (x = 5) is ERROR (assignment, not comparison)."
+    },
+    {
+      "codeSnippet": "Boolean condition",
+      "explanation": "Condition must evaluate to true or false. Can be: comparison (x > 5), variable (bool isReady), or method (text.Contains(\"hi\"))."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a movie ticket price calculator!\n\n1. Ask user for age\n2. Ask for day of week (\"weekday\" or \"weekend\")\n3. Set base price = 15\n4. Apply discounts using IF statements:\n   - IF age < 12: Child discount, price = 8\n   - IF age >= 65: Senior discount, price = 10\n   - IF day is \"weekday\": Reduce price by $3\n5. Display final ticket price\n\nExample:\nAge: 10\nDay: weekday\nChild ticket: $8\nWeekday discount: -$3\nFinal price: $5",
+    "starterCode": "// Movie Ticket Calculator\n\nConsole.WriteLine(\"Enter your age:\");\nint age = int.Parse(Console.ReadLine());\n\nConsole.WriteLine(\"Enter day (weekday or weekend):\");\nstring day = Console.ReadLine();\n\nint price = 15;  // Base price\n\n// Check for child discount\n\n// Check for senior discount\n\n// Check for weekday discount\n\n// Display final price\nConsole.WriteLine($\"Ticket price: ${price}\");",
+    "solutionCode": "// Movie Ticket Calculator\n\nConsole.WriteLine(\"Enter your age:\");\nint age = int.Parse(Console.ReadLine());\n\nConsole.WriteLine(\"Enter day (weekday or weekend):\");\nstring day = Console.ReadLine();\n\nint price = 15;  // Base price\n\n// Check for child discount\nif (age < 12)\n{\n    price = 8;\n    Console.WriteLine(\"Child discount applied!\");\n}\n\n// Check for senior discount\nif (age >= 65)\n{\n    price = 10;\n    Console.WriteLine(\"Senior discount applied!\");\n}\n\n// Check for weekday discount\nif (day == \"weekday\")\n{\n    price = price - 3;\n    Console.WriteLine(\"Weekday discount: -$3\");\n}\n\n// Display final price\nConsole.WriteLine($\"\\nFinal ticket price: ${price}\");",
+    "hint": "Use if (age < 12) for child. if (age >= 65) for senior. if (day == \"weekday\") for weekday. Remember == not = for comparison! Modify price variable inside each if.",
+    "expectedOutputPatterns": ["price", "discount"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Using = instead of ==: if (x = 5) is WRONG! That's assignment. Use if (x == 5) for comparison. Very common beginner mistake!",
+      "Forgetting braces: if (x > 5) Console.WriteLine(\"Hi\"); works but dangerous! Always use { }: if (x > 5) { Console.WriteLine(\"Hi\"); } for clarity and safety.",
+      "Condition not boolean: if (5) is ERROR! Condition must be true/false. Must be: if (x == 5) or if (isReady) where isReady is bool.",
+      "Semicolon after if: if (x > 5); { code } is WRONG! Semicolon ends the if, so { code } always runs! No semicolon after if (condition)."
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "moduleId": 2,
+  "lessonNumber": 3,
+  "lessonId": "M02L03",
+  "title": "Type Conversion & Casting (Changing Data Types)",
+  "simplifierConcept": "Sometimes you need to convert between types:\n\n🧃 → 🥤 Pouring juice from box to cup\n📱 → 💻 Transferring file from phone to computer\n💵 → 🪙 Exchanging dollar bill for coins\n\nTwo types of conversion:\n\n✅ IMPLICIT (Automatic - Safe):\nint small = 5;\ndouble big = small;  // 5 becomes 5.0 automatically\n// Small container → Big container = Safe!\n\n⚠️ EXPLICIT (Manual - Risky):\ndouble big = 5.7;\nint small = (int)big;  // 5.7 becomes 5 (loses .7!)\n// Big container → Small container = Need to force it!\n\nThink: Converting types is like changing containers - sometimes safe, sometimes you lose information!",
+  "coderExample": "// IMPLICIT CONVERSION (Automatic - Safe)\nint wholeNumber = 10;\ndouble decimal = wholeNumber;  // 10 becomes 10.0\nConsole.WriteLine(decimal);  // 10.0\n\nfloat small = 3.14f;\ndouble big = small;  // float → double (safe, bigger container)\n\n// EXPLICIT CONVERSION (Cast - Risky)\ndouble price = 19.99;\nint dollars = (int)price;  // 19.99 → 19 (loses .99!)\nConsole.WriteLine(dollars);  // 19\n\nlong bigNumber = 1000000;\nint smallNumber = (int)bigNumber;  // Could overflow if too big!\n\n// PARSE - String to Number\nstring text = \"42\";\nint number = int.Parse(text);  // \"42\" → 42\nConsole.WriteLine(number + 10);  // 52 (math works!)\n\ndouble value = double.Parse(\"3.14\");\nConsole.WriteLine(value * 2);  // 6.28\n\n// CONVERT CLASS (Safer)\nstring input = \"100\";\nint result = Convert.ToInt32(input);  // \"100\" → 100\ndouble d = Convert.ToDouble(\"5.5\");  // \"5.5\" → 5.5\n\n// ToString - Number to String\nint age = 25;\nstring ageText = age.ToString();  // 25 → \"25\"\nConsole.WriteLine(\"Age: \" + ageText);\n\ndouble pi = 3.14159;\nstring piText = pi.ToString();  // 3.14159 → \"3.14159\"\n\n// PRACTICAL EXAMPLE\nConsole.WriteLine(\"Enter your age:\");\nstring ageInput = Console.ReadLine();  // User types \"25\"\nint userAge = int.Parse(ageInput);  // \"25\" → 25\nint nextYear = userAge + 1;  // 26\nConsole.WriteLine($\"Next year you'll be {nextYear}\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "(type)variable",
+      "explanation": "Explicit cast. Put target type in parentheses before variable. (int)5.7 forces double to int. Loses decimal part! Use when you know data loss is OK."
+    },
+    {
+      "codeSnippet": "int.Parse(string)",
+      "explanation": "Converts string to int. \"42\" becomes 42. CRASHES if string isn't valid number! \"abc\" causes error. User input always needs Parse."
+    },
+    {
+      "codeSnippet": "Convert.ToInt32()",
+      "explanation": "Alternative to Parse. More flexible, handles null better. Convert.ToInt32(\"100\") same as int.Parse(\"100\"). Slightly safer in some cases."
+    },
+    {
+      "codeSnippet": ".ToString()",
+      "explanation": "Converts anything to string. 25.ToString() gives \"25\". Every type has this method. Opposite of Parse!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a tip calculator with conversions!\n\n1. Ask user for bill amount (string input)\n2. Parse to double\n3. Ask for tip percentage (string input)\n4. Parse to int\n5. Calculate tip: bill * (percentage / 100.0)\n6. Calculate total: bill + tip\n7. Convert total to int (dollars only, no cents)\n8. Display:\n   - Bill amount\n   - Tip percentage\n   - Tip amount\n   - Total (with decimals)\n   - Total rounded (whole dollars)\n\nExample:\nBill: $50.00\nTip: 20%\nTip amount: $10.00\nTotal: $60.00\nRounded: $60",
+    "starterCode": "// Tip Calculator\n\nConsole.WriteLine(\"Enter bill amount:\");\nstring billInput = Console.ReadLine();\n// Parse to double\n\nConsole.WriteLine(\"Enter tip percentage (15, 18, 20):\");\n// Get and parse percentage\n\n// Calculate tip\n\n// Calculate total\n\n// Round to whole dollars\n\n// Display all results",
+    "solutionCode": "// Tip Calculator\n\nConsole.WriteLine(\"Enter bill amount:\");\nstring billInput = Console.ReadLine();\ndouble bill = double.Parse(billInput);\n\nConsole.WriteLine(\"Enter tip percentage (15, 18, 20):\");\nstring percentInput = Console.ReadLine();\nint tipPercent = int.Parse(percentInput);\n\n// Calculate tip amount\ndouble tip = bill * (tipPercent / 100.0);\n\n// Calculate total\ndouble total = bill + tip;\n\n// Round to whole dollars (explicit cast)\nint totalRounded = (int)total;\n\n// Display results\nConsole.WriteLine($\"\\nBill: ${bill}\");\nConsole.WriteLine($\"Tip: {tipPercent}%\");\nConsole.WriteLine($\"Tip amount: ${tip}\");\nConsole.WriteLine($\"Total: ${total}\");\nConsole.WriteLine($\"Rounded: ${totalRounded}\");",
+    "hint": "Parse string to double for money. Parse string to int for percentage. Use (int) cast to remove decimals. Division: percent / 100.0 (use .0 for decimal result!).",
+    "expectedOutputPatterns": ["Bill", "Tip", "Total"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Implicit vs explicit: Can't do int x = 5.7; (implicit conversion loses data). Must explicitly cast: int x = (int)5.7; Shows you know data loss happens.",
+      "Parse crashes: int.Parse(\"abc\") crashes program! Only works with valid numbers. Error handling covered later. For now, assume user enters valid input.",
+      "Integer division: int percent = 20; double result = percent / 100; gives 0.0! Integer math! Must do: percent / 100.0 (with decimal).",
+      "Overflow: (int)9999999999L causes overflow! Number too big for int. Casting doesn't check limits. Use Convert.ToInt32() for overflow checking."
+    ]
+  }
+}

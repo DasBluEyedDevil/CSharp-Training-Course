@@ -1,0 +1,40 @@
+{
+  "moduleId": 2,
+  "lessonNumber": 1,
+  "lessonId": "M02L01",
+  "title": "Variable Scope (Where Variables Live)",
+  "simplifierConcept": "Variable SCOPE is like where you can use a nickname:\n\n🏠 FAMILY nickname: Only family members know it\n🏫 SCHOOL nickname: Only classmates know it\n🌍 PUBLIC name: Everyone knows it\n\nVariables work the same way:\n\n{\n  int x = 5;  // x lives HERE (inside these braces)\n  Console.WriteLine(x);  // ✅ Works!\n}\nConsole.WriteLine(x);  // ❌ ERROR! x doesn't exist out here\n\nRULES:\n✅ Variable exists from { to }\n✅ Can use variable inside its scope\n❌ Can't use variable outside its scope\n\nThink: Scope = The area where a variable is alive and usable!",
+  "coderExample": "// METHOD SCOPE\nvoid GreetUser()\n{\n    string greeting = \"Hello!\";  // greeting lives in this method\n    Console.WriteLine(greeting);  // ✅ Works\n}  // greeting DIES here\n\n// Console.WriteLine(greeting);  // ❌ ERROR! greeting doesn't exist\n\n// BLOCK SCOPE\nint age = 25;\nif (age >= 18)\n{\n    string status = \"Adult\";  // status only exists in this if block\n    Console.WriteLine(status);  // ✅ Works\n}  // status DIES here\n// Console.WriteLine(status);  // ❌ ERROR!\n\n// OUTER variable visible to INNER scopes\nstring name = \"Alice\";  // Outer scope\nif (true)\n{\n    Console.WriteLine(name);  // ✅ Works! Inner can see outer\n    string hobby = \"Coding\";  // Inner scope\n}\nConsole.WriteLine(name);  // ✅ Works\n// Console.WriteLine(hobby);  // ❌ ERROR! Outer can't see inner\n\n// LOOP SCOPE\nfor (int i = 0; i < 3; i++)\n{\n    string message = \"Loop \" + i;  // message lives in loop\n    Console.WriteLine(message);\n}  // i and message DIE here\n// Console.WriteLine(i);  // ❌ ERROR!",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "{ }",
+      "explanation": "Curly braces create a SCOPE. Variables declared inside { } only exist until the matching }. Like a room - what's inside stays inside!"
+    },
+    {
+      "codeSnippet": "Outer → Inner",
+      "explanation": "OUTER scopes can be seen by INNER scopes. Like a parent variable visible to child blocks. But inner variables invisible to outer!"
+    },
+    {
+      "codeSnippet": "Loop variables",
+      "explanation": "Variables in for loop (like int i = 0) only exist during the loop. After loop ends, variable disappears. Can reuse same name after!"
+    },
+    {
+      "codeSnippet": "Shadowing",
+      "explanation": "Can't create variable with same name in same scope! int x = 5; int x = 10; is ERROR. But can reuse name in different scope after first one ends."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a temperature converter with proper scoping!\n\n1. Ask user for temperature in Celsius (outer scope)\n2. If temp >= 0:\n   - Create variable \"state\" = \"Above freezing\"\n   - Convert to Fahrenheit: F = C * 9/5 + 32\n   - Display both temps and state\n3. If temp < 0:\n   - Create variable \"state\" = \"Below freezing\"\n   - Convert to Fahrenheit\n   - Display both temps and state\n4. Display closing message using outer temp variable\n\nNote: \"state\" only exists in each if block!",
+    "starterCode": "// Temperature Converter\n\nConsole.WriteLine(\"Enter temperature in Celsius:\");\ndouble celsius = double.Parse(Console.ReadLine());\n\nif (celsius >= 0)\n{\n    // Create state variable here\n    // Convert to Fahrenheit\n    // Display results\n}\nelse\n{\n    // Create state variable here (same name, different scope!)\n    // Convert to Fahrenheit\n    // Display results\n}\n\n// Display message using celsius (outer scope)",
+    "solutionCode": "// Temperature Converter\n\nConsole.WriteLine(\"Enter temperature in Celsius:\");\ndouble celsius = double.Parse(Console.ReadLine());\n\nif (celsius >= 0)\n{\n    string state = \"Above freezing\";  // Inner scope\n    double fahrenheit = celsius * 9.0 / 5.0 + 32;\n    Console.WriteLine($\"{celsius}°C = {fahrenheit}°F\");\n    Console.WriteLine($\"State: {state}\");\n}\nelse\n{\n    string state = \"Below freezing\";  // Different scope, same name OK!\n    double fahrenheit = celsius * 9.0 / 5.0 + 32;\n    Console.WriteLine($\"{celsius}°C = {fahrenheit}°F\");\n    Console.WriteLine($\"State: {state}\");\n}\n\nConsole.WriteLine($\"\\nOriginal temperature: {celsius}°C\");  // celsius still exists!",
+    "hint": "Outer variable (celsius) visible everywhere. Inner variable (state) only exists in its { } block. Same name OK in different scopes!",
+    "expectedOutputPatterns": ["Celsius", "Fahrenheit", "freezing"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Using variable outside scope: Declared int x inside if block, tried to use outside. ERROR! Variable dies at }. Declare before if if you need it after!",
+      "Shadowing confusion: Can't do { int x = 5; int x = 10; } - same scope! But CAN do: { int x = 5; } { int x = 10; } - different scopes.",
+      "Loop variable access: for (int i = 0; i < 5; i++) { } Console.WriteLine(i); ERROR! i only exists during loop. Declare before loop if needed after.",
+      "Forgetting outer visibility: Inner scopes CAN see outer variables! Don't redeclare outer variable inside inner scope if you want to modify it."
+    ]
+  }
+}

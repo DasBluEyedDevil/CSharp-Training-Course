@@ -1,0 +1,40 @@
+{
+  "moduleId": 1,
+  "lessonNumber": 4,
+  "lessonId": "M01L04",
+  "title": "Console Input (Getting User Input)",
+  "simplifierConcept": "So far, we've only TOLD the computer things (output).\nNow let's ASK the computer to GET information from the user (input)!\n\nLike a conversation:\nComputer: \"What's your name?\"\nUser: \"Alice\"\nComputer: \"Hello, Alice!\"\n\nConsole.ReadLine() = Read what the user types\nConsole.WriteLine() = Display to user\n\nInput → Process → Output\n\nThink: ReadLine lets programs interact with users!",
+  "coderExample": "// BASIC INPUT\nConsole.WriteLine(\"What is your name?\");\nstring name = Console.ReadLine();\nConsole.WriteLine($\"Hello, {name}!\");\n\n// MULTIPLE INPUTS\nConsole.WriteLine(\"Enter your age:\");\nstring ageInput = Console.ReadLine();\nint age = int.Parse(ageInput);  // Convert text to number\n\nConsole.WriteLine(\"Enter your city:\");\nstring city = Console.ReadLine();\n\nConsole.WriteLine($\"{name}, age {age}, from {city}\");\n\n// SHORTER VERSION\nConsole.WriteLine(\"Enter score:\");\nint score = int.Parse(Console.ReadLine());\n\nConsole.WriteLine(\"Enter price:\");\ndouble price = double.Parse(Console.ReadLine());",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "Console.ReadLine()",
+      "explanation": "Waits for user to type and press Enter. Returns what they typed as a string. ALWAYS returns string!"
+    },
+    {
+      "codeSnippet": "int.Parse()",
+      "explanation": "Converts string to int. \"25\" becomes 25. Required because ReadLine gives text, but we need numbers for math."
+    },
+    {
+      "codeSnippet": "double.Parse()",
+      "explanation": "Converts string to double. \"3.14\" becomes 3.14. Use for decimal inputs."
+    },
+    {
+      "codeSnippet": "Prompt before input",
+      "explanation": "Always WriteLine BEFORE ReadLine! Tell user what to enter. \"Enter name:\" then ReadLine. Otherwise, user doesn't know what to type!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create an interactive calculator!\n\n1. Ask user for first number\n2. Convert to double\n3. Ask for second number\n4. Convert to double\n5. Calculate sum\n6. Display result\n\nExample:\nEnter first number: 5.5\nEnter second number: 3.2\nSum: 8.7",
+    "starterCode": "// Interactive Calculator\n\nConsole.WriteLine(\"Enter first number:\");\nstring input1 = Console.ReadLine();\ndouble num1 = double.Parse(input1);\n\n// Get second number...\n\n// Calculate sum...\n\n// Display result...",
+    "solutionCode": "// Interactive Calculator\n\nConsole.WriteLine(\"Enter first number:\");\nstring input1 = Console.ReadLine();\ndouble num1 = double.Parse(input1);\n\nConsole.WriteLine(\"Enter second number:\");\nstring input2 = Console.ReadLine();\ndouble num2 = double.Parse(input2);\n\ndouble sum = num1 + num2;\n\nConsole.WriteLine($\"Sum: {sum}\");\nConsole.WriteLine($\"{num1} + {num2} = {sum}\");",
+    "hint": "ReadLine() for input. Parse to convert string to number. Use + for addition. Display with WriteLine.",
+    "expectedOutputPatterns": ["Enter", "Sum"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting Parse: string x = ReadLine(); int y = x; ERROR! Must convert: int y = int.Parse(x);",
+      "Parse crashes on bad input: int.Parse(\"abc\") crashes! User must enter valid number. Error handling covered later.",
+      "Using wrong Parse: int.Parse(\"3.14\") crashes! Decimals need double.Parse(). int.Parse only works with whole numbers.",
+      "Math on strings: string a = \"5\"; string b = \"3\"; string c = a + b; gives \"53\" not 8! Must Parse to numbers first for math."
+    ]
+  }
+}

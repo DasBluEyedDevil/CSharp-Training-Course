@@ -1,0 +1,40 @@
+{
+  "moduleId": 2,
+  "lessonNumber": 2,
+  "lessonId": "M02L02",
+  "title": "Constants (Values That Never Change)",
+  "simplifierConcept": "Some values should NEVER change:\n\n🌍 Earth's gravity: 9.8 m/s²\n🥧 Pi: 3.14159...\n💯 Max score: 100\n📅 Days in week: 7\n\nVARIABLE = Can change:\nint score = 0;\nscore = 10;  // ✅ Allowed\nscore = 20;  // ✅ Allowed\n\nCONSTANT = Cannot change:\nconst int MAX_SCORE = 100;\nMAX_SCORE = 200;  // ❌ ERROR! Can't change constant\n\nWhy use constants?\n✅ Prevents accidental changes\n✅ Makes code more readable\n✅ Easy to update in one place\n✅ Compiler optimizes them\n\nThink: const = A locked box that can't be changed!",
+  "coderExample": "// DECLARING CONSTANTS\nconst double PI = 3.14159;\nconst int DAYS_IN_WEEK = 7;\nconst string APP_NAME = \"My App\";\nconst bool DEBUG_MODE = true;\n\n// USING CONSTANTS\ndouble radius = 5.0;\ndouble area = PI * radius * radius;  // π r²\nConsole.WriteLine($\"Area: {area}\");\n\n// CONSTANTS CAN'T CHANGE\nconst int MAX_PLAYERS = 4;\n// MAX_PLAYERS = 8;  // ❌ ERROR! Cannot assign to constant\n\n// NAMING CONVENTION\nconst int MAX_LIVES = 3;  // ✅ ALL_CAPS with underscores\nconst double TaxRate = 0.08;  // ❌ Bad style (but works)\n\n// MUST ASSIGN ON DECLARATION\nconst int VALUE = 100;  // ✅ Good\n// const int VALUE;  // ❌ ERROR! Must initialize immediately\n// VALUE = 100;  // Can't assign later\n\n// PRACTICAL EXAMPLE - Game Settings\nconst int WINDOW_WIDTH = 800;\nconst int WINDOW_HEIGHT = 600;\nconst double GRAVITY = 9.8;\nconst int MAX_ENEMIES = 20;\nconst string GAME_VERSION = \"1.0.0\";\n\nConsole.WriteLine($\"Window: {WINDOW_WIDTH}x{WINDOW_HEIGHT}\");\nConsole.WriteLine($\"Version: {GAME_VERSION}\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "const type NAME = value;",
+      "explanation": "const keyword makes variable unchangeable. Must assign value immediately. Type required (int, double, string, etc.). Use ALL_CAPS naming convention."
+    },
+    {
+      "codeSnippet": "ALL_CAPS naming",
+      "explanation": "Convention: Constants use ALL_CAPS with UNDERSCORES. Makes them easy to spot in code. const int MAX_SCORE = 100; Not required, but strong convention."
+    },
+    {
+      "codeSnippet": "Compile-time constant",
+      "explanation": "Value must be known at compile time. Can't use variable: const int x = 5; const int y = x; is OK. But can't use method results or user input!"
+    },
+    {
+      "codeSnippet": "readonly vs const",
+      "explanation": "const = compile-time, can't change ever. readonly = runtime, can set in constructor once. const is stricter. readonly covered in OOP later."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a currency converter with constants!\n\n1. Define constants:\n   - USD_TO_EUR = 0.85\n   - USD_TO_GBP = 0.73\n   - USD_TO_JPY = 110.0\n   - APP_NAME = \"Currency Converter\"\n   - VERSION = \"1.0\"\n\n2. Display app name and version\n3. Ask user for USD amount\n4. Convert to all three currencies\n5. Display all conversions\n\nExample:\nEnter USD: 100\n100 USD = 85 EUR\n100 USD = 73 GBP\n100 USD = 11000 JPY",
+    "starterCode": "// Currency Converter\n\n// Define constants here\nconst double USD_TO_EUR = 0.85;\n// Add other constants...\n\n// Display app info\n\n// Get user input\n\n// Perform conversions\n\n// Display results",
+    "solutionCode": "// Currency Converter\n\n// Define conversion rate constants\nconst double USD_TO_EUR = 0.85;\nconst double USD_TO_GBP = 0.73;\nconst double USD_TO_JPY = 110.0;\nconst string APP_NAME = \"Currency Converter\";\nconst string VERSION = \"1.0\";\n\n// Display app info\nConsole.WriteLine($\"{APP_NAME} v{VERSION}\");\nConsole.WriteLine(\"=\".PadLeft(30, '='));\n\n// Get user input\nConsole.WriteLine(\"Enter amount in USD:\");\ndouble usd = double.Parse(Console.ReadLine());\n\n// Perform conversions using constants\ndouble eur = usd * USD_TO_EUR;\ndouble gbp = usd * USD_TO_GBP;\ndouble jpy = usd * USD_TO_JPY;\n\n// Display results\nConsole.WriteLine($\"\\n{usd} USD = {eur} EUR\");\nConsole.WriteLine($\"{usd} USD = {gbp} GBP\");\nConsole.WriteLine($\"{usd} USD = {jpy} JPY\");",
+    "hint": "Use const for values that never change. ALL_CAPS naming. Multiply USD amount by each conversion rate constant. Display with string interpolation.",
+    "expectedOutputPatterns": ["USD", "EUR", "GBP", "JPY"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Trying to change constant: const int X = 5; X = 10; ERROR! Constants are locked forever. Use regular variable if you need to change it.",
+      "Forgetting to initialize: const int X; ERROR! Must assign value immediately: const int X = 5; Can't assign later like variables.",
+      "Using wrong naming: const int maxScore = 100; works but bad style. Use const int MAX_SCORE = 100; for readability.",
+      "Runtime values: const int x = int.Parse(input); ERROR! Constant value must be known at compile time. Can't use user input or method calls that run later."
+    ]
+  }
+}

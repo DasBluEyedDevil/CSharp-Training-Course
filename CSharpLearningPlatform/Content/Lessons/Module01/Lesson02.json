@@ -1,0 +1,40 @@
+{
+  "moduleId": 1,
+  "lessonNumber": 2,
+  "lessonId": "M01L02",
+  "title": "Variables (Named Storage Boxes)",
+  "simplifierConcept": "Variables are like labeled storage boxes:\n\nImagine you have boxes to store things:\n• Box labeled 'age' contains: 25\n• Box labeled 'name' contains: \"Alice\"\n• Box labeled 'price' contains: 19.99\n\nVariables work the same way:\n• Each has a NAME (what we call it)\n• Each has a VALUE (what's inside)\n• Each has a TYPE (what kind of data: number, text, etc.)\n\nYou can:\n✅ CREATE a variable (make a new box)\n✅ STORE a value (put something in)\n✅ CHANGE the value (replace what's inside)\n✅ USE the value (look at what's inside)\n\nThink: Variable = A named box that holds one piece of data!",
+  "coderExample": "// CREATING VARIABLES\nint age = 25;  // int = whole numbers\nstring name = \"Alice\";  // string = text\ndouble price = 19.99;  // double = numbers with decimals\n\n// USING VARIABLES\nConsole.WriteLine(age);    // Displays: 25\nConsole.WriteLine(name);   // Displays: Alice\nConsole.WriteLine(price);  // Displays: 19.99\n\n// CHANGING VALUES\nage = 26;  // Age is now 26\nConsole.WriteLine(age);  // Displays: 26\n\n// VARIABLES IN MESSAGES\nConsole.WriteLine(\"My name is \" + name);\nConsole.WriteLine(\"I am \" + age + \" years old\");\n\n// STRING INTERPOLATION (easier way!)\nConsole.WriteLine($\"My name is {name}\");\nConsole.WriteLine($\"I am {age} years old\");\nConsole.WriteLine($\"The price is ${price}\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "int age = 25;",
+      "explanation": "'int' is the type (whole numbers). 'age' is the name (what we call it). '25' is the value (what's stored). '=' means 'assign' or 'store'."
+    },
+    {
+      "codeSnippet": "string name = \"Alice\";",
+      "explanation": "'string' means text. Name must be in quotes. Use for words, names, sentences - any text!"
+    },
+    {
+      "codeSnippet": "\"text\" + variable",
+      "explanation": "The + operator joins text and variables together. \"Hello \" + name becomes \"Hello Alice\". This is called concatenation."
+    },
+    {
+      "codeSnippet": "$\"Text {variable}\"",
+      "explanation": "String interpolation - easier way to mix text and variables. Put $ before quotes, variables in {}. More readable than +!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a personal profile using variables!\n\n1. Create variables for:\n   - Your name (string)\n   - Your age (int)\n   - Your favorite number (int)\n   - Your height in meters (double, like 1.75)\n   - Your city (string)\n\n2. Display each variable\n3. Create a sentence using string interpolation that includes at least 3 variables\n\nExample output: \"Hi, I'm Alice, age 25, from New York\"",
+    "starterCode": "// Personal Profile Program\n\n// Create your variables here\nstring name = \"Your Name\";\nint age = 0;\n// Add more variables...\n\n// Display each variable\nConsole.WriteLine(name);\nConsole.WriteLine(age);\n// Display others...\n\n// Create a sentence with string interpolation\nConsole.WriteLine($\"Hi, I'm {name}\");",
+    "solutionCode": "// Personal Profile Program\n\nstring name = \"Alex\";\nint age = 28;\nint favoriteNumber = 7;\ndouble height = 1.80;\nstring city = \"Seattle\";\n\nConsole.WriteLine(name);\nConsole.WriteLine(age);\nConsole.WriteLine(favoriteNumber);\nConsole.WriteLine(height);\nConsole.WriteLine(city);\n\nConsole.WriteLine($\"Hi, I'm {name}, age {age}, from {city}\");\nConsole.WriteLine($\"I am {height}m tall and my favorite number is {favoriteNumber}\");",
+    "hint": "Type name = value; for each variable. Use int for whole numbers, double for decimals, string for text. String interpolation: $\"Text {variable}\".",
+    "expectedOutputPatterns": ["name", "age"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Using variable before declaring: Must create variable before using it! int age = 25; THEN Console.WriteLine(age). Can't use 'age' if it doesn't exist yet!",
+      "Type mismatch: int age = \"25\"; is WRONG! int holds numbers not text. int age = 25; is correct (no quotes for numbers).",
+      "Redeclaring variable: int age = 25; int age = 30; is ERROR! Can't create same variable twice. Instead: int age = 25; age = 30; (no 'int' the second time).",
+      "Forgetting $ for interpolation: \"{name}\" displays literal {name}. $\"{name}\" displays the value. Don't forget the $ before the quote!"
+    ]
+  }
+}

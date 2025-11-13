@@ -1,0 +1,40 @@
+{
+  "moduleId": 3,
+  "lessonNumber": 4,
+  "lessonId": "M03L04",
+  "title": "Logical Operators (Combining Conditions)",
+  "simplifierConcept": "Sometimes you need to check MULTIPLE conditions:\n\n🎫 Can enter movie IF:\n   - Age >= 13 AND has ticket\n   \n🏊 Can swim IF:\n   - It's summer OR pool is heated\n   \n🚗 Can't drive IF:\n   - NOT has license\n\nThree logical operators:\n\n&& = AND (both must be true)\n|| = OR (at least one must be true)\n! = NOT (flips true/false)\n\nTruth tables:\nAND (&&): T && T = T, everything else = F\nOR (||): F || F = F, everything else = T\nNOT (!): !T = F, !F = T\n\nThink: Logical operators let you combine multiple yes/no questions!",
+  "coderExample": "// AND OPERATOR (&&) - Both must be true\nint age = 25;\nbool hasLicense = true;\n\nif (age >= 18 && hasLicense)\n{\n    Console.WriteLine(\"Can drive!\");  // Runs (both true)\n}\n\nint score = 75;\nif (score >= 60 && score <= 100)\n{\n    Console.WriteLine(\"Valid score in range\");  // Runs\n}\n\n// OR OPERATOR (||) - At least one must be true\nbool isWeekend = false;\nbool isHoliday = true;\n\nif (isWeekend || isHoliday)\n{\n    Console.WriteLine(\"No work today!\");  // Runs (one is true)\n}\n\nstring role = \"admin\";\nif (role == \"admin\" || role == \"moderator\")\n{\n    Console.WriteLine(\"Has elevated privileges\");  // Runs\n}\n\n// NOT OPERATOR (!) - Flips true/false\nbool isRaining = false;\n\nif (!isRaining)\n{\n    Console.WriteLine(\"No umbrella needed!\");  // Runs (!false = true)\n}\n\nbool hasAccount = true;\nif (!hasAccount)\n{\n    Console.WriteLine(\"Please sign up\");  // Doesn't run\n}\n\n// COMBINING OPERATORS\nint temp = 25;\nbool isSunny = true;\n\nif ((temp > 20 && temp < 30) && isSunny)\n{\n    Console.WriteLine(\"Perfect beach weather!\");\n}\n\n// PRACTICAL: Login validation\nstring username = \"admin\";\nstring password = \"pass123\";\n\nif (username == \"admin\" && password == \"pass123\")\n{\n    Console.WriteLine(\"✅ Login successful!\");\n}\nelse\n{\n    Console.WriteLine(\"❌ Invalid credentials\");\n}\n\n// PRACTICAL: Discount eligibility\nint purchaseAmount = 150;\nbool isMember = true;\n\nif (purchaseAmount >= 100 || isMember)\n{\n    Console.WriteLine(\"10% discount applied!\");\n}\n\n// PRACTICAL: Access control\nint userAge = 16;\nbool hasParentPermission = false;\n\nif (userAge >= 18 || (userAge >= 13 && hasParentPermission))\n{\n    Console.WriteLine(\"Access granted\");\n}\nelse\n{\n    Console.WriteLine(\"Access denied\");\n}\n\n// SHORT-CIRCUIT EVALUATION\nint x = 0;\nif (x != 0 && 10 / x > 2)  // Safe! Second part never runs if x == 0\n{\n    Console.WriteLine(\"Result greater than 2\");\n}\n\n// COMPLEX EXAMPLE: Ticket pricing\nint visitorAge = 65;\nbool isStudent = false;\nbool isWeekday = true;\nint basePrice = 20;\n\nif (visitorAge < 12 || visitorAge >= 65)\n{\n    basePrice = basePrice / 2;  // 50% off for kids/seniors\n}\n\nif (isStudent && isWeekday)\n{\n    basePrice = basePrice - 5;  // $5 student weekday discount\n}\n\nConsole.WriteLine($\"Ticket price: ${basePrice}\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "&&",
+      "explanation": "AND operator. Both sides must be TRUE for result to be TRUE. if (a && b) means a AND b must both be true. If either is false, whole thing is false."
+    },
+    {
+      "codeSnippet": "||",
+      "explanation": "OR operator. At least one side must be TRUE for result to be TRUE. if (a || b) means a OR b (or both) must be true. Only false if BOTH are false."
+    },
+    {
+      "codeSnippet": "!",
+      "explanation": "NOT operator. Flips boolean value. !true becomes false. !false becomes true. if (!condition) runs when condition is FALSE. Like 'if not'."
+    },
+    {
+      "codeSnippet": "Short-circuit",
+      "explanation": "AND (&&) stops checking if first is false (result already known). OR (||) stops if first is true. if (x != 0 && 10/x > 2) is safe - won't divide by zero!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a smart thermostat controller!\n\n1. Ask for current temperature\n2. Ask if it's daytime (true/false)\n3. Ask if someone is home (true/false)\n4. Control heating/cooling based on rules:\n\n   Turn ON heat if:\n   - Temp < 18 AND someone is home\n   OR\n   - Temp < 15 (always, even if away)\n   \n   Turn ON AC if:\n   - Temp > 26 AND (it's daytime OR someone is home)\n   \n   Otherwise:\n   - System off (comfortable)\n\n5. Display the action taken and why\n\nExample:\nTemp: 16\nDaytime: false\nHome: true\nAction: HEAT ON\nReason: Below 18°C and someone is home",
+    "starterCode": "// Smart Thermostat\n\nConsole.WriteLine(\"Enter temperature:\");\nint temp = int.Parse(Console.ReadLine());\n\nConsole.WriteLine(\"Is it daytime? (true/false):\");\nbool isDaytime = bool.Parse(Console.ReadLine());\n\nConsole.WriteLine(\"Is someone home? (true/false):\");\nbool isHome = bool.Parse(Console.ReadLine());\n\n// Check heating conditions\n\n// Check cooling conditions\n\n// Otherwise comfortable",
+    "solutionCode": "// Smart Thermostat\n\nConsole.WriteLine(\"Enter temperature:\");\nint temp = int.Parse(Console.ReadLine());\n\nConsole.WriteLine(\"Is it daytime? (true/false):\");\nbool isDaytime = bool.Parse(Console.ReadLine());\n\nConsole.WriteLine(\"Is someone home? (true/false):\");\nbool isHome = bool.Parse(Console.ReadLine());\n\n// Check heating conditions\nif ((temp < 18 && isHome) || temp < 15)\n{\n    Console.WriteLine(\"\\n🔥 Action: HEAT ON\");\n    if (temp < 15)\n    {\n        Console.WriteLine(\"Reason: Very cold (below 15°C)\");\n    }\n    else\n    {\n        Console.WriteLine(\"Reason: Below 18°C and someone is home\");\n    }\n}\n// Check cooling conditions\nelse if (temp > 26 && (isDaytime || isHome))\n{\n    Console.WriteLine(\"\\n❄️ Action: AC ON\");\n    Console.WriteLine(\"Reason: Above 26°C and (daytime or occupied)\");\n}\n// Otherwise comfortable\nelse\n{\n    Console.WriteLine(\"\\n✅ Action: SYSTEM OFF\");\n    Console.WriteLine(\"Reason: Temperature is comfortable\");\n}",
+    "hint": "Use && for conditions that must BOTH be true. Use || for conditions where AT LEAST ONE must be true. Combine with parentheses: (a && b) || c means (a AND b) OR c.",
+    "expectedOutputPatterns": ["Action", "Reason", "HEAT", "AC", "OFF"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Confusing && and ||: && needs BOTH true. || needs AT LEAST ONE true. if (age > 18 && age < 65) for range. if (role == \\\"admin\\\" || role == \\\"mod\\\") for options.",
+      "Forgetting parentheses: a && b || c is confusing! Use (a && b) || c to be clear. && has higher precedence than || but don't rely on it - use parentheses!",
+      "Using & or | instead of && or ||: Single & is bitwise operator (different!). Always use && for AND logic, || for OR logic in conditions.",
+      "Double NOT: if (!!condition) is valid but confusing! !!true = true, !!false = false. Just use if (condition)! Double NOT does nothing useful here."
+    ]
+  }
+}

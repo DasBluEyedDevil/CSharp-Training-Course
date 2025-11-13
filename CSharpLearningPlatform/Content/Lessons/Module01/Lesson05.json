@@ -1,0 +1,40 @@
+{
+  "moduleId": 1,
+  "lessonNumber": 5,
+  "lessonId": "M01L05",
+  "title": "Comments & Basic Math (Explaining Your Code)",
+  "simplifierConcept": "COMMENTS = Notes to yourself and other programmers\n\nCode is like a recipe:\n// This is a comment - ignored by computer\nConsole.WriteLine(\"Hello\");  // Code - computer runs this\n\nWhy comments matter:\n✅ Explain WHAT the code does\n✅ Explain WHY you wrote it that way\n✅ Help future you remember\n✅ Help teammates understand\n\nMATH OPERATORS:\n+ Add\n- Subtract\n* Multiply\n/ Divide\n% Remainder (modulo)\n\nThink: Comments = Documentation. Math = Calculations!",
+  "coderExample": "// SINGLE-LINE COMMENTS\n// This explains what's below\nint age = 25;\n\nConsole.WriteLine(\"Hello\");  // This explains what's on this line\n\n/* MULTI-LINE COMMENTS\n   Use for longer explanations\n   that span multiple lines\n   Everything between /* and */ is ignored\n*/\n\n// BASIC MATH\nint a = 10;\nint b = 3;\n\nint sum = a + b;        // 13\nint difference = a - b;  // 7\nint product = a * b;     // 30\nint quotient = a / b;    // 3 (integer division!)\nint remainder = a % b;   // 1 (10 ÷ 3 = 3 remainder 1)\n\nConsole.WriteLine($\"Sum: {sum}\");\nConsole.WriteLine($\"Difference: {difference}\");\nConsole.WriteLine($\"Product: {product}\");\nConsole.WriteLine($\"Quotient: {quotient}\");\nConsole.WriteLine($\"Remainder: {remainder}\");\n\n// DECIMAL MATH\ndouble x = 10.0;\ndouble y = 3.0;\ndouble result = x / y;  // 3.3333... (true division!)\nConsole.WriteLine($\"Decimal division: {result}\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "// comment",
+      "explanation": "Single-line comment. Everything after // is ignored. Use for short explanations."
+    },
+    {
+      "codeSnippet": "/* comment */",
+      "explanation": "Multi-line comment. Everything between /* and */ ignored. Use for long explanations, temporarily disabling code."
+    },
+    {
+      "codeSnippet": "% (modulo)",
+      "explanation": "Remainder after division. 10 % 3 = 1 because 10 ÷ 3 = 3 remainder 1. Useful for checking even/odd: x % 2 == 0 means even!"
+    },
+    {
+      "codeSnippet": "int / int",
+      "explanation": "Integer division drops decimals! 10 / 3 = 3 (not 3.33). Use double for true division: 10.0 / 3.0 = 3.33."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a price calculator with comments!\n\n1. Get item price from user\n2. Get quantity from user\n3. Calculate subtotal (price * quantity)\n4. Calculate tax (subtotal * 0.08 for 8% tax)\n5. Calculate total (subtotal + tax)\n6. Display all values\n\nAdd comments explaining each step!",
+    "starterCode": "// Shopping Calculator Program\n\n// Get price\nConsole.WriteLine(\"Enter item price:\");\ndouble price = double.Parse(Console.ReadLine());\n\n// TODO: Get quantity\n\n// TODO: Calculate subtotal\n\n// TODO: Calculate tax\n\n// TODO: Calculate total\n\n// Display results",
+    "solutionCode": "// Shopping Calculator Program\n// Calculates total with tax\n\n// Get item price from user\nConsole.WriteLine(\"Enter item price:\");\ndouble price = double.Parse(Console.ReadLine());\n\n// Get quantity from user\nConsole.WriteLine(\"Enter quantity:\");\nint quantity = int.Parse(Console.ReadLine());\n\n// Calculate subtotal (price * quantity)\ndouble subtotal = price * quantity;\n\n// Calculate 8% sales tax\ndouble tax = subtotal * 0.08;\n\n// Calculate final total\ndouble total = subtotal + tax;\n\n// Display all calculated values\nConsole.WriteLine($\"\\nSubtotal: ${subtotal}\");\nConsole.WriteLine($\"Tax (8%): ${tax}\");\nConsole.WriteLine($\"Total: ${total}\");",
+    "hint": "Use * for multiplication. Tax = subtotal * 0.08. Total = subtotal + tax. Add // comments explaining each step!",
+    "expectedOutputPatterns": ["Subtotal", "Tax", "Total"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Over-commenting: Don't comment obvious code! int x = 5; // set x to 5 is redundant. Comment WHY, not WHAT when it's obvious.",
+      "Outdated comments: If you change code, update comments! Old comments are worse than no comments - they confuse people.",
+      "Integer division surprise: int x = 5 / 2; gives 2 not 2.5! Integers can't hold decimals. Use double: double x = 5.0 / 2.0; gives 2.5.",
+      "Order of operations: 2 + 3 * 4 = 14 not 20! Multiplication before addition. Use parentheses: (2 + 3) * 4 = 20."
+    ]
+  }
+}

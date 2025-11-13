@@ -1,0 +1,40 @@
+{
+  "moduleId": 2,
+  "lessonNumber": 5,
+  "lessonId": "M02L05",
+  "title": "Math Class (Advanced Calculations)",
+  "simplifierConcept": "Basic math: +, -, *, /, %\n\nBut what about:\n📐 Square root?\n🔢 Power/exponent?\n📊 Rounding?\n🎲 Random numbers?\n📏 Absolute value?\n🔺 Trigonometry?\n\nC# has a Math CLASS with tons of math methods!\n\nMath.Sqrt(16)  // 4.0 (square root)\nMath.Pow(2, 3)  // 8.0 (2³ = 2*2*2)\nMath.Round(3.7)  // 4.0 (nearest whole)\nMath.Abs(-5)  // 5 (remove negative)\n\nThink: Math class is your scientific calculator in code form!\n\nBonus: Random class for random numbers!\nRandom rnd = new Random();\nint dice = rnd.Next(1, 7);  // 1-6",
+  "coderExample": "// BASIC MATH CLASS METHODS\n\n// POWER - Exponents\ndouble squared = Math.Pow(5, 2);  // 5² = 25.0\ndouble cubed = Math.Pow(2, 3);  // 2³ = 8.0\nConsole.WriteLine($\"5² = {squared}\");\nConsole.WriteLine($\"2³ = {cubed}\");\n\n// SQUARE ROOT\ndouble sqrt = Math.Sqrt(16);  // 4.0\ndouble sqrt2 = Math.Sqrt(2);  // 1.414...\nConsole.WriteLine($\"√16 = {sqrt}\");\n\n// ABSOLUTE VALUE (remove negative)\nint negative = -42;\nint positive = Math.Abs(negative);  // 42\nConsole.WriteLine($\"|-42| = {positive}\");\n\n// ROUNDING\ndouble price = 19.67;\ndouble rounded = Math.Round(price);  // 20.0\ndouble ceil = Math.Ceiling(price);  // 20.0 (always up)\ndouble floor = Math.Floor(price);  // 19.0 (always down)\nConsole.WriteLine($\"Round: {rounded}\");\nConsole.WriteLine($\"Ceiling: {ceil}\");\nConsole.WriteLine($\"Floor: {floor}\");\n\n// MIN / MAX\nint a = 10, b = 25;\nint smaller = Math.Min(a, b);  // 10\nint larger = Math.Max(a, b);  // 25\nConsole.WriteLine($\"Min: {smaller}, Max: {larger}\");\n\n// CONSTANTS\nConsole.WriteLine($\"π = {Math.PI}\");  // 3.14159...\nConsole.WriteLine($\"e = {Math.E}\");  // 2.71828...\n\n// TRIGONOMETRY (radians!)\ndouble angle = Math.PI / 2;  // 90 degrees in radians\ndouble sinValue = Math.Sin(angle);  // 1.0\nConsole.WriteLine($\"sin(90°) = {sinValue}\");\n\n// RANDOM NUMBERS\nRandom random = new Random();\nint dice = random.Next(1, 7);  // 1 to 6 (7 excluded!)\nint percent = random.Next(0, 101);  // 0 to 100\ndouble decimal = random.NextDouble();  // 0.0 to 0.999...\nConsole.WriteLine($\"Dice roll: {dice}\");\nConsole.WriteLine($\"Random %: {percent}\");\nConsole.WriteLine($\"Random decimal: {decimal}\");\n\n// PRACTICAL: Distance formula\ndouble x1 = 0, y1 = 0;\ndouble x2 = 3, y2 = 4;\ndouble distance = Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));\nConsole.WriteLine($\"Distance: {distance}\");  // 5.0",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "Math.Pow(base, exponent)",
+      "explanation": "Raises base to exponent power. Math.Pow(2, 3) = 8 (2³). Always returns double. Use for squares, cubes, any power!"
+    },
+    {
+      "codeSnippet": "Math.Round(number)",
+      "explanation": "Rounds to nearest whole number. 3.5 → 4.0, 3.4 → 3.0. Can specify decimal places: Math.Round(3.14159, 2) → 3.14."
+    },
+    {
+      "codeSnippet": "Random.Next(min, max)",
+      "explanation": "Random integer from min to max-1. Next(1, 7) gives 1,2,3,4,5,6 (NOT 7!). Max is EXCLUSIVE. Create Random once: Random rnd = new Random();"
+    },
+    {
+      "codeSnippet": "Math.Ceiling / Floor",
+      "explanation": "Ceiling always rounds UP. Floor always rounds DOWN. 3.1 → Ceiling = 4, Floor = 3. Even 3.01 → Ceiling = 4!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a circle calculator!\n\n1. Ask user for circle radius\n2. Calculate:\n   - Area: π r²\n   - Circumference: 2 π r\n   - Diameter: 2r\n3. Round all results to 2 decimal places\n4. Display formatted results\n5. Generate a random circle radius between 1 and 20\n6. Display its area\n\nFormulas:\n- Area = Math.PI * Math.Pow(radius, 2)\n- Circumference = 2 * Math.PI * radius\n- Use Math.Round(value, 2) for 2 decimal places\n\nExample:\nEnter radius: 5\nDiameter: 10.00\nCircumference: 31.42\nArea: 78.54\n\nRandom circle (r=12): Area = 452.39",
+    "starterCode": "// Circle Calculator\n\nConsole.WriteLine(\"Enter circle radius:\");\ndouble radius = double.Parse(Console.ReadLine());\n\n// Calculate diameter\n\n// Calculate circumference\n\n// Calculate area\n\n// Round to 2 decimal places\n\n// Display results\n\n// Random circle\nRandom rnd = new Random();\n// Generate random radius 1-20\n// Calculate and display area",
+    "solutionCode": "// Circle Calculator\n\nConsole.WriteLine(\"Enter circle radius:\");\ndouble radius = double.Parse(Console.ReadLine());\n\n// Calculate properties\ndouble diameter = 2 * radius;\ndouble circumference = 2 * Math.PI * radius;\ndouble area = Math.PI * Math.Pow(radius, 2);\n\n// Round to 2 decimal places\ndiameter = Math.Round(diameter, 2);\ncircumference = Math.Round(circumference, 2);\narea = Math.Round(area, 2);\n\n// Display results\nConsole.WriteLine($\"\\nCircle with radius {radius}:\");\nConsole.WriteLine($\"Diameter: {diameter}\");\nConsole.WriteLine($\"Circumference: {circumference}\");\nConsole.WriteLine($\"Area: {area}\");\n\n// Random circle\nRandom rnd = new Random();\nint randomRadius = rnd.Next(1, 21);  // 1 to 20\ndouble randomArea = Math.PI * Math.Pow(randomRadius, 2);\nrandomArea = Math.Round(randomArea, 2);\n\nConsole.WriteLine($\"\\nRandom circle (r={randomRadius}): Area = {randomArea}\");",
+    "hint": "Math.PI for π. Math.Pow(r, 2) for r². Math.Round(value, 2) for 2 decimals. Random.Next(1, 21) for 1-20 (21 is excluded). Circumference = 2πr.",
+    "expectedOutputPatterns": ["Diameter", "Circumference", "Area", "Random"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Random range confusion: Next(1, 7) gives 1-6 NOT 1-7! Upper bound is EXCLUSIVE. For 1-10, use Next(1, 11). Very common mistake!",
+      "Creating Random in loop: Don't do: for (...) { Random r = new Random(); } Creates same number! Create ONCE before loop: Random r = new Random();",
+      "Forgetting Math.PI: Don't use 3.14! Use Math.PI for accuracy. Math.PI is constant (like const but built-in).",
+      "Integer power: Math.Pow(2, 3) returns DOUBLE (8.0) not int! Cast if needed: int result = (int)Math.Pow(2, 3). Or use multiplication for small powers: 2*2*2."
+    ]
+  }
+}

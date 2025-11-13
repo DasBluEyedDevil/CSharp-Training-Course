@@ -1,0 +1,40 @@
+{
+  "moduleId": 3,
+  "lessonNumber": 3,
+  "lessonId": "M03L03",
+  "title": "Comparison Operators (Comparing Values)",
+  "simplifierConcept": "How do you compare things in life?\n\n📏 Is this longer than that?\n💰 Do I have enough money?\n🎂 Am I older than you?\n📊 Are these scores the same?\n\nC# has comparison operators:\n\n== Equal to (is same?)\n!= Not equal to (is different?)\n> Greater than (is bigger?)\n< Less than (is smaller?)\n>= Greater or equal (at least?)\n<= Less or equal (at most?)\n\nAll return TRUE or FALSE!\n\n5 > 3  // true\n10 == 10  // true\n7 != 7  // false\n\nThink: Comparison operators ask yes/no questions about values!",
+  "coderExample": "// EQUALITY OPERATORS\nint a = 10;\nint b = 10;\nint c = 20;\n\nbool same = (a == b);  // true (10 equals 10)\nbool different = (a != c);  // true (10 not equal 20)\nbool wrong = (a == c);  // false (10 not equal 20)\n\nConsole.WriteLine($\"{a} == {b}: {same}\");\nConsole.WriteLine($\"{a} != {c}: {different}\");\n\n// RELATIONAL OPERATORS\nint age = 25;\n\nbool isAdult = (age >= 18);  // true (25 >= 18)\nbool isTeen = (age < 20);  // false (25 not < 20)\nbool canDrive = (age > 16);  // true (25 > 16)\n\nConsole.WriteLine($\"Is adult: {isAdult}\");\nConsole.WriteLine($\"Is teen: {isTeen}\");\n\n// IN IF STATEMENTS\nint score = 85;\n\nif (score >= 60)\n{\n    Console.WriteLine(\"Passed!\");\n}\n\nif (score == 100)\n{\n    Console.WriteLine(\"Perfect!\");\n}\n\nif (score != 0)\n{\n    Console.WriteLine(\"You tried!\");\n}\n\n// STRING COMPARISONS\nstring password = \"secret\";\n\nif (password == \"secret\")\n{\n    Console.WriteLine(\"Correct password!\");\n}\n\nstring name1 = \"Alice\";\nstring name2 = \"Bob\";\n\nif (name1 != name2)\n{\n    Console.WriteLine(\"Different names\");\n}\n\n// COMPARING VARIABLES\nint playerScore = 100;\nint highScore = 95;\n\nif (playerScore > highScore)\n{\n    Console.WriteLine(\"New high score!\");\n    highScore = playerScore;  // Update high score\n}\n\n// BOUNDARIES\nint temperature = 25;\n\nif (temperature >= 20 && temperature <= 30)\n{\n    Console.WriteLine(\"Comfortable temperature!\");\n}\n\n// PRACTICAL: Age verification\nConsole.WriteLine(\"Enter your age:\");\nint userAge = int.Parse(Console.ReadLine());\n\nif (userAge >= 18)\n{\n    Console.WriteLine(\"Access granted\");\n}\nelse\n{\n    Console.WriteLine(\"Access denied - must be 18+\");\n}\n\n// COMMON COMPARISONS\nint stock = 5;\n\nif (stock <= 0)\n{\n    Console.WriteLine(\"Out of stock!\");\n}\nelse if (stock < 10)\n{\n    Console.WriteLine(\"Low stock warning\");\n}\nelse\n{\n    Console.WriteLine($\"In stock: {stock} items\");\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "==",
+      "explanation": "Double equals checks EQUALITY. Returns true if same, false if different. if (x == 5) checks if x is 5. NEVER use single = in if! That's assignment, not comparison!"
+    },
+    {
+      "codeSnippet": "!=",
+      "explanation": "Not equals checks DIFFERENCE. Exclamation mark means NOT. if (x != 5) is true when x is anything except 5. Opposite of ==."
+    },
+    {
+      "codeSnippet": "> < >= <=",
+      "explanation": "> greater, < less, >= at least (or equal), <= at most (or equal). if (age >= 18) means 18 or older. >= and <= INCLUDE the number!"
+    },
+    {
+      "codeSnippet": "Comparison result",
+      "explanation": "All comparisons return bool (true/false). Can store: bool result = (5 > 3); Can use directly in if: if (5 > 3) { ... } Always evaluates to boolean!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a number guessing game!\n\n1. Set a secret number (pick any number 1-100)\n2. Ask user to guess\n3. Compare guess to secret number:\n   - If guess == secret: \"Correct! You win!\"\n   - If guess > secret: \"Too high! Try again.\"\n   - If guess < secret: \"Too low! Try again.\"\n4. Also tell them how close they are:\n   - If within 5: \"You're very close!\"\n   - If within 10: \"You're close!\"\n   - Otherwise: \"You're far away!\"\n\nExample:\nSecret number: 42\nGuess: 50\nToo high! Try again.\nYou're close! (50-42=8, within 10)\n\nGuess: 42\nCorrect! You win!",
+    "starterCode": "// Number Guessing Game\n\nint secretNumber = 42;  // The secret number\n\nConsole.WriteLine(\"Guess the number (1-100):\");\nint guess = int.Parse(Console.ReadLine());\n\n// Check if correct\n\n// Check if too high or too low\n\n// Calculate difference (use Math.Abs for absolute value)\n\n// Tell them how close they are",
+    "solutionCode": "// Number Guessing Game\n\nint secretNumber = 42;  // The secret number\n\nConsole.WriteLine(\"Guess the number (1-100):\");\nint guess = int.Parse(Console.ReadLine());\n\n// Check if correct\nif (guess == secretNumber)\n{\n    Console.WriteLine(\"🎉 Correct! You win!\");\n}\nelse if (guess > secretNumber)\n{\n    Console.WriteLine(\"📉 Too high! Try again.\");\n}\nelse  // guess < secretNumber\n{\n    Console.WriteLine(\"📈 Too low! Try again.\");\n}\n\n// Calculate how close (absolute difference)\nint difference = Math.Abs(guess - secretNumber);\n\nif (difference <= 5)\n{\n    Console.WriteLine(\"🔥 You're VERY close!\");\n}\nelse if (difference <= 10)\n{\n    Console.WriteLine(\"👍 You're close!\");\n}\nelse\n{\n    Console.WriteLine(\"🌎 You're far away!\");\n}",
+    "hint": "Use == to check exact match. > for too high. < for too low. Math.Abs(guess - secret) gives distance (always positive). Compare distance to 5 and 10.",
+    "expectedOutputPatterns": ["Guess", "high", "low", "close"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Using = instead of ==: if (x = 5) tries to ASSIGN 5 to x, not COMPARE! Always use == for comparison. Single = is assignment, double == is comparison!",
+      "Confusing >= and >: >= means greater OR equal. > means ONLY greater. if (age >= 18) includes 18. if (age > 18) starts at 19! Easy to mix up!",
+      "Comparing strings: \"hi\" == \"Hi\" is FALSE! C# is case-sensitive. Use .ToLower() to ignore case: if (text.ToLower() == \"hi\") matches \"Hi\", \"HI\", \"hi\".",
+      "Negative differences: guess - secret can be negative! 40 - 50 = -10. Use Math.Abs() to get absolute (positive) difference: Math.Abs(40 - 50) = 10."
+    ]
+  }
+}

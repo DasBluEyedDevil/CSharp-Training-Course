@@ -1,0 +1,40 @@
+{
+  "moduleId": 1,
+  "lessonNumber": 1,
+  "lessonId": "M01L01",
+  "title": "What is Programming? (Teaching a Robot)",
+  "simplifierConcept": "Imagine you're teaching a robot to make a sandwich:\n\nYOU (to robot): \"Make me a sandwich\"\nROBOT: *stares blankly*\n\nWhy? The robot doesn't understand English!\n\nYOU (in robot language):\n1. Open bread bag\n2. Take out 2 slices\n3. Open peanut butter jar\n4. Spread on slice 1\n5. Open jelly jar\n6. Spread on slice 2\n7. Put slices together\n\nROBOT: *makes perfect sandwich!*\n\nThat's PROGRAMMING:\n• Computers are like robots - they don't understand human language\n• You write INSTRUCTIONS in a language they understand (C#)\n• Instructions must be PRECISE and IN ORDER\n• Computer follows instructions EXACTLY\n\nThink: Programming = Writing a detailed recipe that a computer can follow!",
+  "coderExample": "// YOUR FIRST C# PROGRAM!\n// This is a comment - the computer ignores it\n// Comments help humans understand the code\n\nConsole.WriteLine(\"Hello, World!\");\n\n// Let's break this down:\n// Console = The black window where text appears\n// WriteLine = Write a line of text\n// \"Hello, World!\" = The text to display\n// ; = End of instruction (like a period in English)\n\n// More examples:\nConsole.WriteLine(\"Welcome to C#!\");\nConsole.WriteLine(\"Programming is fun!\");\nConsole.WriteLine(\"I am learning C#!\");\n\n// Each instruction runs in order:\nConsole.WriteLine(\"First\");   // Runs 1st\nConsole.WriteLine(\"Second\");  // Runs 2nd\nConsole.WriteLine(\"Third\");   // Runs 3rd\n\n// Output:\n// First\n// Second\n// Third",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "Console.WriteLine()",
+      "explanation": "Console = the terminal/output window. WriteLine = write a line of text. The text goes in quotes. This is how you display messages to users!"
+    },
+    {
+      "codeSnippet": "\" \"",
+      "explanation": "Quotes mark the beginning and end of text (called a 'string'). Everything between quotes is displayed exactly as written."
+    },
+    {
+      "codeSnippet": ";",
+      "explanation": "Semicolon marks the end of an instruction. Like a period ends a sentence, semicolon ends a code statement. Forgetting it causes errors!"
+    },
+    {
+      "codeSnippet": "//",
+      "explanation": "Two slashes start a comment. Everything after // on that line is ignored by computer. Use comments to explain what your code does!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Write your first program!\n\n1. Display \"Hello, World!\" (the traditional first program)\n2. Display your name\n3. Display your favorite hobby\n4. Display a message about what you want to learn\n\nUse Console.WriteLine() for each line.\nDon't forget the semicolons!\nAdd comments explaining what each line does.",
+    "starterCode": "// My First C# Program\n// This program displays information about me\n\nConsole.WriteLine(\"Hello, World!\");\n\n// TODO: Display your name here\n\n// TODO: Display your hobby\n\n// TODO: Display what you want to learn",
+    "solutionCode": "// My First C# Program\n// This program displays information about me\n\nConsole.WriteLine(\"Hello, World!\");\n\n// Display my name\nConsole.WriteLine(\"My name is Alex\");\n\n// Display my hobby\nConsole.WriteLine(\"I love playing guitar\");\n\n// Display my learning goal\nConsole.WriteLine(\"I want to learn C# to build games!\");",
+    "hint": "Use Console.WriteLine() with text in quotes. End each line with semicolon. Add // comments to explain!",
+    "expectedOutputPatterns": ["Hello", "World"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting semicolons: Every statement needs a semicolon at the end! Without it, you get an error. Console.WriteLine(\"Hi\"); ✓ Console.WriteLine(\"Hi\") ✗",
+      "Missing quotes: Text must be in quotes! Console.WriteLine(Hello) ✗ Console.WriteLine(\"Hello\") ✓",
+      "Case sensitivity: C# cares about CAPITAL vs lowercase! Console.WriteLine ✓ console.writeline ✗ Always match exactly!",
+      "Spelling: WriteLine not Writeline! Computer doesn't autocorrect spelling errors."
+    ]
+  }
+}

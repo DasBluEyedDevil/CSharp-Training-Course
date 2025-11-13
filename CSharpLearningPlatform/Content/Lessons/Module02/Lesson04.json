@@ -1,0 +1,40 @@
+{
+  "moduleId": 2,
+  "lessonNumber": 4,
+  "lessonId": "M02L04",
+  "title": "String Methods (Text Manipulation Power!)",
+  "simplifierConcept": "Strings aren't just storage - they have SUPERPOWERS!\n\nImagine a Swiss Army knife for text:\n🔪 Cut text (Substring)\n📏 Measure text (Length)\n🔍 Search text (Contains, IndexOf)\n✂️ Split text (Split)\n🔧 Transform text (ToUpper, ToLower, Replace)\n🧹 Clean text (Trim)\n\nEvery string has built-in methods:\n\nstring name = \"Alice\";\nint length = name.Length;  // 5\nstring upper = name.ToUpper();  // \"ALICE\"\nstring lower = name.ToLower();  // \"alice\"\n\nThink: String methods are tools to manipulate text in every way possible!",
+  "coderExample": "string text = \"  Hello, World!  \";\n\n// LENGTH - How many characters\nint length = text.Length;  // 17 (includes spaces!)\nConsole.WriteLine($\"Length: {length}\");\n\n// TRIM - Remove spaces from ends\nstring trimmed = text.Trim();  // \"Hello, World!\"\nConsole.WriteLine($\"Trimmed: '{trimmed}'\");  // 13 characters\n\n// UPPERCASE / LOWERCASE\nstring upper = text.ToUpper();  // \"  HELLO, WORLD!  \"\nstring lower = text.ToLower();  // \"  hello, world!  \"\nConsole.WriteLine(upper);\nConsole.WriteLine(lower);\n\n// REPLACE - Swap text\nstring replaced = text.Replace(\"World\", \"C#\");  // \"  Hello, C#!  \"\nConsole.WriteLine(replaced);\n\n// CONTAINS - Check if text exists\nbool hasHello = text.Contains(\"Hello\");  // true\nbool hasGoodbye = text.Contains(\"Goodbye\");  // false\nConsole.WriteLine($\"Has 'Hello': {hasHello}\");\n\n// STARTSWITH / ENDSWITH\nstring file = \"document.pdf\";\nbool isPDF = file.EndsWith(\".pdf\");  // true\nbool isDoc = file.StartsWith(\"doc\");  // true\n\n// SUBSTRING - Extract part of string\nstring name = \"Alexander\";\nstring short = name.Substring(0, 4);  // \"Alex\" (start at 0, take 4)\nstring last = name.Substring(5);  // \"nder\" (start at 5, take rest)\n\n// INDEXOF - Find position\nstring email = \"user@example.com\";\nint atPosition = email.IndexOf(\"@\");  // 4\nConsole.WriteLine($\"@ is at position {atPosition}\");\n\n// SPLIT - Break into pieces\nstring csv = \"apple,banana,orange\";\nstring[] fruits = csv.Split(',');\nforeach (string fruit in fruits)\n{\n    Console.WriteLine(fruit);  // apple, banana, orange\n}\n\n// PRACTICAL: Email validator\nstring userEmail = \"john@email.com\";\nbool isValid = userEmail.Contains(\"@\") && userEmail.Contains(\".\");\nConsole.WriteLine($\"Email valid: {isValid}\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": ".Length",
+      "explanation": "Property (not method - no parentheses!). Returns character count. \"Hi\".Length is 2. Includes spaces and special characters."
+    },
+    {
+      "codeSnippet": ".ToUpper() / .ToLower()",
+      "explanation": "Returns NEW string in all caps or lowercase. Original unchanged! string x = \"Hi\"; string y = x.ToUpper(); // x still \"Hi\", y is \"HI\"."
+    },
+    {
+      "codeSnippet": ".Substring(start, length)",
+      "explanation": "Extracts portion of string. Start index (0-based), length to take. \"Hello\".Substring(1, 3) is \"ell\". If no length given, takes to end."
+    },
+    {
+      "codeSnippet": ".Split(separator)",
+      "explanation": "Breaks string into array at separator. \"a,b,c\".Split(',') gives array [\"a\", \"b\", \"c\"]. Great for CSV, file paths, sentences!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a username validator and formatter!\n\n1. Ask user for username\n2. Trim whitespace\n3. Convert to lowercase\n4. Check validation rules:\n   - Length between 3 and 15 characters\n   - Contains only letters/numbers (just check if contains space for simplicity)\n   - Doesn't start with number\n5. If valid:\n   - Display formatted username\n   - Show character count\n   - Display first 3 characters\n6. If invalid, explain what's wrong\n\nExample:\nEnter username: \"  JohnDoe123  \"\nValid! Username: johndoe123\nLength: 10 characters\nFirst 3 letters: joh",
+    "starterCode": "// Username Validator\n\nConsole.WriteLine(\"Enter desired username:\");\nstring input = Console.ReadLine();\n\n// Clean up input\nstring username = input.Trim().ToLower();\n\n// Check length\n\n// Check for spaces\n\n// Check if starts with letter\n\n// Display results",
+    "solutionCode": "// Username Validator\n\nConsole.WriteLine(\"Enter desired username:\");\nstring input = Console.ReadLine();\n\n// Clean up input\nstring username = input.Trim().ToLower();\n\n// Validation\nint length = username.Length;\nbool hasSpace = username.Contains(\" \");\nbool startsWithLetter = username.Length > 0 && char.IsLetter(username[0]);\nbool validLength = length >= 3 && length <= 15;\n\n// Check all conditions\nif (validLength && !hasSpace && startsWithLetter)\n{\n    // Valid username\n    Console.WriteLine(\"\\n✅ Valid username!\");\n    Console.WriteLine($\"Username: {username}\");\n    Console.WriteLine($\"Length: {length} characters\");\n    Console.WriteLine($\"First 3 letters: {username.Substring(0, 3)}\");\n}\nelse\n{\n    // Invalid - show why\n    Console.WriteLine(\"\\n❌ Invalid username!\");\n    if (!validLength)\n        Console.WriteLine(\"- Must be 3-15 characters\");\n    if (hasSpace)\n        Console.WriteLine(\"- Cannot contain spaces\");\n    if (!startsWithLetter)\n        Console.WriteLine(\"- Must start with a letter\");\n}",
+    "hint": "Trim() removes spaces from ends. ToLower() converts to lowercase. Length property (no parentheses!). Contains(\" \") checks for spaces. Substring(0, 3) gets first 3 characters.",
+    "expectedOutputPatterns": ["username", "Valid", "Length"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Strings are immutable: string x = \"hi\"; x.ToUpper(); doesn't change x! Must assign result: x = x.ToUpper(); or string y = x.ToUpper();",
+      "Length is property not method: \"hi\".Length not \"hi\".Length(). No parentheses! Common mistake coming from other languages.",
+      "IndexOf returns -1 if not found: string x = \"hi\"; int pos = x.IndexOf(\"z\"); // -1. Check before using: if (pos >= 0) { ... }",
+      "Substring index errors: \"Hi\".Substring(5) crashes! Can't start beyond string length. \"Hi\".Substring(0, 10) also crashes - can't take more than exists!"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "moduleId": 4,
+  "lessonNumber": 2,
+  "lessonId": "M04L02",
+  "title": "For Loops (Count-Based Repetition)",
+  "simplifierConcept": "Sometimes you know EXACTLY how many times to repeat:\n\n🏋️ Do 10 push-ups\n📝 Print pages 1 through 50\n🎂 Count candles 1 to 18\n\nFOR loop = Perfect for counting!\n\nfor (start; condition; step)\n{\n    // Repeat this code\n}\n\nfor (int i = 0; i < 5; i++)\n{\n    Console.WriteLine(i);\n}\n// 0, 1, 2, 3, 4\n\nThree parts:\n1. START: int i = 0 (where to begin)\n2. CONDITION: i < 5 (when to stop)\n3. STEP: i++ (how to change after each loop)\n\nThink: For loop = Counting from start to finish with steps!",
+  "coderExample": "// BASIC FOR LOOP\nfor (int i = 0; i < 5; i++)\n{\n    Console.WriteLine($\"Iteration {i}\");\n}\n// Output: 0, 1, 2, 3, 4 (5 times)\n\n// COUNT 1 TO 10\nfor (int i = 1; i <= 10; i++)\n{\n    Console.WriteLine(i);\n}\n// Output: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n\n// COUNTDOWN\nfor (int i = 10; i >= 0; i--)\n{\n    Console.WriteLine(i);\n}\nConsole.WriteLine(\"Liftoff!\");\n\n// COUNT BY 2s (EVEN NUMBERS)\nfor (int i = 0; i <= 20; i += 2)\n{\n    Console.WriteLine(i);\n}\n// Output: 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20\n\n// MULTIPLICATION TABLE\nint number = 7;\n\nfor (int i = 1; i <= 10; i++)\n{\n    int result = number * i;\n    Console.WriteLine($\"{number} x {i} = {result}\");\n}\n\n// SUM NUMBERS 1 TO 100\nint sum = 0;\n\nfor (int i = 1; i <= 100; i++)\n{\n    sum += i;\n}\nConsole.WriteLine($\"Sum of 1-100: {sum}\");  // 5050\n\n// PRACTICAL: Grade average calculator\nConsole.WriteLine(\"How many grades?\");\nint count = int.Parse(Console.ReadLine());\n\ndouble total = 0;\n\nfor (int i = 1; i <= count; i++)\n{\n    Console.WriteLine($\"Enter grade {i}:\");\n    double grade = double.Parse(Console.ReadLine());\n    total += grade;\n}\n\ndouble average = total / count;\nConsole.WriteLine($\"Average: {average:F2}\");\n\n// PRACTICAL: Password strength checker\nstring password = \"MyP@ss123\";\nint strength = 0;\n\nfor (int i = 0; i < password.Length; i++)\n{\n    char c = password[i];\n    \n    if (char.IsUpper(c)) strength++;\n    if (char.IsLower(c)) strength++;\n    if (char.IsDigit(c)) strength++;\n    if (!char.IsLetterOrDigit(c)) strength++;\n}\n\nConsole.WriteLine($\"Password strength: {strength}\");\n\n// PRACTICAL: Pattern printing\nfor (int i = 1; i <= 5; i++)\n{\n    Console.WriteLine(new string('*', i));\n}\n// Output:\n// *\n// **\n// ***\n// ****\n// *****",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "for (init; condition; update)",
+      "explanation": "Three parts separated by semicolons. init runs ONCE at start. condition checked BEFORE each iteration. update runs AFTER each iteration."
+    },
+    {
+      "codeSnippet": "int i = 0",
+      "explanation": "Initialization: Creates counter variable. Usually int i = 0 (start at 0) or int i = 1 (start at 1). Variable i only exists in loop!"
+    },
+    {
+      "codeSnippet": "i++",
+      "explanation": "Increment: Add 1 after each loop. Can also do i-- (subtract), i += 2 (add 2), i *= 2 (double), etc. Controls how to move to next iteration."
+    },
+    {
+      "codeSnippet": "When to use for vs while",
+      "explanation": "FOR: Know iteration count (repeat 10 times, 0 to 99, etc.). WHILE: Unknown count (until user enters 'quit', while balance > 0)."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a compound interest calculator!\n\n1. Ask for initial investment amount\n2. Ask for annual interest rate (as %, like 5 for 5%)\n3. Ask for number of years\n4. Use for loop to calculate year by year:\n   - Formula: amount = amount * (1 + rate/100)\n   - Display year number and amount each year\n5. Calculate total interest earned\n6. Display summary\n\nExample:\nInitial: $1000\nRate: 5%\nYears: 3\n\nYear 1: $1050.00\nYear 2: $1102.50\nYear 3: $1157.63\n\nTotal interest: $157.63",
+    "starterCode": "// Compound Interest Calculator\n\nConsole.WriteLine(\"Enter initial investment:\");\ndouble principal = double.Parse(Console.ReadLine());\n\nConsole.WriteLine(\"Enter annual interest rate (%):\");\ndouble rate = double.Parse(Console.ReadLine());\n\nConsole.WriteLine(\"Enter number of years:\");\nint years = int.Parse(Console.ReadLine());\n\ndouble amount = principal;\n\n// For loop for each year\n\n// Calculate and display total interest",
+    "solutionCode": "// Compound Interest Calculator\n\nConsole.WriteLine(\"Enter initial investment:\");\ndouble principal = double.Parse(Console.ReadLine());\n\nConsole.WriteLine(\"Enter annual interest rate (%):\");\ndouble rate = double.Parse(Console.ReadLine());\n\nConsole.WriteLine(\"Enter number of years:\");\nint years = int.Parse(Console.ReadLine());\n\ndouble amount = principal;\n\nConsole.WriteLine($\"\\nStarting amount: ${principal:F2}\");\nConsole.WriteLine($\"Interest rate: {rate}%\\n\");\n\n// Calculate compound interest year by year\nfor (int year = 1; year <= years; year++)\n{\n    amount = amount * (1 + rate / 100);\n    Console.WriteLine($\"Year {year}: ${amount:F2}\");\n}\n\n// Calculate total interest earned\ndouble interest = amount - principal;\n\nConsole.WriteLine($\"\\nFinal amount: ${amount:F2}\");\nConsole.WriteLine($\"Total interest earned: ${interest:F2}\");",
+    "hint": "for (int year = 1; year <= years; year++) loops for each year. Compound formula: amount = amount * (1 + rate/100). Interest = final - initial. {value:F2} formats money to 2 decimals.",
+    "expectedOutputPatterns": ["Year", "interest", "amount"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "< vs <=: for (i = 0; i < 5) runs 5 times (0-4). for (i = 0; i <= 5) runs 6 times (0-5). for (i = 1; i <= 10) runs 10 times (1-10). Very common off-by-one error!",
+      "Starting at 0 vs 1: Arrays start at 0, so for (i = 0; i < arr.Length). Counting 1-10 for humans: for (i = 1; i <= 10). Choose based on use case!",
+      "Modifying i inside loop: for (i = 0; i < 10; i++) { i++; } skips numbers! Loop already increments i. Don't modify i inside unless you know what you're doing.",
+      "Variable scope: int i in for loop only exists in loop! Can't use i after loop ends. Declare before loop if needed after: int i; for (i = 0; ...)."
+    ]
+  }
+}

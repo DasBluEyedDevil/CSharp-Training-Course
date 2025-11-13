@@ -1,0 +1,40 @@
+{
+  "moduleId": 3,
+  "lessonNumber": 2,
+  "lessonId": "M03L02",
+  "title": "Else & Else If (Multiple Paths)",
+  "simplifierConcept": "IF gives you one choice. But what about alternatives?\n\n🌦️ IF raining → Umbrella\n☀️ ELSE → Sunglasses\n\nTwo paths, pick one!\n\nif (condition)\n{\n    // Path A: When TRUE\n}\nelse\n{\n    // Path B: When FALSE\n}\n\nMultiple choices? Use ELSE IF:\n\n🎓 IF score >= 90 → A\n📚 ELSE IF score >= 80 → B\n📖 ELSE IF score >= 70 → C\n📝 ELSE → F\n\nOnly ONE path executes!\n\nThink: if/else if/else creates a decision tree with multiple branches!",
+  "coderExample": "// BASIC IF-ELSE\nint age = 16;\n\nif (age >= 18)\n{\n    Console.WriteLine(\"Adult\");\n}\nelse\n{\n    Console.WriteLine(\"Minor\");\n}\n// Prints \"Minor\" because condition false\n\n// ELSE IF - Multiple conditions\nint score = 85;\n\nif (score >= 90)\n{\n    Console.WriteLine(\"Grade: A\");\n}\nelse if (score >= 80)\n{\n    Console.WriteLine(\"Grade: B\");  // This runs!\n}\nelse if (score >= 70)\n{\n    Console.WriteLine(\"Grade: C\");\n}\nelse\n{\n    Console.WriteLine(\"Grade: F\");\n}\n\n// TEMPERATURE CHECKER\nint temp = 25;\n\nif (temp > 30)\n{\n    Console.WriteLine(\"Hot! 🔥\");\n}\nelse if (temp > 20)\n{\n    Console.WriteLine(\"Warm! ☀️\");  // This runs!\n}\nelse if (temp > 10)\n{\n    Console.WriteLine(\"Cool! 🌤️\");\n}\nelse\n{\n    Console.WriteLine(\"Cold! ❄️\");\n}\n\n// TIME OF DAY\nint hour = 14;  // 2 PM\n\nif (hour < 12)\n{\n    Console.WriteLine(\"Good morning!\");\n}\nelse if (hour < 18)\n{\n    Console.WriteLine(\"Good afternoon!\");  // This runs!\n}\nelse\n{\n    Console.WriteLine(\"Good evening!\");\n}\n\n// PRACTICAL: Login system\nstring username = \"admin\";\nstring password = \"pass123\";\n\nif (username == \"admin\" && password == \"pass123\")\n{\n    Console.WriteLine(\"Login successful!\");\n}\nelse if (username != \"admin\")\n{\n    Console.WriteLine(\"Username not found\");\n}\nelse\n{\n    Console.WriteLine(\"Incorrect password\");\n}\n\n// ONLY FIRST MATCH RUNS\nint number = 50;\n\nif (number > 10)\n{\n    Console.WriteLine(\"Greater than 10\");  // Runs!\n}\nelse if (number > 20)\n{\n    Console.WriteLine(\"Greater than 20\");  // Skipped!\n}\nelse if (number > 30)\n{\n    Console.WriteLine(\"Greater than 30\");  // Skipped!\n}\n// Only first true condition executes!",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "else",
+      "explanation": "Runs when IF condition is false. Must come AFTER if. No condition needed! Acts as catch-all for everything else. Only ONE of if or else runs, never both."
+    },
+    {
+      "codeSnippet": "else if",
+      "explanation": "Additional condition to check if previous if/else if was false. Can chain many else if blocks. Checks in order, stops at first true match!"
+    },
+    {
+      "codeSnippet": "Order matters!",
+      "explanation": "Checks top to bottom, stops at first match! if (x > 10) before if (x > 50) means 60 matches first! Order conditions from specific to general."
+    },
+    {
+      "codeSnippet": "Only one runs",
+      "explanation": "In if/else if/else chain, ONLY ONE block executes. Once a match is found, rest are skipped. Different from multiple separate if statements!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a BMI calculator with health categories!\n\n1. Ask for weight in kg\n2. Ask for height in meters\n3. Calculate BMI: weight / (height * height)\n4. Display BMI value\n5. Categorize using else if:\n   - BMI < 18.5: \"Underweight\"\n   - BMI < 25: \"Normal weight\"\n   - BMI < 30: \"Overweight\"\n   - BMI >= 30: \"Obese\"\n6. Display category and a health tip for each\n\nExample:\nWeight: 70 kg\nHeight: 1.75 m\nBMI: 22.86\nCategory: Normal weight\nTip: Keep up the good work!",
+    "starterCode": "// BMI Calculator\n\nConsole.WriteLine(\"Enter weight (kg):\");\ndouble weight = double.Parse(Console.ReadLine());\n\nConsole.WriteLine(\"Enter height (meters):\");\ndouble height = double.Parse(Console.ReadLine());\n\n// Calculate BMI\ndouble bmi = weight / (height * height);\nConsole.WriteLine($\"BMI: {bmi:F2}\");\n\n// Categorize with else if\n\n// Display health tip",
+    "solutionCode": "// BMI Calculator\n\nConsole.WriteLine(\"Enter weight (kg):\");\ndouble weight = double.Parse(Console.ReadLine());\n\nConsole.WriteLine(\"Enter height (meters):\");\ndouble height = double.Parse(Console.ReadLine());\n\n// Calculate BMI\ndouble bmi = weight / (height * height);\nConsole.WriteLine($\"\\nBMI: {bmi:F2}\");\n\n// Categorize with else if\nif (bmi < 18.5)\n{\n    Console.WriteLine(\"Category: Underweight\");\n    Console.WriteLine(\"Tip: Consider eating more nutrient-rich foods\");\n}\nelse if (bmi < 25)\n{\n    Console.WriteLine(\"Category: Normal weight\");\n    Console.WriteLine(\"Tip: Keep up the good work!\");\n}\nelse if (bmi < 30)\n{\n    Console.WriteLine(\"Category: Overweight\");\n    Console.WriteLine(\"Tip: Consider regular exercise and balanced diet\");\n}\nelse\n{\n    Console.WriteLine(\"Category: Obese\");\n    Console.WriteLine(\"Tip: Consult with a healthcare provider\");\n}",
+    "hint": "BMI = weight / (height * height). Use else if chain: bmi < 18.5, bmi < 25, bmi < 30, else. Order matters! Check smaller values first. {value:F2} formats to 2 decimals.",
+    "expectedOutputPatterns": ["BMI", "Category", "Tip"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Wrong order: if (bmi < 30) before if (bmi < 25) catches all! A BMI of 22 is < 30, so matches first! Order from smallest to largest for ranges.",
+      "Multiple if vs else if: Separate if statements ALL check. if/else if chain stops at first match. Use else if when only one should run!",
+      "Forgetting else: if/else if without final else means nothing runs if all false! Add else as safety net: else { Console.WriteLine(\"Error\"); }",
+      "Overlapping conditions: if (x > 10) else if (x > 5) - what about x=7? Matches second! Make sure conditions don't overlap unexpectedly."
+    ]
+  }
+}

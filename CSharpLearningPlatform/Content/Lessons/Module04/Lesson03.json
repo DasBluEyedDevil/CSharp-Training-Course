@@ -1,0 +1,40 @@
+{
+  "moduleId": 4,
+  "lessonNumber": 3,
+  "lessonId": "M04L03",
+  "title": "Foreach Loops (Iterate Collections)",
+  "simplifierConcept": "Imagine you have a shopping cart with items:\n\n🛒 [Apple, Banana, Orange, Grapes]\n\nYou want to check out EACH item:\n\nFOR loop way:\nfor (int i = 0; i < items.Length; i++)\n{\n    Console.WriteLine(items[i]);\n}\n\nFOREACH way (easier!):\nforeach (string item in items)\n{\n    Console.WriteLine(item);\n}\n\nForeach automatically:\n✅ Goes through EACH item\n✅ No index needed\n✅ No counting\n✅ Can't go out of bounds\n\nThink: Foreach = \"For each item in this collection, do something\"",
+  "coderExample": "// BASIC FOREACH WITH ARRAY\nstring[] fruits = { \"Apple\", \"Banana\", \"Orange\", \"Grape\" };\n\nforeach (string fruit in fruits)\n{\n    Console.WriteLine(fruit);\n}\n// Apple, Banana, Orange, Grape\n\n// FOREACH WITH NUMBERS\nint[] numbers = { 10, 20, 30, 40, 50 };\nint sum = 0;\n\nforeach (int number in numbers)\n{\n    sum += number;\n}\nConsole.WriteLine($\"Sum: {sum}\");  // 150\n\n// FOREACH WITH LIST\nList<string> names = new List<string> { \"Alice\", \"Bob\", \"Charlie\" };\n\nforeach (string name in names)\n{\n    Console.WriteLine($\"Hello, {name}!\");\n}\n\n// FINDING IN COLLECTION\nstring[] cities = { \"Paris\", \"London\", \"Tokyo\", \"NYC\" };\nstring search = \"Tokyo\";\nbool found = false;\n\nforeach (string city in cities)\n{\n    if (city == search)\n    {\n        found = true;\n        Console.WriteLine($\"Found {search}!\");\n        break;\n    }\n}\n\nif (!found)\n{\n    Console.WriteLine($\"{search} not found\");\n}\n\n// COUNTING MATCHES\nint[] scores = { 95, 87, 92, 78, 88, 95, 100 };\nint perfectScores = 0;\n\nforeach (int score in scores)\n{\n    if (score >= 90)\n    {\n        perfectScores++;\n    }\n}\nConsole.WriteLine($\"Scores 90+: {perfectScores}\");\n\n// PRACTICAL: Shopping cart total\nstring[] items = { \"Shirt\", \"Pants\", \"Shoes\", \"Hat\" };\ndouble[] prices = { 25.99, 45.50, 89.99, 15.00 };\n\ndouble total = 0;\nfor (int i = 0; i < prices.Length; i++)\n{\n    Console.WriteLine($\"{items[i]}: ${prices[i]}\");\n    total += prices[i];\n}\nConsole.WriteLine($\"Total: ${total}\");\n\n// BETTER: Using single array of structs (advanced)\n// For now, separate arrays work\n\n// PRACTICAL: Grade statistics\nint[] grades = { 85, 92, 78, 95, 88, 76, 90 };\n\nint sum2 = 0;\nint highest = grades[0];\nint lowest = grades[0];\n\nforeach (int grade in grades)\n{\n    sum2 += grade;\n    if (grade > highest) highest = grade;\n    if (grade < lowest) lowest = grade;\n}\n\ndouble average = (double)sum2 / grades.Length;\n\nConsole.WriteLine($\"Average: {average:F2}\");\nConsole.WriteLine($\"Highest: {highest}\");\nConsole.WriteLine($\"Lowest: {lowest}\");\n\n// PRACTICAL: String array processing\nstring[] emails = { \"alice@email.com\", \"bob@test.org\", \"charlie@email.com\" };\nint emailComCount = 0;\n\nforeach (string email in emails)\n{\n    if (email.EndsWith(\"@email.com\"))\n    {\n        emailComCount++;\n        Console.WriteLine($\"Email.com user: {email}\");\n    }\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "foreach (type item in collection)",
+      "explanation": "Automatically iterates through EACH element. type matches collection type (int for int[], string for string[]). item is temporary variable for current element."
+    },
+    {
+      "codeSnippet": "item variable",
+      "explanation": "Represents current element in iteration. Changes each loop. Can name anything: foreach (int x in numbers) or foreach (int num in numbers). Common: item, element."
+    },
+    {
+      "codeSnippet": "Read-only",
+      "explanation": "Can READ item but can't MODIFY collection during foreach! Can't do: foreach (int x in arr) { arr[0] = 5; } ERROR! Use regular for loop to modify."
+    },
+    {
+      "codeSnippet": "For vs Foreach",
+      "explanation": "FOREACH: Simpler, safer, read-only, no index. FOR: Can modify, need index, more control. Use foreach when just reading/using each item!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create an inventory management system!\n\n1. Create array of product names:\n   [\"Laptop\", \"Mouse\", \"Keyboard\", \"Monitor\", \"Webcam\"]\n2. Create array of quantities:\n   [5, 15, 8, 3, 12]\n3. Create array of prices:\n   [999.99, 25.50, 75.00, 299.99, 89.99]\n4. Use foreach or for loop to:\n   - Display each product with quantity and price\n   - Calculate total inventory value (quantity * price for each)\n   - Count low stock items (quantity < 5)\n   - Find most expensive item\n5. Display summary statistics\n\nExample:\n=== INVENTORY ===\nLaptop: 5 units @ $999.99 = $4999.95\n...\nTotal inventory value: $...\nLow stock items: 2\nMost expensive: Monitor ($299.99)",
+    "starterCode": "// Inventory Management\n\nstring[] products = { \"Laptop\", \"Mouse\", \"Keyboard\", \"Monitor\", \"Webcam\" };\nint[] quantities = { 5, 15, 8, 3, 12 };\ndouble[] prices = { 999.99, 25.50, 75.00, 299.99, 89.99 };\n\n// Display inventory with calculations\n\n// Calculate summary statistics",
+    "solutionCode": "// Inventory Management\n\nstring[] products = { \"Laptop\", \"Mouse\", \"Keyboard\", \"Monitor\", \"Webcam\" };\nint[] quantities = { 5, 15, 8, 3, 12 };\ndouble[] prices = { 999.99, 25.50, 75.00, 299.99, 89.99 };\n\nConsole.WriteLine(\"=== INVENTORY ===\");\n\ndouble totalValue = 0;\nint lowStockCount = 0;\nstring mostExpensiveName = \"\";\ndouble highestPrice = 0;\n\n// Use for loop since we need index for multiple arrays\nfor (int i = 0; i < products.Length; i++)\n{\n    string product = products[i];\n    int quantity = quantities[i];\n    double price = prices[i];\n    \n    // Calculate item value\n    double itemValue = quantity * price;\n    totalValue += itemValue;\n    \n    // Display item\n    Console.WriteLine($\"{product}: {quantity} units @ ${price} = ${itemValue:F2}\");\n    \n    // Check low stock\n    if (quantity < 5)\n    {\n        lowStockCount++;\n        Console.WriteLine($\"  ⚠️ LOW STOCK!\");\n    }\n    \n    // Track most expensive\n    if (price > highestPrice)\n    {\n        highestPrice = price;\n        mostExpensiveName = product;\n    }\n}\n\n// Display summary\nConsole.WriteLine($\"\\n=== SUMMARY ===\");\nConsole.WriteLine($\"Total inventory value: ${totalValue:F2}\");\nConsole.WriteLine($\"Low stock items: {lowStockCount}\");\nConsole.WriteLine($\"Most expensive: {mostExpensiveName} (${highestPrice})\");",
+    "hint": "Use for loop (not foreach) to access same index in all 3 arrays. for (i = 0; i < products.Length; i++) then access products[i], quantities[i], prices[i]. Track max with if (price > highest).",
+    "expectedOutputPatterns": ["INVENTORY", "units", "Total", "Low stock"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Modifying during foreach: foreach (int x in arr) { arr[0] = 5; } ERROR! Can't modify collection during foreach. Use regular for loop to modify array.",
+      "No index in foreach: foreach doesn't give you index! If you need position, use for loop: for (int i = 0; i < arr.Length; i++). Foreach only gives value, not position.",
+      "Multiple arrays: Can't do foreach on multiple arrays at once! foreach (var x in arr1, arr2) is WRONG. Use for loop with index to access arr1[i] and arr2[i].",
+      "Type mismatch: foreach (int x in stringArray) ERROR! Item type must match collection type. foreach (string x in stringArray) is correct."
+    ]
+  }
+}

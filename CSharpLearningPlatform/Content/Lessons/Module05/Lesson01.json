@@ -1,0 +1,40 @@
+{
+  "moduleId": 5,
+  "lessonNumber": 1,
+  "lessonId": "M05L01",
+  "title": "Arrays (Fixed-Size Collections)",
+  "simplifierConcept": "What if you need to store MANY related values?\n\n❌ BAD WAY:\nstring student1 = \"Alice\";\nstring student2 = \"Bob\";\nstring student3 = \"Charlie\";\n...\nstring student100 = \"Zoe\";\n\n✅ GOOD WAY (Array):\nstring[] students = new string[100];\nstudents[0] = \"Alice\";\nstudents[1] = \"Bob\";\nstudents[99] = \"Zoe\";\n\nArray = Container for MULTIPLE values of SAME type!\n\nKey features:\n📦 Fixed size (can't grow/shrink)\n🔢 Indexed (0, 1, 2, 3...)\n📊 Same type (all int, all string, etc.)\n⚡ Fast access by index\n\nThink: Array = Numbered row of lockers, each holding same type of item!",
+  "coderExample": "// CREATING ARRAYS\n\n// Method 1: Declare with size\nint[] numbers = new int[5];  // 5 empty slots\nnumbers[0] = 10;\nnumbers[1] = 20;\nnumbers[2] = 30;\nnumbers[3] = 40;\nnumbers[4] = 50;\n\n// Method 2: Initialize with values\nstring[] fruits = { \"Apple\", \"Banana\", \"Orange\" };\n\n// Method 3: new with values\nint[] scores = new int[] { 95, 87, 92, 78, 88 };\n\n// ACCESSING ARRAY ELEMENTS\nConsole.WriteLine(fruits[0]);  // \"Apple\" (first)\nConsole.WriteLine(fruits[1]);  // \"Banana\" (second)\nConsole.WriteLine(fruits[2]);  // \"Orange\" (third)\n\n// ARRAY LENGTH\nConsole.WriteLine($\"Array has {fruits.Length} items\");\n\n// LOOPING THROUGH ARRAY\nfor (int i = 0; i < numbers.Length; i++)\n{\n    Console.WriteLine($\"numbers[{i}] = {numbers[i]}\");\n}\n\n// FOREACH LOOP\nforeach (string fruit in fruits)\n{\n    Console.WriteLine(fruit);\n}\n\n// MODIFYING ARRAY\nfruits[1] = \"Grape\";  // Change \"Banana\" to \"Grape\"\nConsole.WriteLine(fruits[1]);  // \"Grape\"\n\n// FINDING IN ARRAY\nint[] values = { 5, 10, 15, 20, 25 };\nint searchFor = 15;\nbool found = false;\n\nfor (int i = 0; i < values.Length; i++)\n{\n    if (values[i] == searchFor)\n    {\n        Console.WriteLine($\"Found {searchFor} at index {i}\");\n        found = true;\n        break;\n    }\n}\n\n// CALCULATING ARRAY SUM\nint[] grades = { 85, 92, 78, 90, 88 };\nint sum = 0;\n\nfor (int i = 0; i < grades.Length; i++)\n{\n    sum += grades[i];\n}\n\ndouble average = (double)sum / grades.Length;\nConsole.WriteLine($\"Average: {average}\");\n\n// FINDING MAX VALUE\nint max = grades[0];  // Assume first is max\n\nfor (int i = 1; i < grades.Length; i++)\n{\n    if (grades[i] > max)\n    {\n        max = grades[i];\n    }\n}\nConsole.WriteLine($\"Highest grade: {max}\");\n\n// REVERSING ARRAY\nint[] original = { 1, 2, 3, 4, 5 };\nint[] reversed = new int[original.Length];\n\nfor (int i = 0; i < original.Length; i++)\n{\n    reversed[i] = original[original.Length - 1 - i];\n}\n\n// COPYING ARRAY\nint[] source = { 1, 2, 3 };\nint[] copy = new int[source.Length];\nArray.Copy(source, copy, source.Length);\n\n// SORTING ARRAY\nint[] unsorted = { 5, 2, 8, 1, 9 };\nArray.Sort(unsorted);\n// Now: { 1, 2, 5, 8, 9 }",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "type[] name",
+      "explanation": "Array declaration. int[] numbers or string[] names. Square brackets [] make it array. Type specifies what it holds."
+    },
+    {
+      "codeSnippet": "new type[size]",
+      "explanation": "Creates array with specified size. new int[5] makes array holding 5 integers. Size can't change after creation!"
+    },
+    {
+      "codeSnippet": "array[index]",
+      "explanation": "Access element at position. Indexing starts at 0! First element: arr[0]. Last element: arr[arr.Length - 1]. arr[5] for 5-item array is ERROR!"
+    },
+    {
+      "codeSnippet": ".Length",
+      "explanation": "Property (not method - no parentheses!). Returns number of elements. arr.Length for 5 elements = 5. Use in loops: i < arr.Length."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a student grade manager!\n\n1. Ask how many students (create array of that size)\n2. Use loop to get each student's name (string array)\n3. Use loop to get each student's score (int array)\n4. Calculate and display:\n   - Each student with their score\n   - Class average\n   - Highest score and student name\n   - Lowest score and student name\n   - How many students passed (score >= 60)\n5. Sort and display all students by score (descending)\n\nExample:\nHow many students? 3\n\nStudent 1 name: Alice\nStudent 1 score: 85\nStudent 2 name: Bob\nStudent 2 score: 92\nStudent 3 name: Charlie\nStudent 3 score: 78\n\n=== RESULTS ===\nAlice: 85\nBob: 92\nCharlie: 78\nClass average: 85.0\nHighest: Bob (92)\nLowest: Charlie (78)\nPassed: 3/3",
+    "starterCode": "// Student Grade Manager\n\nConsole.WriteLine(\"How many students?\");\nint count = int.Parse(Console.ReadLine());\n\nstring[] names = new string[count];\nint[] scores = new int[count];\n\n// Get student data\nfor (int i = 0; i < count; i++)\n{\n    // Get name\n    // Get score\n}\n\n// Calculate statistics\n// Display results",
+    "solutionCode": "// Student Grade Manager\n\nConsole.WriteLine(\"How many students?\");\nint count = int.Parse(Console.ReadLine());\n\nstring[] names = new string[count];\nint[] scores = new int[count];\n\n// Get student data\nfor (int i = 0; i < count; i++)\n{\n    Console.WriteLine($\"\\nStudent {i + 1} name:\");\n    names[i] = Console.ReadLine();\n    \n    Console.WriteLine($\"Student {i + 1} score:\");\n    scores[i] = int.Parse(Console.ReadLine());\n}\n\n// Display all students\nConsole.WriteLine(\"\\n=== RESULTS ===\");\nfor (int i = 0; i < count; i++)\n{\n    Console.WriteLine($\"{names[i]}: {scores[i]}\");\n}\n\n// Calculate average\nint sum = 0;\nfor (int i = 0; i < scores.Length; i++)\n{\n    sum += scores[i];\n}\ndouble average = (double)sum / count;\nConsole.WriteLine($\"\\nClass average: {average:F1}\");\n\n// Find highest\nint highestScore = scores[0];\nstring highestStudent = names[0];\nfor (int i = 1; i < count; i++)\n{\n    if (scores[i] > highestScore)\n    {\n        highestScore = scores[i];\n        highestStudent = names[i];\n    }\n}\nConsole.WriteLine($\"Highest: {highestStudent} ({highestScore})\");\n\n// Find lowest\nint lowestScore = scores[0];\nstring lowestStudent = names[0];\nfor (int i = 1; i < count; i++)\n{\n    if (scores[i] < lowestScore)\n    {\n        lowestScore = scores[i];\n        lowestStudent = names[i];\n    }\n}\nConsole.WriteLine($\"Lowest: {lowestStudent} ({lowestScore})\");\n\n// Count passed\nint passedCount = 0;\nfor (int i = 0; i < scores.Length; i++)\n{\n    if (scores[i] >= 60)\n    {\n        passedCount++;\n    }\n}\nConsole.WriteLine($\"Passed: {passedCount}/{count}\");",
+    "hint": "Create arrays with new string[count] and new int[count]. Loop with i < count to fill. Sum all scores then divide by count for average. Track max/min with if (score > highest). Count passes with if (score >= 60) passedCount++.",
+    "expectedOutputPatterns": ["average", "Highest", "Lowest", "Passed"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Index out of bounds: arr[5] on 5-element array is ERROR! Valid indices: 0-4. Last index is arr.Length - 1 NOT arr.Length! Very common beginner mistake.",
+      "Fixed size: Can't do arr.Add() or grow array! Size set at creation. int[] arr = new int[5]; stays 5 forever. Use List<T> for dynamic size (next lesson).",
+      "Forgetting new: int[] arr; arr[0] = 5; ERROR! Must initialize: int[] arr = new int[5]; or int[] arr = {1,2,3}; Empty declaration not enough!",
+      "Type mixing: int[] numbers = {1, 2, \\\"three\\\"}; ERROR! Array holds ONE type only. All int OR all string, never mixed. Use object[] for mixed (advanced)."
+    ]
+  }
+}

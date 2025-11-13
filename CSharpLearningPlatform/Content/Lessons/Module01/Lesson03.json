@@ -1,0 +1,40 @@
+{
+  "moduleId": 1,
+  "lessonNumber": 3,
+  "lessonId": "M01L03",
+  "title": "Data Types (Different Kinds of Data)",
+  "simplifierConcept": "Data types are like different containers:\n\n🔢 NUMBERS: int (whole), double (decimals)\n📝 TEXT: string\n✅❌ TRUE/FALSE: bool\n\nJust like:\n• Water bottle holds liquids\n• Box holds solid objects\n• Envelope holds paper\n\nEach type has a purpose!\n\nint: Counting (age, quantity)\ndouble: Measurements (price, height)\nstring: Words (name, address)\nbool: Yes/No decisions (isStudent, hasLicense)\n\nThink: Choose the right container for your data!",
+  "coderExample": "// INTEGER (int) - Whole numbers\nint studentCount = 30;\nint temperature = -5;\nint score = 100;\n\n// DOUBLE - Numbers with decimals\ndouble price = 19.99;\ndouble height = 1.75;\ndouble pi = 3.14159;\n\n// STRING - Text\nstring firstName = \"John\";\nstring message = \"Hello, World!\";\nstring email = \"john@email.com\";\n\n// BOOLEAN (bool) - True or False\nbool isStudent = true;\nbool hasLicense = false;\nbool isRaining = true;\n\n// DISPLAY ALL TYPES\nConsole.WriteLine($\"Students: {studentCount}\");\nConsole.WriteLine($\"Price: ${price}\");\nConsole.WriteLine($\"Name: {firstName}\");\nConsole.WriteLine($\"Is student: {isStudent}\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "int",
+      "explanation": "Whole numbers only: -100, 0, 42, 1000. No decimals! Range: -2 billion to +2 billion."
+    },
+    {
+      "codeSnippet": "double",
+      "explanation": "Numbers with decimals: 3.14, 19.99, -0.5. More precise than int for measurements."
+    },
+    {
+      "codeSnippet": "string",
+      "explanation": "Text in quotes. Any characters: letters, numbers, symbols, spaces. \"Hello 123!\" is valid."
+    },
+    {
+      "codeSnippet": "bool",
+      "explanation": "Only two values: true or false (lowercase!). For yes/no, on/off, enabled/disabled situations."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a game character profile!\n\n1. Create variables:\n   - Character name (string)\n   - Health points (int)\n   - Attack power (double)\n   - Is alive (bool)\n   - Level (int)\n\n2. Display all character stats\n3. Use string interpolation to create a summary\n\nExample: \"Knight (Level 5): 100 HP, 15.5 ATK, Status: Alive\"",
+    "starterCode": "// Game Character Profile\n\nstring characterName = \"Warrior\";\n// Add other variables...\n\nConsole.WriteLine($\"Character: {characterName}\");\n// Display other stats...",
+    "solutionCode": "// Game Character Profile\n\nstring characterName = \"Knight\";\nint health = 100;\ndouble attackPower = 15.5;\nbool isAlive = true;\nint level = 5;\n\nConsole.WriteLine($\"Character: {characterName}\");\nConsole.WriteLine($\"Level: {level}\");\nConsole.WriteLine($\"Health: {health} HP\");\nConsole.WriteLine($\"Attack Power: {attackPower}\");\nConsole.WriteLine($\"Status: {(isAlive ? \"Alive\" : \"Dead\")}\");\n\nConsole.WriteLine($\"\\n{characterName} (Level {level}): {health} HP, {attackPower} ATK, Status: {(isAlive ? \"Alive\" : \"Dead\")}\");",
+    "hint": "int for whole numbers (health, level). double for decimals (attack). string for text (name). bool for true/false (isAlive).",
+    "expectedOutputPatterns": ["Character", "Level", "Health"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Using wrong type: int price = 19.99; ERROR! int can't hold decimals. Use double. int quantity = 5; OK!",
+      "Bool capitalization: bool isReady = True; ERROR! Must be lowercase: true or false, never True/False.",
+      "Quotes on numbers: int age = \"25\"; ERROR! Numbers don't use quotes. string age = \"25\"; works but age is text, not a number!",
+      "Mixing types: int x = 5; string y = x; ERROR! Can't directly assign int to string. Need conversion (covered later)."
+    ]
+  }
+}
