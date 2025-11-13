@@ -1,0 +1,35 @@
+{
+  "moduleId": 1,
+  "lessonNumber": 5,
+  "lessonId": "M01L05",
+  "title": "Combining Text (String Concatenation)",
+  "simplifierConcept": "Sometimes you want to combine pieces of text, like combining 'Hello' and 'World' into 'Hello World'. This is called STRING CONCATENATION (fancy word for 'gluing text together').\n\nIn C#, you can combine text using the + operator:\n\n\"Hello\" + \" \" + \"World\" becomes \"Hello World\"\n\nYou can also mix text and numbers! C# automatically converts numbers to text when you use +.\n\nThink of + as glue – it sticks pieces of text together into one long piece!",
+  "coderExample": "// Combining text with +\nConsole.WriteLine(\"Hello\" + \" \" + \"World\");\n\n// Mixing text and numbers\nConsole.WriteLine(\"I have \" + 5 + \" apples\");\n\n// You can even do math inside!\nConsole.WriteLine(\"The answer is: \" + (2 + 2));",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "\"Text1\" + \"Text2\"",
+      "explanation": "The + operator glues text together. Make sure there's a space between words, or they'll stick together like 'HelloWorld'!"
+    },
+    {
+      "codeSnippet": "\"Text\" + number",
+      "explanation": "When you add text and a number, C# converts the number to text first. \"I am \" + 25 becomes \"I am 25\"."
+    },
+    {
+      "codeSnippet": "(2 + 2) in text",
+      "explanation": "Parentheses matter! \"Result: \" + 2 + 2 gives \"Result: 22\" (text gluing), but \"Result: \" + (2 + 2) gives \"Result: 4\" (math first)."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a personalized greeting card! Use string concatenation (+) to combine:\n\n1. A greeting: 'Hello' + [a name]\n2. A message: 'You have completed' + [a number] + 'lessons!'\n3. An encouragement: 'Keep going, you are doing' + [an adjective] + '!'\n\nMake it your own!",
+    "starterCode": "// Create your greeting card using + to combine text!\n\nConsole.WriteLine(\"Hello \" + \"Student\");\n// Add two more lines with concatenation!",
+    "solutionCode": "// Create your greeting card using + to combine text!\n\nConsole.WriteLine(\"Hello \" + \"Alex\" + \"!\");\nConsole.WriteLine(\"You have completed \" + 5 + \" lessons!\");\nConsole.WriteLine(\"Keep going, you are doing \" + \"amazing\" + \"!\");",
+    "hint": "Remember to add spaces! \"Hello\"+\"World\" becomes \"HelloWorld\". Use \"Hello \"+\" World\" for proper spacing!",
+    "expectedOutputPatterns": ["Hello"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting spaces between words: \"Hello\"+\"World\" becomes \"HelloWorld\" instead of \"Hello World\"!",
+      "Mixing up (2+2) vs 2+2 in text: Without parentheses, C# glues text instead of doing math first!",
+      "Forgetting quotes around text: Console.WriteLine(Hello + World); won't work – they need quotes!"
+    ]
+  }
+}
