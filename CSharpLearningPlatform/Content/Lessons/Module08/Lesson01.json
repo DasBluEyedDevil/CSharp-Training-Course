@@ -1,0 +1,40 @@
+{
+  "moduleId": 8,
+  "lessonNumber": 1,
+  "lessonId": "M08L01",
+  "title": "Exceptions & try/catch (Planning for Problems)",
+  "simplifierConcept": "Imagine you're driving a car. Most of the time everything works fine, but what if you get a flat tire? You need a PLAN: pull over safely, turn on hazards, call for help.\n\nThat's what EXCEPTIONS are in programming! They're unexpected problems that happen while your code runs:\n• User enters text instead of a number\n• File doesn't exist when you try to open it\n• Network connection drops\n• Division by zero\n\nWithout a plan, your program CRASHES! With try/catch, you handle the problem gracefully:\n• TRY: 'Try to do this risky thing'\n• CATCH: 'If something goes wrong, do this instead'\n\nThink: try/catch = 'Attempt the task, but have a backup plan if it fails.' Your program stays running instead of crashing!",
+  "coderExample": "// WITHOUT exception handling - program crashes!\nstring input = \"abc\";\nint number = int.Parse(input);  // CRASH! Can't convert \"abc\" to number\nConsole.WriteLine(\"This never runs\");\n\n// WITH exception handling - graceful recovery\ntry\n{\n    string input = \"abc\";\n    int number = int.Parse(input);  // This fails...\n    Console.WriteLine(\"Success: \" + number);  // Never reached\n}\ncatch (FormatException ex)\n{\n    Console.WriteLine(\"Error: That's not a valid number!\");\n    Console.WriteLine(\"Please enter digits only.\");\n}\nConsole.WriteLine(\"Program continues running!\");\n\n// Multiple catch blocks for different errors\ntry\n{\n    int[] numbers = { 1, 2, 3 };\n    Console.WriteLine(numbers[10]);  // Index out of range!\n}\ncatch (IndexOutOfRangeException ex)\n{\n    Console.WriteLine(\"Error: Array index too large!\");\n}\ncatch (Exception ex)  // Generic catch for any other error\n{\n    Console.WriteLine(\"Something went wrong: \" + ex.Message);\n}\n\n// Real-world example: Safe division\ntry\n{\n    int a = 10;\n    int b = 0;\n    int result = a / b;  // Division by zero!\n}\ncatch (DivideByZeroException ex)\n{\n    Console.WriteLine(\"Cannot divide by zero!\");\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "try { risky code }",
+      "explanation": "The 'try' block contains code that MIGHT fail. If any line throws an exception, execution immediately jumps to the catch block."
+    },
+    {
+      "codeSnippet": "catch (ExceptionType ex) { handle }",
+      "explanation": "'catch' runs ONLY if an exception occurs in the try block. ExceptionType specifies what kind of error to catch. 'ex' is a variable holding error details."
+    },
+    {
+      "codeSnippet": "Multiple catch blocks",
+      "explanation": "You can have multiple catch blocks for different exception types! They're checked in order. Put specific exceptions first, generic (Exception) last."
+    },
+    {
+      "codeSnippet": "ex.Message",
+      "explanation": "The exception object 'ex' has properties: Message (error description), StackTrace (where error occurred). Useful for debugging!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a safe calculator that handles errors!\n\n1. Prompt user for two numbers (use int.Parse)\n2. Prompt for operation (+, -, *, /)\n3. Wrap risky code in try/catch:\n   - Catch FormatException (invalid number input)\n   - Catch DivideByZeroException (division by zero)\n   - Catch general Exception (anything else)\n4. Display appropriate error messages\n5. If successful, show the result",
+    "starterCode": "try\n{\n    Console.WriteLine(\"Enter first number:\");\n    // Parse input\n    \n    Console.WriteLine(\"Enter second number:\");\n    // Parse input\n    \n    Console.WriteLine(\"Enter operation (+, -, *, /):\");\n    string op = Console.ReadLine();\n    \n    // Perform calculation\n    int result = 0;\n    \n    Console.WriteLine(\"Result: \" + result);\n}\ncatch (FormatException ex)\n{\n    // Handle invalid number\n}\ncatch (DivideByZeroException ex)\n{\n    // Handle division by zero\n}\ncatch (Exception ex)\n{\n    // Handle any other error\n}",
+    "solutionCode": "try\n{\n    Console.WriteLine(\"Enter first number:\");\n    int num1 = int.Parse(Console.ReadLine());\n    \n    Console.WriteLine(\"Enter second number:\");\n    int num2 = int.Parse(Console.ReadLine());\n    \n    Console.WriteLine(\"Enter operation (+, -, *, /):\");\n    string op = Console.ReadLine();\n    \n    int result = 0;\n    if (op == \"+\") result = num1 + num2;\n    else if (op == \"-\") result = num1 - num2;\n    else if (op == \"*\") result = num1 * num2;\n    else if (op == \"/\") result = num1 / num2;\n    \n    Console.WriteLine(\"Result: \" + result);\n}\ncatch (FormatException ex)\n{\n    Console.WriteLine(\"Error: Please enter valid numbers only!\");\n}\ncatch (DivideByZeroException ex)\n{\n    Console.WriteLine(\"Error: Cannot divide by zero!\");\n}\ncatch (Exception ex)\n{\n    Console.WriteLine(\"Unexpected error: \" + ex.Message);\n}",
+    "hint": "Wrap ALL risky code in the try block. Use specific exception types in catch blocks. Order matters: specific exceptions before generic ones!",
+    "expectedOutputPatterns": ["Result", "Error"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Catching Exception first: If you put 'catch (Exception ex)' FIRST, it catches EVERYTHING! Specific catches after it never run. Always put specific exceptions before generic Exception.",
+      "Empty catch blocks: 'catch { }' swallows errors silently! Always log or display error messages. Silent failures are impossible to debug.",
+      "Try without catch: 'try { code }' alone is ERROR! Must have at least one catch block (or finally, next lesson). Try/catch are partners.",
+      "Catching wrong exception type: If you catch FormatException but the error is IndexOutOfRangeException, your catch won't run! Use general Exception catch as fallback."
+    ]
+  }
+}

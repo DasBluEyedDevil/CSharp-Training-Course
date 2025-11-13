@@ -1,0 +1,40 @@
+{
+  "moduleId": 9,
+  "lessonNumber": 2,
+  "lessonId": "M09L02",
+  "title": "IEnumerable<T> (The Stream of Data)",
+  "simplifierConcept": "Imagine a conveyor belt in a factory. Items move along one at a time. You don't need ALL items in memory - you process each one as it arrives!\n\nThat's IEnumerable<T> - it represents a SEQUENCE of items:\n• 'T' is the type: IEnumerable<int>, IEnumerable<string>\n• Items are accessed ONE AT A TIME (via foreach)\n• Doesn't load everything into memory at once\n• LINQ methods return IEnumerable<T>\n\nWhy use it?\n• MEMORY EFFICIENT: Query 1 million items without loading them all\n• LAZY EVALUATION: Computation happens only when needed\n• FLEXIBLE: Works with any collection type\n\nList<T> implements IEnumerable<T>, arrays implement it, LINQ results are IEnumerable<T>.\n\nThink: IEnumerable<T> = 'A promise of future items, delivered one at a time when you ask.'",
+  "coderExample": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\n// IEnumerable<T> as return type\nIEnumerable<int> GetNumbers()\n{\n    Console.WriteLine(\"Generating numbers...\");\n    yield return 1;\n    yield return 2;\n    yield return 3;\n}\n\nIEnumerable<int> numbers = GetNumbers();\nConsole.WriteLine(\"Method called, but not executed yet!\");\n\nforeach (int num in numbers)  // NOW it executes!\n{\n    Console.WriteLine(\"Number: \" + num);\n}\n\n// LINQ returns IEnumerable<T>\nList<int> sourceList = new List<int> { 1, 2, 3, 4, 5 };\nIEnumerable<int> evenNumbers = sourceList.Where(n => n % 2 == 0);\n\nConsole.WriteLine(\"Query created, not executed!\");\n\nforeach (int num in evenNumbers)  // Executes here!\n{\n    Console.WriteLine(\"Even: \" + num);\n}\n\n// Convert to concrete collection with .ToList() or .ToArray()\nList<int> evenList = sourceList.Where(n => n % 2 == 0).ToList();\nint[] evenArray = sourceList.Where(n => n % 2 == 0).ToArray();\n\nConsole.WriteLine(\"Count: \" + evenList.Count);  // .Count on List (property)\nConsole.WriteLine(\"Count: \" + evenNumbers.Count());  // .Count() on IEnumerable (method)",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "IEnumerable<T>",
+      "explanation": "Interface representing a sequence of items of type T. Any collection (List, array, etc.) can be treated as IEnumerable<T>."
+    },
+    {
+      "codeSnippet": "Deferred execution",
+      "explanation": "LINQ queries return IEnumerable<T> but don't execute immediately! Execution happens when you iterate (foreach) or materialize (.ToList(), .Count(), etc.)."
+    },
+    {
+      "codeSnippet": ".ToList() / .ToArray()",
+      "explanation": "Converts IEnumerable<T> to concrete collection. Forces immediate execution. Use when you need to iterate multiple times or need Count/indexing."
+    },
+    {
+      "codeSnippet": "yield return",
+      "explanation": "Advanced: Creates an IEnumerable<T> by returning items one at a time. Enables lazy evaluation. Each 'yield return' pauses execution until next item needed."
+    }
+  ],
+  "challenge": {
+    "instructions": "Work with IEnumerable<T> and understand deferred execution!\n\n1. Create a List of strings: \"apple\", \"banana\", \"apricot\", \"blueberry\", \"avocado\"\n\n2. Use LINQ to create an IEnumerable<string> of fruits starting with 'a'\n   - DON'T use .ToList() yet!\n   - Print \"Query created\"\n\n3. Add \"cherry\" to the original list AFTER creating the query\n\n4. Now iterate the query result with foreach\n   - What do you notice? Does it include \"cherry\"?\n\n5. Create a second query for fruits longer than 6 characters\n   - Convert this one to a List with .ToList()\n   - Display the count and items",
+    "starterCode": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\nList<string> fruits = new List<string> { \"apple\", \"banana\", \"apricot\", \"blueberry\", \"avocado\" };\n\n// Query 1: starts with 'a' (deferred)\nIEnumerable<string> startsWithA = fruits.Where(f => /* condition */);\nConsole.WriteLine(\"Query created\");\n\n// Add item AFTER query creation\nfruits.Add(\"cherry\");\n\n// Iterate query 1\nforeach (string fruit in startsWithA)\n{\n    Console.WriteLine(\"Starts with A: \" + fruit);\n}\n\n// Query 2: longer than 6 characters (materialized)\nList<string> longFruits = fruits.Where(f => /* condition */).ToList();\nConsole.WriteLine(\"Long fruits count: \" + longFruits.Count);",
+    "solutionCode": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\nList<string> fruits = new List<string> { \"apple\", \"banana\", \"apricot\", \"blueberry\", \"avocado\" };\n\nIEnumerable<string> startsWithA = fruits.Where(f => f.StartsWith(\"a\"));\nConsole.WriteLine(\"Query created (deferred execution)\");\n\nfruits.Add(\"cherry\");\nConsole.WriteLine(\"Added 'cherry' to list\");\n\nConsole.WriteLine(\"\\nFruits starting with 'a':\");\nforeach (string fruit in startsWithA)\n{\n    Console.WriteLine(\"- \" + fruit);\n}\n\nList<string> longFruits = fruits.Where(f => f.Length > 6).ToList();\nConsole.WriteLine(\"\\nLong fruits (>6 chars): \" + longFruits.Count);\nforeach (string fruit in longFruits)\n{\n    Console.WriteLine(\"- \" + fruit);\n}",
+    "hint": "IEnumerable<T> queries execute when iterated! .Where() returns IEnumerable. .ToList() forces immediate execution. Use .StartsWith() for string prefix check.",
+    "expectedOutputPatterns": ["Query created", "cherry", "Long fruits"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Iterating IEnumerable multiple times: Each iteration re-executes the query! If you need to iterate multiple times, use .ToList() once. Otherwise, expensive operations run repeatedly.",
+      "Modifying collection during iteration: Don't change the source collection while iterating IEnumerable! You'll get 'Collection was modified' exception. Materialize with .ToList() first if you need to modify.",
+      "Expecting snapshot behavior: IEnumerable is LIVE! If you create query, then modify source list, the query sees the changes when executed. For snapshot, use .ToList() immediately.",
+      ".Count vs .Count(): IEnumerable<T> has .Count() METHOD (executes query!). List<T> has .Count PROPERTY (instant). Using .Count() on large IEnumerable can be slow!"
+    ]
+  }
+}

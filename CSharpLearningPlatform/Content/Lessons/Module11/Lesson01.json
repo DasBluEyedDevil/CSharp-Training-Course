@@ -1,0 +1,40 @@
+{
+  "moduleId": 11,
+  "lessonNumber": 1,
+  "lessonId": "M11L01",
+  "title": "What is ASP.NET Core? (The Web Application Factory)",
+  "simplifierConcept": "Imagine a restaurant:\n• KITCHEN prepares food (your business logic)\n• WAITERS take orders and deliver food (HTTP handles requests/responses)\n• MENU lists what's available (your API endpoints)\n• CUSTOMERS make requests (web browsers, mobile apps, other services)\n\nThat's ASP.NET Core! It's a framework for building WEB APPLICATIONS and APIS:\n\nWEB API = Application Programming Interface for the web\n• Not a visual website (no HTML/CSS)\n• Returns DATA (JSON, XML)\n• Other apps consume your API (mobile apps, frontend frameworks, other services)\n\nASP.NET Core 8 (latest) features:\n• MINIMAL APIs - Simple, lightweight endpoint definitions\n• FAST - One of the fastest web frameworks\n• CROSS-PLATFORM - Runs on Windows, Linux, Mac\n• BUILT-IN features: Logging, DI, Configuration\n\nThink: ASP.NET Core = 'The factory that creates web services that speak HTTP and return data!'",
+  "coderExample": "// MINIMAL API in ASP.NET Core 8 (.NET 8)\n// File: Program.cs\n\nvar builder = WebApplication.CreateBuilder(args);\nvar app = builder.Build();\n\n// ENDPOINT 1: Simple GET request\napp.MapGet(\"/\", () => \"Hello from ASP.NET Core!\");\n\n// ENDPOINT 2: GET with route parameter\napp.MapGet(\"/hello/{name}\", (string name) => \n{\n    return $\"Hello, {name}!\";\n});\n\n// ENDPOINT 3: Returning JSON object\napp.MapGet(\"/api/user\", () => \n{\n    return new { Id = 1, Name = \"Alice\", Email = \"alice@example.com\" };\n});\n\n// ENDPOINT 4: List of data\napp.MapGet(\"/api/products\", () => \n{\n    var products = new[]\n    {\n        new { Id = 1, Name = \"Laptop\", Price = 999.99 },\n        new { Id = 2, Name = \"Mouse\", Price = 29.99 },\n        new { Id = 3, Name = \"Keyboard\", Price = 79.99 }\n    };\n    return products;\n});\n\n// ENDPOINT 5: Query parameters\napp.MapGet(\"/api/search\", (string? query) => \n{\n    if (string.IsNullOrEmpty(query))\n        return Results.BadRequest(\"Query parameter required!\");\n    \n    return Results.Ok($\"Searching for: {query}\");\n});\n\napp.Run();  // Start the web server!\n\n// Access in browser:\n// http://localhost:5000/\n// http://localhost:5000/hello/Bob\n// http://localhost:5000/api/user\n// http://localhost:5000/api/products\n// http://localhost:5000/api/search?query=laptop",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "WebApplication.CreateBuilder(args)",
+      "explanation": "Creates the web application builder. Configures services, logging, configuration. This is the foundation of your app."
+    },
+    {
+      "codeSnippet": "app.MapGet(route, handler)",
+      "explanation": "Defines a GET endpoint. Route is URL pattern (\\\"/api/users\\\"). Handler is lambda that returns response. ASP.NET Core automatically converts to JSON!"
+    },
+    {
+      "codeSnippet": "Route parameters: {name}",
+      "explanation": "Curly braces in route = parameter! /hello/{name} matches /hello/Bob. Parameter value passed to handler: (string name) => ..."
+    },
+    {
+      "codeSnippet": "app.Run()",
+      "explanation": "Starts the web server! Listens for HTTP requests. Runs until stopped (Ctrl+C). This MUST be the last line!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create your first ASP.NET Core API!\n\n1. Create web application builder and app\n\n2. Create these endpoints:\n   - GET / -> Return \"Welcome to my API!\"\n   - GET /api/time -> Return current DateTime as JSON\n   - GET /api/greet/{name} -> Return greeting with name\n   - GET /api/math/add?a=5&b=3 -> Return sum of two numbers\n   - GET /api/products -> Return array of 3 product objects (Id, Name, Price)\n\n3. Run the application with app.Run()\n\nNOTE: For the learning platform, simulate endpoint behavior by printing what each would return!",
+    "starterCode": "using Microsoft.AspNetCore.Builder;\n\nvar builder = WebApplication.CreateBuilder(args);\nvar app = builder.Build();\n\n// Endpoint 1: Root\napp.MapGet(\"/\", () => /* return value */);\n\n// Endpoint 2: Current time\napp.MapGet(\"/api/time\", () => \n{\n    // Return DateTime.Now as anonymous object\n});\n\n// Endpoint 3: Greet with name parameter\napp.MapGet(\"/api/greet/{name}\", (string name) => \n{\n    // Return greeting\n});\n\n// Endpoint 4: Add two numbers from query\napp.MapGet(\"/api/math/add\", (int a, int b) => \n{\n    // Return sum\n});\n\n// Endpoint 5: Product list\napp.MapGet(\"/api/products\", () => \n{\n    // Return array of products\n});\n\nConsole.WriteLine(\"API endpoints created!\");\nConsole.WriteLine(\"Endpoints available:\");\nConsole.WriteLine(\"  GET /\");\nConsole.WriteLine(\"  GET /api/time\");\nConsole.WriteLine(\"  GET /api/greet/{name}\");\nConsole.WriteLine(\"  GET /api/math/add?a=5&b=3\");\nConsole.WriteLine(\"  GET /api/products\");",
+    "solutionCode": "using Microsoft.AspNetCore.Builder;\nusing System;\n\nvar builder = WebApplication.CreateBuilder(args);\nvar app = builder.Build();\n\napp.MapGet(\"/\", () => \"Welcome to my API!\");\n\napp.MapGet(\"/api/time\", () => \n{\n    return new { CurrentTime = DateTime.Now };\n});\n\napp.MapGet(\"/api/greet/{name}\", (string name) => \n{\n    return $\"Hello, {name}! Welcome to the API.\";\n});\n\napp.MapGet(\"/api/math/add\", (int a, int b) => \n{\n    return new { A = a, B = b, Sum = a + b };\n});\n\napp.MapGet(\"/api/products\", () => \n{\n    var products = new[]\n    {\n        new { Id = 1, Name = \"Laptop\", Price = 999.99 },\n        new { Id = 2, Name = \"Mouse\", Price = 29.99 },\n        new { Id = 3, Name = \"Keyboard\", Price = 79.99 }\n    };\n    return products;\n});\n\nConsole.WriteLine(\"API endpoints created!\");\nConsole.WriteLine(\"Endpoints available:\");\nConsole.WriteLine(\"  GET /\");\nConsole.WriteLine(\"  GET /api/time\");\nConsole.WriteLine(\"  GET /api/greet/Bob\");\nConsole.WriteLine(\"  GET /api/math/add?a=5&b=3\");\nConsole.WriteLine(\"  GET /api/products\");",
+    "hint": "Create builder and app. MapGet: app.MapGet(route, handler). Route params: /api/{param}. Query params: (int a, int b) from ?a=5&b=3. Return objects - auto-converted to JSON!",
+    "expectedOutputPatterns": ["API endpoints", "available", "/api/"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting app.Run(): Without app.Run() at the end, server doesn't start! It MUST be the last line in Program.cs. Server won't listen for requests without it.",
+      "Route casing: Routes are case-INSENSITIVE by default! /API/Products and /api/products are the same. But parameters ARE case-sensitive in C# handler!",
+      "Missing using statements: Need 'using Microsoft.AspNetCore.Builder;' and others. If IDE shows red underlines, you're missing package references or usings!",
+      "Query parameter types: Query params auto-bind to handler parameters! ?a=5&b=3 with (int a, int b) works automatically. Wrong type (string when expecting int) = 400 Bad Request."
+    ]
+  }
+}

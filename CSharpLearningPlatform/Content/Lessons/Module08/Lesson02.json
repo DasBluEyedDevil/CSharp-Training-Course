@@ -1,0 +1,40 @@
+{
+  "moduleId": 8,
+  "lessonNumber": 2,
+  "lessonId": "M08L02",
+  "title": "The finally Block & Custom Exceptions",
+  "simplifierConcept": "Imagine borrowing a book from the library. Whether you finish reading it OR give up halfway, you MUST return the book! That's a 'finally' action - it happens NO MATTER WHAT.\n\nThe FINALLY BLOCK runs whether the try succeeds OR an exception is caught:\n• Try succeeds → finally runs\n• Exception caught → finally runs\n• Exception NOT caught → finally runs (then exception propagates)\n\nUse finally for CLEANUP: close files, release resources, disconnect from databases.\n\nCUSTOM EXCEPTIONS: Sometimes built-in exceptions aren't specific enough. Create your own!\n• InvalidAgeException for age validation\n• InsufficientFundsException for banking\n• GameOverException for game logic\n\nThink: finally = 'Always do this, no matter what!' Custom exceptions = 'Create your own error types for your domain.'",
+  "coderExample": "// FINALLY block example\ntry\n{\n    Console.WriteLine(\"Opening file...\");\n    // Risky file operations\n    throw new Exception(\"File corrupted!\");\n    Console.WriteLine(\"This won't run\");\n}\ncatch (Exception ex)\n{\n    Console.WriteLine(\"Error: \" + ex.Message);\n}\nfinally\n{\n    Console.WriteLine(\"Closing file...\");  // ALWAYS runs!\n    // Cleanup code here\n}\n\n// CUSTOM EXCEPTION - create your own!\nclass InvalidAgeException : Exception\n{\n    public InvalidAgeException(string message) : base(message)\n    {\n    }\n}\n\nclass Person\n{\n    private int _age;\n    \n    public int Age\n    {\n        get { return _age; }\n        set\n        {\n            if (value < 0 || value > 120)\n            {\n                throw new InvalidAgeException(\"Age must be between 0 and 120!\");\n            }\n            _age = value;\n        }\n    }\n}\n\n// Using custom exception\ntry\n{\n    Person person = new Person();\n    person.Age = 150;  // Throws InvalidAgeException!\n}\ncatch (InvalidAgeException ex)\n{\n    Console.WriteLine(\"Custom error: \" + ex.Message);\n}\nfinally\n{\n    Console.WriteLine(\"Validation complete.\");\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "finally { cleanup code }",
+      "explanation": "Finally block runs AFTER try and catch, ALWAYS! Use for cleanup: closing files, releasing resources. Runs even if exception is thrown."
+    },
+    {
+      "codeSnippet": "class CustomException : Exception",
+      "explanation": "Create custom exception by inheriting from Exception class. Naming convention: end with 'Exception' (InvalidAgeException, not InvalidAge)."
+    },
+    {
+      "codeSnippet": ": base(message)",
+      "explanation": "Call base constructor with error message. This passes the message to the Exception class, so ex.Message works."
+    },
+    {
+      "codeSnippet": "throw new CustomException()",
+      "explanation": "'throw' keyword creates and throws an exception. Program immediately jumps to nearest catch block that handles this exception type."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a banking system with custom exception and finally!\n\n1. CUSTOM EXCEPTION 'InsufficientFundsException':\n   - Inherits from Exception\n   - Constructor accepts message\n\n2. CLASS 'BankAccount':\n   - Property: decimal Balance\n   - Method Withdraw(amount):\n     - If amount > Balance, throw InsufficientFundsException\n     - Otherwise, subtract amount\n\n3. In main code:\n   - Create account with balance $100\n   - Try to withdraw $150 (will throw exception)\n   - Catch InsufficientFundsException\n   - Finally: Display \"Transaction complete\"",
+    "starterCode": "class InsufficientFundsException : Exception\n{\n    // Constructor\n}\n\nclass BankAccount\n{\n    public decimal Balance;\n    \n    public void Withdraw(decimal amount)\n    {\n        // Check balance, throw if insufficient\n        // Otherwise subtract\n    }\n}\n\n// Test the system\ntry\n{\n    BankAccount account = new BankAccount();\n    account.Balance = 100;\n    \n    Console.WriteLine(\"Balance: $\" + account.Balance);\n    account.Withdraw(150);  // Should throw exception\n    Console.WriteLine(\"Withdrawal successful!\");\n}\ncatch (InsufficientFundsException ex)\n{\n    // Handle error\n}\nfinally\n{\n    // Always runs\n}",
+    "solutionCode": "class InsufficientFundsException : Exception\n{\n    public InsufficientFundsException(string message) : base(message)\n    {\n    }\n}\n\nclass BankAccount\n{\n    public decimal Balance;\n    \n    public void Withdraw(decimal amount)\n    {\n        if (amount > Balance)\n        {\n            throw new InsufficientFundsException(\"Insufficient funds for withdrawal!\");\n        }\n        Balance -= amount;\n    }\n}\n\ntry\n{\n    BankAccount account = new BankAccount();\n    account.Balance = 100;\n    \n    Console.WriteLine(\"Balance: $\" + account.Balance);\n    account.Withdraw(150);\n    Console.WriteLine(\"Withdrawal successful!\");\n}\ncatch (InsufficientFundsException ex)\n{\n    Console.WriteLine(\"Error: \" + ex.Message);\n}\nfinally\n{\n    Console.WriteLine(\"Transaction complete.\");\n}",
+    "hint": "Custom exception: 'class MyException : Exception'. Constructor: ': base(message)'. Throw: 'throw new MyException(\"message\")'. Finally always runs after try/catch!",
+    "expectedOutputPatterns": ["Balance", "Error", "Transaction complete"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting base constructor: 'class MyEx : Exception { }' without constructor works, but you can't pass custom messages! Always add constructor with ': base(message)'.",
+      "Finally for logic: Finally is for CLEANUP, not business logic! Don't put critical app logic in finally - use it for closing files, releasing locks, etc.",
+      "Return in finally: 'return' in finally block overrides return in try/catch! Avoid returning values from finally - it's confusing and error-prone.",
+      "Not throwing custom exception: Creating 'new InvalidAgeException()' without 'throw' does nothing! Must use 'throw new InvalidAgeException()' to actually throw it."
+    ]
+  }
+}

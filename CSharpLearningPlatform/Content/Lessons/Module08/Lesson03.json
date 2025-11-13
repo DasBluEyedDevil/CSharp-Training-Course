@@ -1,0 +1,40 @@
+{
+  "moduleId": 8,
+  "lessonNumber": 3,
+  "lessonId": "M08L03",
+  "title": "Namespaces (Organizing Your Blueprints)",
+  "simplifierConcept": "Imagine a huge library with 100,000 books all mixed together on one shelf! Finding 'The Great Gatsby' would be impossible. Instead, libraries organize books:\n• Fiction → Mystery → Author Name\n• Non-Fiction → Science → Biology\n\nThat's what NAMESPACES do for code! They're FOLDERS for organizing classes:\n• System.Collections.Generic → List, Dictionary\n• System.IO → File, Directory\n• YourApp.Models → Customer, Product\n• YourApp.Services → EmailService, PaymentService\n\nNamespaces prevent NAMING CONFLICTS: Microsoft can have 'Microsoft.UI.Button' and you can have 'MyApp.CustomControls.Button' - different namespaces, no conflict!\n\nThink: namespace = 'The organizational folder path for your code.' Without namespaces, large projects become chaos!",
+  "coderExample": "// DEFINING a namespace\nnamespace MyApp.Models\n{\n    class Customer\n    {\n        public string Name;\n        public string Email;\n    }\n    \n    class Product\n    {\n        public string Name;\n        public decimal Price;\n    }\n}\n\nnamespace MyApp.Services\n{\n    class EmailService\n    {\n        public void SendEmail(string to, string message)\n        {\n            Console.WriteLine(\"Sending email to: \" + to);\n        }\n    }\n}\n\n// USING namespaces\nusing System;\nusing System.Collections.Generic;\nusing MyApp.Models;  // Now we can use Customer, Product directly!\n\nnamespace MyApp\n{\n    class Program\n    {\n        static void Main()\n        {\n            // Without 'using MyApp.Models', we'd need:\n            // MyApp.Models.Customer c = new MyApp.Models.Customer();\n            \n            // With 'using MyApp.Models':\n            Customer customer = new Customer();\n            customer.Name = \"John\";\n            \n            List<Product> products = new List<Product>();\n            // List comes from System.Collections.Generic (using statement)\n        }\n    }\n}\n\n// NESTED namespaces\nnamespace Company.ProjectName.ModuleName\n{\n    class SomeClass { }\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "namespace Name { }",
+      "explanation": "Namespace wraps your classes. Use PascalCase. Dot notation for hierarchy: Company.Product.Feature (like folder paths!)."
+    },
+    {
+      "codeSnippet": "using Namespace;",
+      "explanation": "'using' at top of file imports a namespace. Now you can use classes from that namespace without full path. Like 'import' in other languages."
+    },
+    {
+      "codeSnippet": "Fully qualified name",
+      "explanation": "Full path to a class: 'System.Collections.Generic.List<int>'. Using statements let you skip the path: just 'List<int>'."
+    },
+    {
+      "codeSnippet": "Namespace organization",
+      "explanation": "Convention: YourApp.Models (data classes), YourApp.Services (business logic), YourApp.Views (UI). Organize by feature or layer!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a multi-namespace project structure!\n\n1. NAMESPACE 'MyStore.Models':\n   - Class Product: string Name, decimal Price\n\n2. NAMESPACE 'MyStore.Services':\n   - Class ShoppingCart:\n     - List<Product> Items\n     - Method AddItem(Product p): adds to Items, prints confirmation\n     - Method GetTotal(): returns sum of all item prices\n\n3. NAMESPACE 'MyStore':\n   - Import both namespaces with 'using'\n   - Create products\n   - Create cart, add products\n   - Display total",
+    "starterCode": "using System;\nusing System.Collections.Generic;\n// Add using statements for your namespaces\n\nnamespace MyStore.Models\n{\n    // Define Product class\n}\n\nnamespace MyStore.Services\n{\n    // Define ShoppingCart class\n    // Don't forget: you'll need 'using MyStore.Models;' here to use Product!\n}\n\nnamespace MyStore\n{\n    class Program\n    {\n        static void Main()\n        {\n            // Create products\n            // Create cart\n            // Add items\n            // Display total\n        }\n    }\n}",
+    "solutionCode": "using System;\nusing System.Collections.Generic;\nusing MyStore.Models;\nusing MyStore.Services;\n\nnamespace MyStore.Models\n{\n    class Product\n    {\n        public string Name;\n        public decimal Price;\n    }\n}\n\nnamespace MyStore.Services\n{\n    using MyStore.Models;\n    \n    class ShoppingCart\n    {\n        public List<Product> Items = new List<Product>();\n        \n        public void AddItem(Product p)\n        {\n            Items.Add(p);\n            Console.WriteLine(\"Added: \" + p.Name);\n        }\n        \n        public decimal GetTotal()\n        {\n            decimal total = 0;\n            foreach (Product item in Items)\n            {\n                total += item.Price;\n            }\n            return total;\n        }\n    }\n}\n\nnamespace MyStore\n{\n    class Program\n    {\n        static void Main()\n        {\n            Product p1 = new Product() { Name = \"Laptop\", Price = 999.99m };\n            Product p2 = new Product() { Name = \"Mouse\", Price = 29.99m };\n            \n            ShoppingCart cart = new ShoppingCart();\n            cart.AddItem(p1);\n            cart.AddItem(p2);\n            \n            Console.WriteLine(\"Total: $\" + cart.GetTotal());\n        }\n    }\n}",
+    "hint": "Define namespaces: 'namespace Name { class C { } }'. Import: 'using Name;' at top of file. Nested namespaces use dots: Company.Product.Feature.",
+    "expectedOutputPatterns": ["Added", "Total"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Circular using statements: If namespace A uses B, and B uses A, you can get confusing errors! Organize code so dependencies flow one direction (Models → Services → UI).",
+      "Forgetting using in nested namespaces: If MyStore.Services needs Product from MyStore.Models, you must add 'using MyStore.Models;' INSIDE the Services namespace block!",
+      "Namespace doesn't match folder: By convention, namespace should match folder structure! File at 'MyApp/Models/Customer.cs' should have 'namespace MyApp.Models'. Not required, but strong convention.",
+      "Using vs namespace: 'using System;' IMPORTS a namespace (at top of file). 'namespace MyApp { }' DEFINES a namespace (wraps your code). Don't confuse them!"
+    ]
+  }
+}
