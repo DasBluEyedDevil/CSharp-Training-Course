@@ -3,12 +3,12 @@
   "lessonNumber": 1,
   "lessonId": "M01L01",
   "title": "What is Programming?",
-  "simplifierConcept": "Imagine you're teaching a robot to make a sandwich. You can't just say \"make me lunch\" – the robot needs EXACT steps: pick up bread, put on peanut butter, put on jelly, combine slices. That's programming! You're giving a computer step-by-step instructions in a language it understands.\n\nC# (pronounced \"See-Sharp\") is one of those languages. It's like English, but much more precise and rule-based. When you write C# code, you're telling the computer exactly what to do, one instruction at a time.",
-  "coderExample": "// This is your first C# program!\nConsole.WriteLine(\"Hello, World!\");",
+  "simplifierConcept": "Imagine you're teaching a robot to make a sandwich. You can't just say \"make me lunch\" \u2013 the robot needs EXACT steps: pick up bread, put on peanut butter, put on jelly, combine slices. That's programming! You're giving a computer step-by-step instructions in a language it understands.\n\nC# (pronounced \"See-Sharp\") is one of those languages. It's like English, but much more precise and rule-based. When you write C# code, you're telling the computer exactly what to do, one instruction at a time.",
+  "coderExample": "// YOUR FIRST C# PROGRAM!\n// This is a comment - the computer ignores it\n// Comments help humans understand the code\n\nConsole.WriteLine(\"Hello, World!\");\n\n// Let's break this down:\n// Console = The black window where text appears\n// WriteLine = Write a line of text\n// \"Hello, World!\" = The text to display\n// ; = End of instruction (like a period in English)\n\n// More examples:\nConsole.WriteLine(\"Welcome to C#!\");\nConsole.WriteLine(\"Programming is fun!\");\nConsole.WriteLine(\"I am learning C#!\");\n\n// Each instruction runs in order:\nConsole.WriteLine(\"First\");   // Runs 1st\nConsole.WriteLine(\"Second\");  // Runs 2nd\nConsole.WriteLine(\"Third\");   // Runs 3rd\n\n// Output:\n// First\n// Second\n// Third",
   "syntaxBreakdown": [
     {
       "codeSnippet": "//",
-      "explanation": "Two slashes create a 'comment' – notes for humans that the computer ignores. Use these to explain your code!"
+      "explanation": "Two slashes create a 'comment' \u2013 notes for humans that the computer ignores. Use these to explain your code!"
     },
     {
       "codeSnippet": "Console.WriteLine",
@@ -24,19 +24,20 @@
     }
   ],
   "challenge": {
-    "instructions": "Your challenge: Change the message to display YOUR name instead of 'Hello, World!'. For example, if your name is Alex, make it say 'Hello, Alex!'",
-    "starterCode": "// Change the message below to say your name!\nConsole.WriteLine(\"Hello, World!\");",
-    "solutionCode": "// Change the message below to say your name!\nConsole.WriteLine(\"Hello, Alex!\");",
-    "hint": "Keep the Console.WriteLine part the same – just change the text between the quotes!",
-    "expectedOutputPatterns": ["Hello"],
-    "validationRules": [
-      "Output must contain 'Hello'",
-      "Must use Console.WriteLine"
+    "instructions": "Write your first program!\n\n1. Display \"Hello, World!\" (the traditional first program)\n2. Display your name\n3. Display your favorite hobby\n4. Display a message about what you want to learn\n\nUse Console.WriteLine() for each line.\nDon't forget the semicolons!\nAdd comments explaining what each line does.",
+    "starterCode": "// My First C# Program\n// This program displays information about me\n\nConsole.WriteLine(\"Hello, World!\");\n\n// TODO: Display your name here\n\n// TODO: Display your hobby\n\n// TODO: Display what you want to learn",
+    "solutionCode": "// My First C# Program\n// This program displays information about me\n\nConsole.WriteLine(\"Hello, World!\");\n\n// Display my name\nConsole.WriteLine(\"My name is Alex\");\n\n// Display my hobby\nConsole.WriteLine(\"I love playing guitar\");\n\n// Display my learning goal\nConsole.WriteLine(\"I want to learn C# to build games!\");",
+    "hint": "Use Console.WriteLine() with text in quotes. End each line with semicolon. Add // comments to explain!",
+    "expectedOutputPatterns": [
+      "Hello",
+      "World"
     ],
+    "validationRules": [],
     "commonStickingPoints": [
-      "Forgetting the semicolon (;) at the end – C# will complain with an error!",
-      "Removing the quotes (\") around the text – the quotes are required!",
-      "Misspelling Console or WriteLine – capitalization matters in C#!"
+      "Forgetting semicolons: Every statement needs a semicolon at the end! Without it, you get an error. Console.WriteLine(\"Hi\"); \u2713 Console.WriteLine(\"Hi\") \u2717",
+      "Missing quotes: Text must be in quotes! Console.WriteLine(Hello) \u2717 Console.WriteLine(\"Hello\") \u2713",
+      "Case sensitivity: C# cares about CAPITAL vs lowercase! Console.WriteLine \u2713 console.writeline \u2717 Always match exactly!",
+      "Spelling: WriteLine not Writeline! Computer doesn't autocorrect spelling errors."
     ]
   }
 }
