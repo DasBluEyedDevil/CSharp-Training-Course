@@ -1,0 +1,40 @@
+{
+  "moduleId": 13,
+  "lessonNumber": 1,
+  "lessonId": "M13L01",
+  "title": "What is Blazor? (C# in the Browser!)",
+  "simplifierConcept": "Imagine building a website:\n\nOLD WAY:\n• HTML for structure\n• CSS for styling\n• JavaScript for interactivity\n• C# on server (backend only)\n\nBLAZOR WAY:\n• HTML for structure\n• CSS for styling\n• C# for interactivity! (No JavaScript required!)\n• C# everywhere - frontend AND backend!\n\nBlazor = Write interactive web UIs using C# instead of JavaScript!\n\nThink of it like:\n• React/Vue/Angular = JavaScript frameworks\n• Blazor = C# framework (same power, different language!)\n\nBlazor lets you:\n✅ Use C# skills for web development\n✅ Share code between client and server\n✅ Build SPAs (Single Page Applications)\n✅ Rich interactivity without JavaScript\n✅ Component-based architecture\n\nTwo main hosting models:\n1. Blazor Server - C# runs on server, UI updates over SignalR\n2. Blazor WebAssembly - C# runs IN BROWSER via WebAssembly\n3. Blazor Auto (.NET 8) - Best of both!\n\nThink: Blazor = 'Build modern web apps with C#, not JavaScript!'",
+  "coderExample": "// BLAZOR COMPONENT (.razor file)\n// Counter.razor\n\n<h3>Counter Example</h3>\n\n<p>Current count: @currentCount</p>\n\n<button class=\"btn btn-primary\" @onclick=\"IncrementCount\">Click me</button>\n\n@code {\n    private int currentCount = 0;\n\n    private void IncrementCount()\n    {\n        currentCount++;  // C# code!\n    }\n}\n\n// WHAT MAKES THIS SPECIAL?\n// 1. HTML markup at top\n// 2. @code block with C# logic\n// 3. @onclick binds to C# method (not JavaScript!)\n// 4. @currentCount displays C# variable\n\n// COMPARISON TO JAVASCRIPT FRAMEWORKS\n\n// React (JavaScript):\n/*\nimport { useState } from 'react';\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button onClick={() => setCount(count + 1)}>Click me</button>\n    </div>\n  );\n}\n*/\n\n// Blazor (C#):\n/*\n<p>Count: @count</p>\n<button @onclick=\"() => count++\">Click me</button>\n\n@code {\n    private int count = 0;\n}\n*/\n\n// BENEFITS OF BLAZOR\n// ✅ One language (C#) for everything\n// ✅ Full .NET ecosystem (NuGet, LINQ, async/await)\n// ✅ Type safety (compile-time errors!)\n// ✅ Great tooling (Visual Studio, Rider)\n// ✅ Code sharing (models, logic, validation)\n// ✅ No JavaScript transpiling/bundling complexity",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": ".razor file",
+      "explanation": "Blazor components use .razor extension. Mix HTML markup with C# code. Top part = markup, @code block = C# logic."
+    },
+    {
+      "codeSnippet": "@variable",
+      "explanation": "@ symbol in markup accesses C# variables/expressions. @currentCount displays the value. @DateTime.Now.Year shows current year."
+    },
+    {
+      "codeSnippet": "@onclick=\"MethodName\"",
+      "explanation": "Event binding with @. @onclick for clicks, @onchange for input changes. Binds to C# methods, not JavaScript!"
+    },
+    {
+      "codeSnippet": "@code { }",
+      "explanation": "Contains C# logic for component. Define fields, properties, methods here. Private by default. This is your component's brain!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create your first Blazor component!\n\n1. Create a 'Greeting' component structure:\n   - Title: \"Welcome to Blazor!\"\n   - Display current year using @DateTime.Now.Year\n   - Input field for user's name\n   - Button \"Greet Me\"\n   - When clicked, display \"Hello, [name]! Welcome to Blazor!\"\n\n2. Component should have:\n   - HTML markup section\n   - @code block with:\n     - string name field\n     - string greeting field\n     - GreetUser() method that sets greeting\n\n3. Print the complete component structure\n\nThis demonstrates Blazor's syntax and interactivity!",
+    "starterCode": "// Greeting.razor\n\n<h3>Welcome to Blazor!</h3>\n\n<p>Year: @DateTime.Now.Year</p>\n\n<div>\n    <label>Your Name:</label>\n    <!-- Input field here -->\n</div>\n\n<button @onclick=\"GreetUser\">Greet Me</button>\n\n<p>@greeting</p>\n\n@code {\n    private string name = \"\";\n    private string greeting = \"\";\n    \n    private void GreetUser()\n    {\n        // Set greeting message\n    }\n}",
+    "solutionCode": "// Greeting.razor\nusing System;\n\nConsole.WriteLine(@\"\n=== BLAZOR COMPONENT EXAMPLE ===\");\nConsole.WriteLine(@\"\n<h3>Welcome to Blazor!</h3>\n\n<p>Year: @DateTime.Now.Year</p>\n\n<div>\n    <label>Your Name:</label>\n    <input @bind=\"\"name\"\" placeholder=\"\"Enter your name\"\" />\n</div>\n\n<button class=\"\"btn btn-primary\"\" @onclick=\"\"GreetUser\"\">Greet Me</button>\n\n@if (!string.IsNullOrEmpty(greeting))\n{\n    <div class=\"\"alert alert-success\"\">\n        <p>@greeting</p>\n    </div>\n}\n\n@code {\n    private string name = \"\"\"\";\n    private string greeting = \"\"\"\";\n    \n    private void GreetUser()\n    {\n        if (!string.IsNullOrEmpty(name))\n        {\n            greeting = $\"\"Hello, {name}! Welcome to Blazor!\"\";\n        }\n        else\n        {\n            greeting = \"\"Please enter your name first!\"\";\n        }\n    }\n}\n\"\");\n\nConsole.WriteLine(@\"\n=== HOW IT WORKS ===\");\nConsole.WriteLine(\"1. @bind=\\\"name\\\" creates two-way data binding\");\nConsole.WriteLine(\"2. User types → name variable updates automatically\");\nConsole.WriteLine(\"3. @onclick=\\\"GreetUser\\\" calls C# method on click\");\nConsole.WriteLine(\"4. GreetUser() updates greeting variable\");\nConsole.WriteLine(\"5. @greeting displays the message (re-renders automatically!)\");\nConsole.WriteLine(\"\\n✓ All logic in C#, no JavaScript needed!\");",
+    "hint": "@bind for two-way binding on input. @onclick for button click. Use string interpolation in C# method. @if for conditional rendering. All C# code goes in @code block!",
+    "expectedOutputPatterns": ["BLAZOR COMPONENT", "Welcome to Blazor", "@code", "GreetUser"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting @ symbol: In markup, use @ to access C# variables! Just 'currentCount' won't work, need '@currentCount'. @ tells Blazor 'this is C#!'",
+      "JavaScript thinking: Don't add .js files or write JavaScript! Blazor uses C# for everything. @onclick calls C# methods, not JS functions.",
+      "Quotes in @onclick: Use @onclick=\"MethodName\" (no parentheses unless passing parameters). For lambda: @onclick=\"() => count++\" with quotes around entire expression.",
+      "Component naming: Component files must start with uppercase letter! Counter.razor (correct), counter.razor (wrong). This is C# convention."
+    ]
+  }
+}
