@@ -1,0 +1,44 @@
+{
+  "moduleId": 4,
+  "lessonNumber": 1,
+  "lessonId": "M04L01",
+  "title": "The for Loop (When You Know the Count)",
+  "simplifierConcept": "Imagine you need to write 'I will not talk in class' 100 times on the blackboard. You wouldn't write it once and think 'okay, done!' - you'd repeat it exactly 100 times.\n\nThat's what a FOR LOOP does! It repeats code a SPECIFIC number of times. You tell it:\n1. Where to start (I'm starting at line 1)\n2. When to stop (Keep going until I reach line 100)\n3. How to count (Add 1 each time)\n\nThink of it like a countdown: '10, 9, 8, 7...' or a count-up: '1, 2, 3, 4...'. The for loop handles the counting FOR you!\n\nThe for loop is PERFECT when you know EXACTLY how many times to repeat. Need to process 50 items? Use a for loop counting from 0 to 49. Need to print numbers 1 to 10? For loop!",
+  "coderExample": "// Basic for loop - count from 1 to 5\nfor (int i = 1; i <= 5; i++)\n{\n    Console.WriteLine(\"Number: \" + i);\n}\n\n// Countdown\nfor (int countdown = 10; countdown >= 1; countdown--)\n{\n    Console.WriteLine(countdown);\n}\nConsole.WriteLine(\"Blast off!\");\n\n// Count by 2s\nfor (int i = 0; i <= 10; i += 2)\n{\n    Console.WriteLine(\"Even number: \" + i);\n}\n\n// Real-world: print a multiplication table\nint number = 5;\nfor (int i = 1; i <= 10; i++)\n{\n    Console.WriteLine(number + \" x \" + i + \" = \" + (number * i));\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "for (initialization; condition; increment)",
+      "explanation": "Three parts separated by semicolons: 1) Start point (int i = 0), 2) When to stop (i < 10), 3) How to change i each time (i++)"
+    },
+    {
+      "codeSnippet": "int i = 1",
+      "explanation": "INITIALIZATION: Creates a counter variable (usually called i, j, or k). This runs ONCE at the start. i typically starts at 0 or 1."
+    },
+    {
+      "codeSnippet": "i <= 5",
+      "explanation": "CONDITION: Checked BEFORE each loop. If true, the loop runs. If false, the loop stops. Here: 'keep going while i is 5 or less'."
+    },
+    {
+      "codeSnippet": "i++",
+      "explanation": "INCREMENT: Runs AFTER each loop iteration. i++ adds 1 to i. Could also be i--, i += 2, etc. This moves you closer to the end!"
+    },
+    {
+      "codeSnippet": "Loop body { }",
+      "explanation": "The code in braces runs each time. If the loop runs 5 times, this code executes 5 times with different values of i!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a program that displays a countdown for a rocket launch!\n\n1. Use a for loop to count down from 10 to 1\n2. Display each number\n3. After the loop ends, display 'Liftoff!'\n\nBonus: Try making it count from 20 to 1, or count by 2s!",
+    "starterCode": "// Create a countdown from 10 to 1\n// Remember: for (start; condition; change)\n\n// After the loop, display \"Liftoff!\"",
+    "solutionCode": "// Create a countdown from 10 to 1\nfor (int i = 10; i >= 1; i--)\n{\n    Console.WriteLine(i);\n}\n\n// After the loop, display \"Liftoff!\"\nConsole.WriteLine(\"Liftoff!\");",
+    "hint": "Start at 10: int i = 10. Keep going while i >= 1. Count down: i--. Structure: for (int i = 10; i >= 1; i--) { }",
+    "expectedOutputPatterns": ["Liftoff"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Using commas instead of semicolons: for (int i = 0, i < 10, i++) is WRONG! Use semicolons: for (int i = 0; i < 10; i++)",
+      "Infinite loops from wrong condition: for (int i = 0; i >= 0; i++) never ends because i is ALWAYS >= 0! Make sure your condition eventually becomes false.",
+      "Off-by-one errors: for (int i = 0; i < 10; i++) runs 10 times (0-9). for (int i = 0; i <= 10; i++) runs 11 times (0-10)!",
+      "Forgetting the increment: for (int i = 0; i < 10; ) with no i++ creates an infinite loop! i never changes so i < 10 is always true."
+    ]
+  }
+}

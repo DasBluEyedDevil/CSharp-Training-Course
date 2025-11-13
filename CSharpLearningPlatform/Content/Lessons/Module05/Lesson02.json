@@ -1,0 +1,44 @@
+{
+  "moduleId": 5,
+  "lessonNumber": 2,
+  "lessonId": "M05L02",
+  "title": "List<T> (The Flexible Container)",
+  "simplifierConcept": "Remember arrays? They're like a bookshelf with fixed slots - you can't add more books if it's full!\n\nA LIST is like a magical expanding shelf! You can:\n• Add items anytime (shelf grows automatically!)\n• Remove items (shelf shrinks!)\n• Insert items in the middle\n• Check if an item exists\n\nLists are DYNAMIC - they change size as needed. The <T> syntax (like List<int>) means 'List of what type?' Just like arrays, all items must be the same type, but unlike arrays, you can grow and shrink them!\n\nThink of a grocery list app: You add items ('milk'), remove items when bought, and the list grows/shrinks automatically. You wouldn't use a fixed array for that - you'd use a List!\n\nLists are THE most common collection in C#. When in doubt, use a List!",
+  "coderExample": "using System.Collections.Generic;\n\n// Creating a list\nList<string> shoppingList = new List<string>();\n\n// Adding items\nshoppingList.Add(\"Milk\");\nshoppingList.Add(\"Bread\");\nshoppingList.Add(\"Eggs\");\n\nConsole.WriteLine(\"Items: \" + shoppingList.Count);  // 3\n\n// Accessing items (like arrays)\nConsole.WriteLine(\"First item: \" + shoppingList[0]);\n\n// Removing items\nshoppingList.Remove(\"Bread\");  // Removes \"Bread\"\nConsole.WriteLine(\"Items now: \" + shoppingList.Count);  // 2\n\n// Check if item exists\nif (shoppingList.Contains(\"Milk\"))\n{\n    Console.WriteLine(\"Don't forget milk!\");\n}\n\n// Looping through a list\nfor (int i = 0; i < shoppingList.Count; i++)\n{\n    Console.WriteLine(\"Item \" + i + \": \" + shoppingList[i]);\n}\n\n// Create list with initial values\nList<int> scores = new List<int> { 95, 87, 92, 78 };",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "List<string>",
+      "explanation": "List<T> where T is the type. List<string> = list of strings, List<int> = list of integers. The angle brackets specify what type is stored!"
+    },
+    {
+      "codeSnippet": ".Add(item)",
+      "explanation": "Adds an item to the END of the list. The list automatically expands to fit! add() is THE most common list operation."
+    },
+    {
+      "codeSnippet": ".Remove(item)",
+      "explanation": "Removes the FIRST occurrence of this item from the list. If the item isn't found, nothing happens (no error)."
+    },
+    {
+      "codeSnippet": ".Count",
+      "explanation": "Like array's .Length but for lists! Use .Count to get the number of items. NOTE: It's Count not Length!"
+    },
+    {
+      "codeSnippet": ".Contains(item)",
+      "explanation": "Returns true if the item exists in the list, false otherwise. Great for checking before adding or removing!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a player inventory system!\n\n1. Create a List<string> called 'inventory'\n2. Add these items: 'Sword', 'Shield', 'Potion'\n3. Display the count of items\n4. Check if inventory Contains 'Potion' - if yes, display 'Potion ready!'\n5. Remove 'Potion' (it was used!)\n6. Add 'Gold Coin'\n7. Use a foreach loop to display all remaining items\n\nRemember: using System.Collections.Generic; at the top!",
+    "starterCode": "using System.Collections.Generic;\n\n// Create inventory\n\n// Add items\n\n// Display count\n\n// Check for potion\n\n// Remove potion\n\n// Add gold coin\n\n// Display all items",
+    "solutionCode": "using System.Collections.Generic;\n\n// Create inventory\nList<string> inventory = new List<string>();\n\n// Add items\ninventory.Add(\"Sword\");\ninventory.Add(\"Shield\");\ninventory.Add(\"Potion\");\n\n// Display count\nConsole.WriteLine(\"Items in inventory: \" + inventory.Count);\n\n// Check for potion\nif (inventory.Contains(\"Potion\"))\n{\n    Console.WriteLine(\"Potion ready!\");\n}\n\n// Remove potion\ninventory.Remove(\"Potion\");\n\n// Add gold coin\ninventory.Add(\"Gold Coin\");\n\n// Display all items\nfor (int i = 0; i < inventory.Count; i++)\n{\n    Console.WriteLine(\"Item: \" + inventory[i]);\n}",
+    "hint": "Create: List<string> list = new List<string>(); Add: list.Add(\"item\"); Remove: list.Remove(\"item\"); Check: list.Contains(\"item\")",
+    "expectedOutputPatterns": ["inventory", "Item"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting using statement: List needs 'using System.Collections.Generic;' at the top! Without it, C# doesn't know what List is.",
+      "Using .Length instead of .Count: Arrays use .Length, Lists use .Count! list.Length doesn't exist!",
+      "Forgetting <T>: Just 'List' is wrong! Must specify type: List<int>, List<string>, etc. The angle brackets are REQUIRED!",
+      "Index out of range on dynamic lists: If you remove items, the Count changes! Always loop with i < list.Count, not a hardcoded number."
+    ]
+  }
+}

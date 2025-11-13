@@ -1,0 +1,40 @@
+{
+  "moduleId": 4,
+  "lessonNumber": 3,
+  "lessonId": "M04L03",
+  "title": "The do-while Loop (At Least Once)",
+  "simplifierConcept": "Imagine a restaurant: 'Please tell me what you'd like to order.' They ask you at LEAST ONCE, even if you say 'I'm not hungry.' They don't check if you're hungry BEFORE asking - they ask FIRST, then check if you want more.\n\nThat's a DO-WHILE loop! It's like a while loop, but the condition is checked at the END, not the beginning. This guarantees the code runs AT LEAST ONCE!\n\nThink of it like trying a food sample at the grocery store:\n• Regular while: 'While you're hungry, take a sample' → If you're not hungry, you take ZERO samples\n• Do-while: 'Take a sample. Still hungry? Take another!' → You ALWAYS get at least one sample\n\nDo-while is perfect for menus, user input prompts, or anything where you need to do something at least once before checking a condition.",
+  "coderExample": "// Regular while - might not run at all\nint x = 10;\nwhile (x < 5)  // False from the start\n{\n    Console.WriteLine(\"This never prints!\");\n}\n\n// Do-while - runs at least once!\nint y = 10;\ndo\n{\n    Console.WriteLine(\"This prints once, even though y is not < 5!\");\n} while (y < 5);  // Condition checked AFTER\n\n// Practical example: Menu system\nint choice;\ndo\n{\n    Console.WriteLine(\"\\n=== MENU ===\");\n    Console.WriteLine(\"1. Play Game\");\n    Console.WriteLine(\"2. Settings\");\n    Console.WriteLine(\"3. Quit\");\n    Console.WriteLine(\"Enter choice: \");\n    \n    // Simulating user input\n    choice = 1; // Pretend user chose 1\n    \n    if (choice == 1)\n    {\n        Console.WriteLine(\"Starting game...\");\n    }\n    else if (choice == 2)\n    {\n        Console.WriteLine(\"Opening settings...\");\n    }\n    \n    // Force exit for this example\n    choice = 3;\n    \n} while (choice != 3);\n\nConsole.WriteLine(\"Thanks for playing!\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "do { } while (condition);",
+      "explanation": "Structure: 'do' keyword, then { code }, then 'while (condition)' and SEMICOLON. The semicolon after while is REQUIRED for do-while!"
+    },
+    {
+      "codeSnippet": "Runs at least once",
+      "explanation": "The code block executes FIRST, THEN the condition is checked. Even if the condition is false, the code runs one time!"
+    },
+    {
+      "codeSnippet": "Condition at the end",
+      "explanation": "The while (condition); comes AFTER the closing brace. If condition is true, loop back to 'do'. If false, continue after the loop."
+    },
+    {
+      "codeSnippet": "Don't forget the semicolon!",
+      "explanation": "while (condition); - the semicolon at the end is MANDATORY for do-while! Forgetting it causes a compiler error."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a simple dice rolling simulator!\n\n1. Create an int variable 'diceRoll' = 1\n2. Use a do-while loop:\n   - Display 'Rolling dice...'\n   - Display the current dice value\n   - Add 1 to diceRoll\n3. Continue while diceRoll is <= 6\n\nThe loop should run exactly 6 times, showing rolls 1 through 6!",
+    "starterCode": "// Dice roller\nint diceRoll = 1;\n\n// Write your do-while loop here",
+    "solutionCode": "// Dice roller\nint diceRoll = 1;\n\n// Write your do-while loop here\ndo\n{\n    Console.WriteLine(\"Rolling dice...\");\n    Console.WriteLine(\"You rolled: \" + diceRoll);\n    diceRoll++;\n} while (diceRoll <= 6);",
+    "hint": "Structure: do { code here; change variable; } while (condition); Don't forget the semicolon after while!",
+    "expectedOutputPatterns": ["Rolling"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting the semicolon: } while (condition); - the semicolon after while is REQUIRED! Without it, compiler error!",
+      "Confusing do-while with while: do-while checks condition at END (runs at least once). while checks at START (might not run at all).",
+      "Wrong brace placement: It's do { } while, not do while { }. The 'while' comes AFTER the closing brace!",
+      "When to use do-while: Use it when you MUST run the code at least once. Menus, user prompts, 'try again?' scenarios are perfect!"
+    ]
+  }
+}

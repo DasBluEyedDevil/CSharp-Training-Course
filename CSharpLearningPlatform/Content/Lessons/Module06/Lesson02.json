@@ -1,0 +1,40 @@
+{
+  "moduleId": 6,
+  "lessonNumber": 2,
+  "lessonId": "M06L02",
+  "title": "Constructors (The Setup Crew)",
+  "simplifierConcept": "When you build a house, there's a crew that sets everything up FIRST - they install the foundation, connect the water, turn on the electricity. Only THEN is the house ready to use!\n\nA CONSTRUCTOR is that setup crew for your objects! It's a special method that runs automatically when you create an object with 'new'. It initializes the object with starting values.\n\nWithout constructor (tedious):\nPlayer p = new Player();\np.Name = 'Alice';\np.Score = 0;\np.Health = 100;\n\nWith constructor (one line!):\nPlayer p = new Player('Alice', 0, 100);\n\nConstructors make object creation EASIER and SAFER - you can't forget to set important values!",
+  "coderExample": "class Player\n{\n    public string Name;\n    public int Score;\n    public int Health;\n    \n    // Constructor - same name as class, no return type!\n    public Player(string name, int score, int health)\n    {\n        Name = name;\n        Score = score;\n        Health = health;\n        Console.WriteLine(\"Player created: \" + Name);\n    }\n    \n    public void Display()\n    {\n        Console.WriteLine(Name + \": \" + Score + \" points, \" + Health + \" HP\");\n    }\n}\n\n// Creating objects with constructor\nPlayer alice = new Player(\"Alice\", 100, 80);\nPlayer bob = new Player(\"Bob\", 150, 60);\n\nalice.Display();\nbob.Display();",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "public Player(...)",
+      "explanation": "Constructor has the SAME NAME as the class and NO RETURN TYPE (not even void!). This is how C# knows it's a constructor."
+    },
+    {
+      "codeSnippet": "Parameters",
+      "explanation": "Constructors can take parameters to initialize the object. When you write 'new Player('Alice', 100)', you're calling the constructor with those values!"
+    },
+    {
+      "codeSnippet": "Name = name;",
+      "explanation": "Inside the constructor, set the class fields using the parameters. 'Name' (field) = 'name' (parameter). Common pattern!"
+    },
+    {
+      "codeSnippet": "Auto-runs on 'new'",
+      "explanation": "You don't 'call' the constructor explicitly. It runs automatically when you use 'new Player(...)'. It's the first code that executes!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Enhance your Car class with a constructor!\n\n1. Create a Car class with fields: Brand, Model, Year\n2. Add a constructor that takes all three values as parameters\n3. In the constructor, set the fields AND print 'Car created: [Brand] [Model]'\n4. Create two Car objects using the constructor in ONE line each\n5. Display both cars\n\nMuch cleaner than setting fields one by one!",
+    "starterCode": "// Car class with constructor\nclass Car\n{\n    public string Brand;\n    public string Model;\n    public int Year;\n    \n    // Add constructor here\n}\n\n// Create cars using constructor\n\n// Display cars",
+    "solutionCode": "// Car class with constructor\nclass Car\n{\n    public string Brand;\n    public string Model;\n    public int Year;\n    \n    // Constructor\n    public Car(string brand, string model, int year)\n    {\n        Brand = brand;\n        Model = model;\n        Year = year;\n        Console.WriteLine(\"Car created: \" + Brand + \" \" + Model);\n    }\n}\n\n// Create cars using constructor\nCar car1 = new Car(\"Toyota\", \"Camry\", 2020);\nCar car2 = new Car(\"Honda\", \"Civic\", 2019);\n\n// Display cars\nConsole.WriteLine(car1.Brand + \" \" + car1.Model + \" (\" + car1.Year + \")\");\nConsole.WriteLine(car2.Brand + \" \" + car2.Model + \" (\" + car2.Year + \")\");",
+    "hint": "Constructor: public ClassName(parameters) { set fields }. Same name as class, no return type! Call with: new ClassName(arguments);",
+    "expectedOutputPatterns": ["Car created", "Toyota"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Adding return type: public void Car(...) is WRONG! Constructors have NO return type, not even void! Just: public Car(...)",
+      "Wrong name: The constructor MUST have the exact same name as the class! public Player(...) for class Player.",
+      "Forgetting 'new': You still need 'new' when using a constructor! Player p = Player('Alice') is wrong - must be new Player('Alice').",
+      "Parameter naming: Common to use lowercase parameter names (string name) and assign to PascalCase fields (Name = name). Don't confuse them!"
+    ]
+  }
+}

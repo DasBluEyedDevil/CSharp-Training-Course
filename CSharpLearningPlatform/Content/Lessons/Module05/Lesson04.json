@@ -1,0 +1,40 @@
+{
+  "moduleId": 5,
+  "lessonNumber": 4,
+  "lessonId": "M05L04",
+  "title": "foreach Loop & Collection Methods",
+  "simplifierConcept": "You've learned to loop through collections with 'for' loops and indexes. But there's a SIMPLER way when you just want to look at each item without caring about the index number!\n\nThe FOREACH loop says: 'For each item in this collection, do something with it.'\n\nCompare:\nfor loop: 'Start at index 0, check if less than length, increment...' - you manage the index!\nforeach loop: 'Give me each item, one at a time' - C# handles the index!\n\nThink of it like a buffet line:\n• for loop: 'Give me plate #1, plate #2, plate #3...'\n• foreach loop: 'Give me the next plate, I don't care about the number!'\n\nforeach is CLEANER and SAFER (no index out of bounds errors!) when you just need to process each item. Use for when you need the index or want to modify the collection while looping!",
+  "coderExample": "using System.Collections.Generic;\n\n// Array with foreach\nstring[] fruits = { \"Apple\", \"Banana\", \"Orange\" };\n\nforeach (string fruit in fruits)\n{\n    Console.WriteLine(\"I like \" + fruit);\n}\n\n// List with foreach\nList<int> scores = new List<int> { 95, 87, 92, 78 };\n\nforeach (int score in scores)\n{\n    Console.WriteLine(\"Score: \" + score);\n}\n\n// Useful collection methods\nList<string> names = new List<string> { \"Alice\", \"Bob\", \"Charlie\", \"David\" };\n\n// .Count\nConsole.WriteLine(\"Total names: \" + names.Count);\n\n// .Contains\nif (names.Contains(\"Bob\"))\n{\n    Console.WriteLine(\"Bob is in the list!\");\n}\n\n// .Clear - remove all items\nnames.Clear();\nConsole.WriteLine(\"After clear: \" + names.Count);  // 0\n\n// .Insert - add at specific position\nList<int> numbers = new List<int> { 1, 2, 4, 5 };\nnumbers.Insert(2, 3);  // Insert 3 at index 2\n// Now: 1, 2, 3, 4, 5",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "foreach (type variable in collection)",
+      "explanation": "Automatically loops through EVERY item in the collection. 'type' matches the collection's type. 'variable' is your name for each item."
+    },
+    {
+      "codeSnippet": "Read-only iteration",
+      "explanation": "foreach gives you a COPY of each item. You can't modify the collection (add/remove items) while looping! Use a regular for loop for that."
+    },
+    {
+      "codeSnippet": ".Clear()",
+      "explanation": "Removes ALL items from a list. count becomes 0. The list still exists, just empty!"
+    },
+    {
+      "codeSnippet": ".Insert(index, item)",
+      "explanation": "Inserts item at the specific index. Existing items shift right. Insert(0, x) puts x at the beginning!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a grade analyzer!\n\n1. Create List<int> with grades: 95, 78, 82, 91, 67, 88\n2. Use foreach to:\n   - Display each grade\n   - Count how many grades are >= 80 (store in a counter variable)\n3. After the loop, display:\n   - Total grades\n   - Number of passing grades (>= 80)\n   - Number of failing grades (< 80)\n\nCalculate the counts DURING the foreach loop!",
+    "starterCode": "using System.Collections.Generic;\n\n// Create grades list\n\n// Counter variables\n\n// foreach loop to analyze grades\n\n// Display results",
+    "solutionCode": "using System.Collections.Generic;\n\n// Create grades list\nList<int> grades = new List<int> { 95, 78, 82, 91, 67, 88 };\n\n// Counter variables\nint passing = 0;\nint failing = 0;\n\n// foreach loop to analyze grades\nforeach (int grade in grades)\n{\n    Console.WriteLine(\"Grade: \" + grade);\n    \n    if (grade >= 80)\n    {\n        passing++;\n    }\n    else\n    {\n        failing++;\n    }\n}\n\n// Display results\nConsole.WriteLine(\"Total grades: \" + grades.Count);\nConsole.WriteLine(\"Passing (>= 80): \" + passing);\nConsole.WriteLine(\"Failing (< 80): \" + failing);",
+    "hint": "foreach (int grade in grades) gives you each grade. Use if (grade >= 80) to count passing grades. Increment counters inside the loop!",
+    "expectedOutputPatterns": ["Grade", "Total", "Passing"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Trying to modify collection: You CAN'T add/remove items during foreach! list.Add() inside foreach = ERROR. Use a regular for loop instead.",
+      "Wrong variable type: foreach (string x in intList) is WRONG! The variable type must match the collection's type!",
+      "Confusing 'in' with other keywords: It's 'in', not 'from' or 'of'! foreach (item in collection), not foreach (item of collection).",
+      "Modifying the loop variable: foreach (int x in list) { x = 10; } doesn't change the list! x is a COPY. Changes to x don't affect the original."
+    ]
+  }
+}

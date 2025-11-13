@@ -1,0 +1,40 @@
+{
+  "moduleId": 5,
+  "lessonNumber": 1,
+  "lessonId": "M05L01",
+  "title": "Arrays (The Fixed-Size Shelf)",
+  "simplifierConcept": "Imagine you buy a bookshelf with exactly 5 slots. You can put 5 books on it, no more, no less. Each slot has a number (0, 1, 2, 3, 4), and you can access any book directly: 'Give me the book in slot 3!'\n\nThat's an ARRAY! It's a collection of items:\n• Fixed size (decided when created - can't grow or shrink!)\n• All items must be the same type (all ints, all strings, etc.)\n• Accessed by index (position number, starting from 0!)\n\nWhy start at 0? Because programmers are weird! Seriously, it's a computer science convention. The FIRST item is at index 0, second at index 1, etc.\n\nArrays are FAST for accessing items (instant lookup!) but INFLEXIBLE (can't change size). Perfect for fixed data like days of the week, months, or game levels!",
+  "coderExample": "// Creating arrays\nint[] scores = new int[5];  // Creates array with 5 empty slots\nscores[0] = 95;  // First item (index 0)\nscores[1] = 87;\nscores[2] = 92;\nscores[3] = 78;\nscores[4] = 88;  // Last item (index 4, not 5!)\n\n// Or initialize with values directly\nstring[] players = { \"Alice\", \"Bob\", \"Charlie\" };\n\n// Accessing array items\nConsole.WriteLine(\"First player: \" + players[0]);  // Alice\nConsole.WriteLine(\"Third player: \" + players[2]);  // Charlie\n\n// Array length\nConsole.WriteLine(\"Number of players: \" + players.Length);\n\n// Looping through an array\nfor (int i = 0; i < scores.Length; i++)\n{\n    Console.WriteLine(\"Score \" + i + \": \" + scores[i]);\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "int[] arrayName",
+      "explanation": "Square brackets [] after the type means 'array of this type'. int[] means array of integers, string[] means array of strings."
+    },
+    {
+      "codeSnippet": "new int[5]",
+      "explanation": "Creates an array with 5 slots. The number in brackets is the SIZE. Once created, this size can NEVER change!"
+    },
+    {
+      "codeSnippet": "arrayName[index]",
+      "explanation": "Access an item using square brackets and the index. Remember: indexes start at 0! An array of size 5 has indexes 0, 1, 2, 3, 4."
+    },
+    {
+      "codeSnippet": ".Length",
+      "explanation": "The Length property tells you how many items the array holds. arrayName.Length is VERY useful in loops!"
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a weekly temperature tracker!\n\n1. Create a double array 'temperatures' with 7 slots (for 7 days)\n2. Fill it with values: 72.5, 75.0, 68.3, 71.2, 74.8, 70.1, 69.5\n3. Use a for loop to display each day's temperature: 'Day [index]: [temp]°F'\n4. Calculate and display the average temperature\n\nHint: To calculate average, add all temps and divide by array.Length!",
+    "starterCode": "// Create temperature array\n\n// Fill with values\n\n// Display each temperature with a loop\n\n// Calculate average",
+    "solutionCode": "// Create temperature array\ndouble[] temperatures = new double[7];\n\n// Fill with values\ntemperatures[0] = 72.5;\ntemperatures[1] = 75.0;\ntemperatures[2] = 68.3;\ntemperatures[3] = 71.2;\ntemperatures[4] = 74.8;\ntemperatures[5] = 70.1;\ntemperatures[6] = 69.5;\n\n// Display each temperature with a loop\nfor (int i = 0; i < temperatures.Length; i++)\n{\n    Console.WriteLine(\"Day \" + i + \": \" + temperatures[i] + \"°F\");\n}\n\n// Calculate average\ndouble sum = 0;\nfor (int i = 0; i < temperatures.Length; i++)\n{\n    sum += temperatures[i];\n}\ndouble average = sum / temperatures.Length;\nConsole.WriteLine(\"Average: \" + average + \"°F\");",
+    "hint": "Create: double[] temps = new double[7]; Access: temps[0] = value; Loop: for (int i = 0; i < temps.Length; i++)",
+    "expectedOutputPatterns": ["Day", "Average"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Index out of range: array[5] when the array has 5 items (indexes 0-4) = CRASH! Always remember: indexes go from 0 to Length-1!",
+      "Forgetting 'new' keyword: int[] arr = int[5]; is WRONG! Must be: int[] arr = new int[5];",
+      "Wrong loop condition: for (i = 0; i <= arr.Length; i++) goes ONE TOO FAR! Use i < arr.Length (less than, not less-or-equal)!",
+      "Trying to resize: You CAN'T change array size after creation! array.Length = 10; doesn't work. Create a new array if you need different size."
+    ]
+  }
+}

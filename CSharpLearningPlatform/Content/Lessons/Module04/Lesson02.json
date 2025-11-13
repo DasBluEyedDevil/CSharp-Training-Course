@@ -1,0 +1,40 @@
+{
+  "moduleId": 4,
+  "lessonNumber": 2,
+  "lessonId": "M04L02",
+  "title": "The while Loop (When You Don't Know)",
+  "simplifierConcept": "Imagine you're flipping a coin repeatedly until you get heads. How many flips will it take? You don't know! Could be 1, could be 10, could be 50.\n\nThat's when you use a WHILE loop! Unlike a for loop (which counts a specific number of times), a while loop says: 'WHILE this condition is true, keep repeating.'\n\nThink of it like checking your phone: 'While I have unread messages, keep reading them.' You don't know how many messages there are - you just keep going WHILE there are more!\n\nOr waiting in line: 'While the line is not empty, keep moving forward.' The line could be 3 people or 300 people - the while loop handles it!\n\nWhile loops are PERFECT when you don't know how many times to repeat, but you know the CONDITION to stop.",
+  "coderExample": "// Simple while loop\nint count = 1;\n\nwhile (count <= 5)\n{\n    Console.WriteLine(\"Count is: \" + count);\n    count++;  // CRITICAL! Must change count or loop never ends!\n}\n\n// User input validation (keep asking until valid)\nbool validInput = false;\nint userAge = 0;\n\n// Simulating user input\nuserAge = 15; // Pretend user entered this\n\nwhile (!validInput)\n{\n    if (userAge >= 18)\n    {\n        Console.WriteLine(\"Valid age!\");\n        validInput = true;\n    }\n    else\n    {\n        Console.WriteLine(\"You must be 18 or older.\");\n        validInput = true; // For this example, we stop after one check\n    }\n}\n\n// Countdown with while\nint countdown = 5;\nwhile (countdown > 0)\n{\n    Console.WriteLine(countdown);\n    countdown--;\n}\nConsole.WriteLine(\"Done!\");",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "while (condition)",
+      "explanation": "The loop checks the condition BEFORE each iteration. If true, the loop body runs. If false, the loop stops and continues after the braces."
+    },
+    {
+      "codeSnippet": "Condition checked FIRST",
+      "explanation": "Unlike do-while (coming soon!), while checks BEFORE running. If the condition starts as false, the loop body NEVER runs, not even once!"
+    },
+    {
+      "codeSnippet": "Must change something!",
+      "explanation": "CRITICAL: Something inside the loop MUST eventually make the condition false! Otherwise you get an INFINITE LOOP and your program hangs forever."
+    },
+    {
+      "codeSnippet": "while vs for",
+      "explanation": "Use FOR when you know the count (repeat 10 times). Use WHILE when you're checking a condition (repeat until user enters valid input)."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a password strength checker!\n\n1. Create an int variable 'passwordLength' starting at 3\n2. Use a while loop: while (passwordLength < 8)\n3. Inside the loop: display 'Password too short: [length] characters'\n4. Increment passwordLength by 1 each time\n5. After the loop: display 'Password is strong!'\n\nWatch it count up from 3 to 7, then stop!",
+    "starterCode": "// Create password length variable\nint passwordLength = 3;\n\n// While loop to check password strength\n\n// After loop ends",
+    "solutionCode": "// Create password length variable\nint passwordLength = 3;\n\n// While loop to check password strength\nwhile (passwordLength < 8)\n{\n    Console.WriteLine(\"Password too short: \" + passwordLength + \" characters\");\n    passwordLength++;\n}\n\n// After loop ends\nConsole.WriteLine(\"Password is strong!\");",
+    "hint": "Structure: while (condition) { code here; change something; }. Don't forget to increment passwordLength inside the loop!",
+    "expectedOutputPatterns": ["Password"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Infinite loops: Forgetting to change the condition variable inside the loop! while (x < 10) without increasing x = infinite loop!",
+      "Semicolon after while: while (condition); is WRONG! No semicolon before the {. It's while (condition) { }",
+      "Not entering the loop: If the condition is false from the start, the loop body NEVER runs. while (5 < 3) { } - this code never executes!",
+      "Changing wrong variable: If your condition checks 'count', make sure you're changing COUNT inside the loop, not some other variable!"
+    ]
+  }
+}

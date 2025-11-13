@@ -1,0 +1,40 @@
+{
+  "moduleId": 3,
+  "lessonNumber": 1,
+  "lessonId": "M03L01",
+  "title": "The if Statement (Your First Fork)",
+  "simplifierConcept": "Imagine you're walking down a path and you reach a fork in the road. There's a sign that says: 'If it's raining, take the left path (you have an umbrella there). Otherwise, keep going straight.'\n\nThat's EXACTLY what an 'if statement' does in programming! It checks a condition (Is it raining?) and makes a decision:\n\n• If the condition is TRUE → Do this code\n• If the condition is FALSE → Skip that code\n\nIn C#, we use 'if' to make our programs smart. Instead of always doing the same thing, the program can DECIDE what to do based on the situation.\n\nThink of it like a bouncer at a club: 'If you're 21 or older, you can enter. If not, you can't.' The bouncer checks your age (the condition) and makes a decision!",
+  "coderExample": "// Simple if statement\nint age = 25;\n\nif (age >= 21)\n{\n    Console.WriteLine(\"You can enter!\");\n}\n\nConsole.WriteLine(\"Program continues...\");\n\n// Another example with boolean\nbool hasKey = true;\n\nif (hasKey)\n{\n    Console.WriteLine(\"Door unlocked!\");\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "if (condition)",
+      "explanation": "The 'if' keyword starts the decision. The condition in parentheses MUST evaluate to true or false (a boolean)."
+    },
+    {
+      "codeSnippet": "{ }",
+      "explanation": "Curly braces contain the code that runs ONLY if the condition is true. If false, everything in the braces is skipped!"
+    },
+    {
+      "codeSnippet": "age >= 21",
+      "explanation": "This is a comparison that produces true or false. >= means 'greater than or equal to'. If age is 21 or more, it's true!"
+    },
+    {
+      "codeSnippet": "Code after if",
+      "explanation": "Code outside the if block ALWAYS runs, whether the condition was true or false. The program continues normally."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a simple age verification system:\n\n1. Create an int variable called 'playerAge' and set it to any number\n2. Use an if statement to check if playerAge is >= 13\n3. If true, display: 'Welcome to the game!'\n4. After the if statement, always display: 'Thank you for visiting'\n\nTry changing playerAge to different values and see what happens!",
+    "starterCode": "// Create your age variable\nint playerAge = 15;\n\n// Write your if statement here\n\n// This should always display\nConsole.WriteLine(\"Thank you for visiting\");",
+    "solutionCode": "// Create your age variable\nint playerAge = 15;\n\n// Write your if statement here\nif (playerAge >= 13)\n{\n    Console.WriteLine(\"Welcome to the game!\");\n}\n\n// This should always display\nConsole.WriteLine(\"Thank you for visiting\");",
+    "hint": "Remember: if (condition) { code to run if true }. The condition should be playerAge >= 13. Don't forget the curly braces!",
+    "expectedOutputPatterns": ["Thank you for visiting"],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Forgetting parentheses around the condition: if age >= 13 is WRONG! Must be if (age >= 13)",
+      "Forgetting curly braces: While you CAN skip them for one line, it's bad practice. Always use { }!",
+      "Using = instead of ==: if (age = 13) ASSIGNS 13 to age! Use == to COMPARE: if (age == 13)",
+      "Putting a semicolon after the if: if (age >= 13); is WRONG! No semicolon before the { }"
+    ]
+  }
+}

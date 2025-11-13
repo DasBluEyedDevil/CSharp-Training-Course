@@ -1,0 +1,40 @@
+{
+  "moduleId": 4,
+  "lessonNumber": 4,
+  "lessonId": "M04L04",
+  "title": "Loop Control (break and continue)",
+  "simplifierConcept": "Imagine you're reading through a book chapter by chapter:\n\n• BREAK: You find the answer you need on chapter 5. You say 'I'm done!' and CLOSE THE BOOK completely. You exit the loop!\n\n• CONTINUE: You're on chapter 3 and it's boring. You say 'Skip this chapter!' and jump to chapter 4. You stay in the loop, just skip THIS iteration!\n\nThese are CONTROL STATEMENTS that give you finer control over loops:\n\n**break** = Exit the loop IMMEDIATELY, no matter what. Jump to the code after the loop.\n\n**continue** = Skip the REST of this iteration and jump to the next one. The loop continues!\n\nThink of a security checkpoint:\n• break: 'Suspicious person found! Shut down the whole checkpoint!' (exit loop)\n• continue: 'This person is fine, next person please!' (skip to next iteration)",
+  "coderExample": "// BREAK example - exit loop early\nfor (int i = 1; i <= 10; i++)\n{\n    Console.WriteLine(\"Number: \" + i);\n    \n    if (i == 5)\n    {\n        Console.WriteLine(\"Found 5! Exiting loop.\");\n        break;  // Exit the entire loop\n    }\n}\nConsole.WriteLine(\"Loop ended.\");\n// Only prints 1, 2, 3, 4, 5, then exits!\n\n// CONTINUE example - skip current iteration\nfor (int i = 1; i <= 10; i++)\n{\n    if (i % 2 == 0)  // If even number\n    {\n        continue;  // Skip the rest, go to next iteration\n    }\n    \n    Console.WriteLine(\"Odd number: \" + i);\n}\n// Only prints odd numbers: 1, 3, 5, 7, 9\n\n// Real-world: Finding a player in a list\nstring[] players = {\"Alice\", \"Bob\", \"Charlie\", \"David\"};\nstring targetPlayer = \"Charlie\";\n\nfor (int i = 0; i < players.Length; i++)\n{\n    if (players[i] == targetPlayer)\n    {\n        Console.WriteLine(\"Found player: \" + players[i]);\n        break;  // Found them, stop searching!\n    }\n}",
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "break;",
+      "explanation": "Immediately exits the loop. Code jumps to the first line AFTER the loop. The loop is completely done, even if iterations remain!"
+    },
+    {
+      "codeSnippet": "continue;",
+      "explanation": "Skips the rest of the current iteration and jumps back to the loop's condition check. The loop keeps going, just skips THIS round!"
+    },
+    {
+      "codeSnippet": "break in nested loops",
+      "explanation": "break only exits the INNERMOST loop it's in! If you have loops inside loops, break only exits the current one, not all of them."
+    },
+    {
+      "codeSnippet": "When to use",
+      "explanation": "break: When you find what you're looking for and don't need to continue. continue: When you want to skip specific items but keep processing others."
+    }
+  ],
+  "challenge": {
+    "instructions": "Create a number analyzer!\n\n1. Use a for loop from 1 to 20\n2. Use CONTINUE to skip all even numbers (if i % 2 == 0, continue)\n3. If you hit the number 15, use BREAK to exit the loop entirely\n4. Display all odd numbers before 15\n\nExpected output: 1, 3, 5, 7, 9, 11, 13, then stops!",
+    "starterCode": "// Number analyzer\nfor (int i = 1; i <= 20; i++)\n{\n    // Skip even numbers\n    \n    // Break at 15\n    \n    // Display the number\n}",
+    "solutionCode": "// Number analyzer\nfor (int i = 1; i <= 20; i++)\n{\n    // Skip even numbers\n    if (i % 2 == 0)\n    {\n        continue;\n    }\n    \n    // Break at 15\n    if (i == 15)\n    {\n        break;\n    }\n    \n    // Display the number\n    Console.WriteLine(i);\n}",
+    "hint": "Use if (i % 2 == 0) continue; to skip evens. Use if (i == 15) break; to exit at 15. Put the Console.WriteLine at the end!",
+    "expectedOutputPatterns": [],
+    "validationRules": [],
+    "commonStickingPoints": [
+      "Confusing break and continue: break EXITS the loop. continue SKIPS to next iteration. Very different behaviors!",
+      "Using outside loops: break and continue ONLY work inside loops! Using them outside a loop causes a compile error.",
+      "Unreachable code after break: Code after break in the same block never runs! if (x) { break; Console.WriteLine('hi'); } - 'hi' is unreachable!",
+      "Continue logic errors: Putting continue before important code means that code gets skipped! Place your continue checks carefully."
+    ]
+  }
+}
