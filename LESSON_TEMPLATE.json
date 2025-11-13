@@ -1,0 +1,64 @@
+{
+  "_comment": "LESSON TEMPLATE - Copy and customize for each new lesson",
+  "_instructions": [
+    "1. Copy this template for each new lesson",
+    "2. Update moduleId, lessonNumber, lessonId, and title",
+    "3. Write simplifierConcept with a real-world analogy FIRST",
+    "4. Provide working coderExample code",
+    "5. Break down syntax with clear explanations",
+    "6. Create a practical challenge with starter code",
+    "7. Include solution and common beginner mistakes",
+    "8. Save as: ModuleXX/LessonXX.json"
+  ],
+
+  "moduleId": 0,
+  "lessonNumber": 0,
+  "lessonId": "M00L00",
+  "title": "Lesson Title Here",
+
+  "simplifierConcept": "Start with a REAL-WORLD ANALOGY that explains the concept WITHOUT using technical jargon.\n\nExample structure:\n1. Introduce the analogy (2-3 sentences)\n2. Connect to programming (2-3 sentences)\n3. Contrast with alternative approaches\n4. Explain when to use this concept\n\nRemember: Explain to a 10-year-old FIRST, then introduce technical terms!",
+
+  "coderExample": "// Well-commented code example\n// Show the concept in action\n// Use realistic variable names\n// Include 2-3 variations\n\n// Example 1: Basic usage\n\n// Example 2: Common pattern\n\n// Example 3: Real-world scenario",
+
+  "syntaxBreakdown": [
+    {
+      "codeSnippet": "Specific syntax element",
+      "explanation": "What this does and WHY it's written this way. Connect to the analogy!"
+    },
+    {
+      "codeSnippet": "Another syntax element",
+      "explanation": "Explain the purpose and common usage patterns"
+    },
+    {
+      "codeSnippet": "Edge case or important note",
+      "explanation": "Highlight potential confusion or critical details"
+    }
+  ],
+
+  "challenge": {
+    "instructions": "Clear, specific task description.\n\n1. Step-by-step what they should do\n2. Include expected behavior\n3. Mention edge cases to consider\n\nBonus challenges are optional but encouraged!",
+
+    "starterCode": "// Provide helpful comments\n// Include some structure\n\n// Student fills in the rest",
+
+    "solutionCode": "// Complete, working solution\n// Well-commented\n// Follows best practices\n\n// Include alternative approaches if relevant",
+
+    "hint": "Give a helpful nudge without giving away the full solution. Point to syntax, method names, or approach.",
+
+    "expectedOutputPatterns": [
+      "keyword or phrase that should appear in output",
+      "another expected pattern"
+    ],
+
+    "validationRules": [
+      "Optional: specific rules for validation",
+      "E.g., 'Must use foreach loop', 'Output must be sorted'"
+    ],
+
+    "commonStickingPoints": [
+      "Most common mistake #1: Description of error and why beginners make it",
+      "Most common mistake #2: Explanation of the correct approach",
+      "Most common mistake #3: Compare wrong vs. right way",
+      "Conceptual misunderstanding: Clarify a common confusion point"
+    ]
+  }
+}
